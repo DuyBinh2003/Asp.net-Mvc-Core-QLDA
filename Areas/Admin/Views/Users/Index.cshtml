@@ -1,0 +1,46 @@
+﻿@model IEnumerable<DoAn.Models.User>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="col-xl-12 col-lg-6 col-md-12 col-sm-12 col-12">
+    <div class="card">
+        <h5 class="card-header">Quản lý tài khoản</h5>
+        <div class="card-body">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Password</th>
+                        <th scope="col">Type</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model != null)
+                    {
+                        foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@item.UserId</td>
+                                <td>@item.Name</td>
+                                <td>@item.Email</td>
+                                <td>@item.Password</td>
+                                <td>@item.UserType</td>
+                                <td>
+                                    <a class="btn btn-success btn-tone m-r-5" asp-action="Details" asp-route-id=@item.UserId>View</a>
+                                    <a class="btn btn-primary btn-tone m-r-5" asp-action="Edit" asp-route-id=@item.UserId>Edit</a>
+                                    <a class="btn btn-danger btn-tone m-r-5" asp-action="Delete" asp-route-id=@item.UserId>Delete</a>
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,56 @@
+﻿@model DoAn.Models.User
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
+    <div class="card">
+        <h5 class="card-header">Horizontal Form</h5>
+        <div class="card-body">
+            <form asp-action="Edit">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="UserId" />
+                
+                <div class="form-group row">
+                    <label asp-for="Name" class="col-3 col-lg-2 col-form-label text-left">Fullname</label>
+                    <div class="col-9 col-lg-10">
+                        <input asp-for="Name" type="text" class="form-control">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label asp-for="Email" class="col-3 col-lg-2 col-form-label text-left">Email</label>
+                    <div class="col-9 col-lg-10">
+                        <input asp-for="Email" type="email" required="" data-parsley-type="email" class="form-control">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label asp-for="Password" class="col-3 col-lg-2 col-form-label text-left">Password</label>
+                    <div class="col-9 col-lg-10">
+                        <input asp-for="Password" type="text" value=@Model.Password class="form-control">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label asp-for="UserType" class="col-3 col-lg-2 col-form-label text-left">User type</label>
+                    <div class="col-9 col-lg-10">
+                        <input asp-for="UserType" type="text" value=@Model.UserType class="form-control">
+                    </div>
+                </div>
+                <div class="row pt-2 pt-sm-5 mt-1">
+                    <div class="col-sm-6 pb-2 pb-sm-4 pb-lg-0 pr-0">
+                        <label class="be-checkbox custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input"><span class="custom-control-label">Remember me</span>
+                        </label>
+                    </div>
+                    <div class="col-sm-6 pl-0">
+                        <p class="text-right">
+                            <button type="submit" class="btn btn-space btn-primary">Cofirm</button>
+                            <button class="btn btn-space btn-secondary" asp-action="Index">Back to List</button>
+                        </p>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
