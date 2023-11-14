@@ -160,6 +160,8 @@ public partial class CContext : DbContext
 
             entity.ToTable("invoice");
 
+            entity.HasIndex(e => e.UserId, "pk_iv_user_idx");
+
             entity.Property(e => e.InvoiceId).HasColumnName("invoice_id");
             entity.Property(e => e.Address)
                 .HasMaxLength(255)
@@ -175,13 +177,19 @@ public partial class CContext : DbContext
                 .HasColumnName("sdt");
             entity.Property(e => e.TotalPrice)
                 .HasPrecision(10)
+                .HasDefaultValueSql("'0.00'")
                 .HasColumnName("total_price");
             entity.Property(e => e.UserId).HasColumnName("user_id");
+
+            entity.HasOne(d => d.User).WithMany(p => p.Invoices)
+                .HasForeignKey(d => d.UserId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("pk_iv_user");
         });
 
         modelBuilder.Entity<InvoiceDetail>(entity =>
         {
-            entity.HasKey(e => e.InvoiceId).HasName("PRIMARY");
+            entity.HasKey(e => new { e.InvoiceId, e.BookId }).HasName("PRIMARY");
 
             entity.ToTable("invoice_detail");
 
@@ -201,8 +209,8 @@ public partial class CContext : DbContext
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("fk_odd_b");
 
-            entity.HasOne(d => d.Invoice).WithOne(p => p.InvoiceDetail)
-                .HasForeignKey<InvoiceDetail>(d => d.InvoiceId)
+            entity.HasOne(d => d.Invoice).WithMany(p => p.InvoiceDetails)
+                .HasForeignKey(d => d.InvoiceId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("fk_odd_od");
         });
@@ -212,6 +220,10 @@ public partial class CContext : DbContext
             entity.HasKey(e => e.UserId).HasName("PRIMARY");
 
             entity.ToTable("user");
+
+            entity.HasIndex(e => e.Email, "email_UNIQUE").IsUnique();
+
+            entity.HasIndex(e => e.Username, "username_UNIQUE").IsUnique();
 
             entity.Property(e => e.UserId).HasColumnName("user_id");
             entity.Property(e => e.Email)

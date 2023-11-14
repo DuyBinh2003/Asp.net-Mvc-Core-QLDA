@@ -14,7 +14,7 @@
                         Menu
                     </li>
                     <li class="nav-item ">
-                        <a class="nav-link active" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-1" aria-controls="submenu-1"><i class="fa fa-fw fa-user-circle"></i>Dashboard <span class="badge badge-success">6</span></a>
+                        <a class="nav-link @(ViewContext.RouteData.Values["controller"].ToString().ToLower() == "home" ? "active" : "")" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-1" aria-controls="submenu-1"><i class="fa fa-fw fa-user-circle"></i>Dashboard <span class="badge badge-success">6</span></a>
                         <div id="submenu-1" class="collapse submenu" style="">
                             <ul class="nav flex-column">
                                 <li class="nav-item">
@@ -62,19 +62,19 @@
                         </div>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" asp-area="Admin" asp-controller="Invoices" asp-action="Index"><i class="ti-shopping-cart-full"></i>Quản lý đơn hàng</a>
+                        <a class="nav-link @(ViewContext.RouteData.Values["controller"].ToString().ToLower() == "invoices" ? "active" : "")" asp-area="Admin" asp-controller="Invoices" asp-action="Index"><i class="ti-shopping-cart-full"></i>Quản lý đơn hàng</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" asp-area="Admin" asp-controller="Books" asp-action="Index"><i class="fas fa-book"></i>Quản lý sản phẩm</a>
+                        <a class="nav-link @(ViewContext.RouteData.Values["controller"].ToString().ToLower() == "books" ? "active" : "")" asp-area="Admin" asp-controller="Books" asp-action="Index"><i class="fas fa-book"></i>Quản lý sản phẩm</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" asp-area="Admin" asp-controller="Categories" asp-action="Index"><i class="fas fa-align-left"></i>Quản lý category</a>
+                        <a class="nav-link @(ViewContext.RouteData.Values["controller"].ToString().ToLower() == "categories" ? "active" : "")" asp-area="Admin" asp-controller="Categories" asp-action="Index"><i class="fas fa-align-left"></i>Quản lý category</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" asp-area="Admin" asp-controller="Users" asp-action="Index"><i class="fas fa-users"></i>Quản lý khách hàng</a>
+                        <a class="nav-link @(ViewContext.RouteData.Values["controller"].ToString().ToLower() == "users" ? "active" : "")" asp-area="Admin" asp-controller="Users" asp-action="Index"><i class="fas fa-users"></i>Quản lý khách hàng</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" asp-area="Admin" asp-controller="Authors" asp-action="Index"><i class="ti-pencil"></i>Quản lý tác giả</a>
+                        <a class="nav-link @(ViewContext.RouteData.Values["controller"].ToString().ToLower() == "authors" ? "active" : "")" asp-area="Admin" asp-controller="Authors" asp-action="Index"><i class="ti-pencil"></i>Quản lý tác giả</a>
                     </li>
                     <!--
                          <li class="nav-item">

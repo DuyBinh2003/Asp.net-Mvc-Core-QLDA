@@ -19,5 +19,7 @@ public partial class Invoice
 
     public string? Sdt { get; set; }
 
-    public virtual InvoiceDetail? InvoiceDetail { get; set; }
+    public virtual ICollection<InvoiceDetail> InvoiceDetails { get; set; } = new List<InvoiceDetail>();
+
+    public virtual User User { get; set; } = null!;
 }

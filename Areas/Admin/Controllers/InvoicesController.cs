@@ -22,9 +22,13 @@ namespace DoAn.Areas.Admin.Controllers
         // GET: Admin/Invoices
         public async Task<IActionResult> Index()
         {
-              return _context.Invoices != null ? 
-                          View(await _context.Invoices.ToListAsync()) :
-                          Problem("Entity set 'CContext.Invoices'  is null.");
+            var invoice = _context.Invoices
+                 .Include(s => s.InvoiceDetails)
+                 .Include(s => s.User)
+                 .ToList();
+            return _context.Invoices != null ? 
+                      View(await _context.Invoices.ToListAsync()) :
+                    Problem("Entity set 'CContext.Invoices'  is null.");
         }
 
         // GET: Admin/Invoices/Details/5
@@ -36,6 +40,7 @@ namespace DoAn.Areas.Admin.Controllers
             }
 
             var invoice = await _context.Invoices
+                .Include(s => s.InvoiceDetails)
                 .FirstOrDefaultAsync(m => m.InvoiceId == id);
             if (invoice == null)
             {
