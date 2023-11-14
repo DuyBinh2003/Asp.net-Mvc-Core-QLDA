@@ -25,13 +25,14 @@ public partial class CContext : DbContext
 
     public virtual DbSet<Category> Categories { get; set; }
 
-    public virtual DbSet<Order> Orders { get; set; }
+    public virtual DbSet<Invoice> Invoices { get; set; }
 
-    public virtual DbSet<OrderDetail> OrderDetails { get; set; }
+    public virtual DbSet<InvoiceDetail> InvoiceDetails { get; set; }
 
     public virtual DbSet<User> Users { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
         => optionsBuilder.UseMySQL("Server=localhost;User=root;Password=Binh0366032155;Database=c#;");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -60,6 +61,10 @@ public partial class CContext : DbContext
 
             entity.ToTable("book");
 
+            entity.HasIndex(e => e.AuthorId, "fk_b_at_idx");
+
+            entity.HasIndex(e => e.CategoryId, "pk_b_ct_idx");
+
             entity.Property(e => e.BookId).HasColumnName("book_id");
             entity.Property(e => e.AuthorId).HasColumnName("author_id");
             entity.Property(e => e.BookPath)
@@ -81,9 +86,22 @@ public partial class CContext : DbContext
             entity.Property(e => e.Price)
                 .HasPrecision(10)
                 .HasColumnName("price");
+            entity.Property(e => e.Quantity)
+                .HasDefaultValueSql("'0'")
+                .HasColumnName("quantity");
             entity.Property(e => e.Status)
                 .HasMaxLength(10)
                 .HasColumnName("status");
+
+            entity.HasOne(d => d.Author).WithMany(p => p.Books)
+                .HasForeignKey(d => d.AuthorId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("fk_b_at");
+
+            entity.HasOne(d => d.Category).WithMany(p => p.Books)
+                .HasForeignKey(d => d.CategoryId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("fk_b_ct");
         });
 
         modelBuilder.Entity<BookOwner>(entity =>
@@ -102,11 +120,23 @@ public partial class CContext : DbContext
 
             entity.ToTable("cart");
 
+            entity.HasIndex(e => e.UserId, "fk_ca_us_idx");
+
             entity.Property(e => e.BookId).HasColumnName("book_id");
             entity.Property(e => e.UserId).HasColumnName("user_id");
             entity.Property(e => e.Quantity)
                 .HasDefaultValueSql("'1'")
                 .HasColumnName("quantity");
+
+            entity.HasOne(d => d.Book).WithMany(p => p.Carts)
+                .HasForeignKey(d => d.BookId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("fk_ca_b");
+
+            entity.HasOne(d => d.User).WithMany(p => p.Carts)
+                .HasForeignKey(d => d.UserId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("fk_ca_us");
         });
 
         modelBuilder.Entity<Category>(entity =>
@@ -124,13 +154,13 @@ public partial class CContext : DbContext
                 .HasColumnName("name");
         });
 
-        modelBuilder.Entity<Order>(entity =>
+        modelBuilder.Entity<Invoice>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PRIMARY");
+            entity.HasKey(e => e.InvoiceId).HasName("PRIMARY");
 
-            entity.ToTable("order");
+            entity.ToTable("invoice");
 
-            entity.Property(e => e.Id).HasColumnName("id");
+            entity.Property(e => e.InvoiceId).HasColumnName("invoice_id");
             entity.Property(e => e.Address)
                 .HasMaxLength(255)
                 .HasColumnName("address");
@@ -140,22 +170,24 @@ public partial class CContext : DbContext
             entity.Property(e => e.Note)
                 .HasColumnType("text")
                 .HasColumnName("note");
-            entity.Property(e => e.Status)
-                .HasMaxLength(10)
-                .HasColumnName("status");
+            entity.Property(e => e.Sdt)
+                .HasMaxLength(15)
+                .HasColumnName("sdt");
             entity.Property(e => e.TotalPrice)
                 .HasPrecision(10)
                 .HasColumnName("total_price");
             entity.Property(e => e.UserId).HasColumnName("user_id");
         });
 
-        modelBuilder.Entity<OrderDetail>(entity =>
+        modelBuilder.Entity<InvoiceDetail>(entity =>
         {
-            entity.HasKey(e => e.OrderId).HasName("PRIMARY");
+            entity.HasKey(e => e.InvoiceId).HasName("PRIMARY");
 
-            entity.ToTable("order_detail");
+            entity.ToTable("invoice_detail");
 
-            entity.Property(e => e.OrderId).HasColumnName("order_id");
+            entity.HasIndex(e => e.BookId, "pk_odd_b_idx");
+
+            entity.Property(e => e.InvoiceId).HasColumnName("invoice_id");
             entity.Property(e => e.BookId).HasColumnName("book_id");
             entity.Property(e => e.Quantity)
                 .HasDefaultValueSql("'-1'")
@@ -163,6 +195,16 @@ public partial class CContext : DbContext
             entity.Property(e => e.UnitPrice)
                 .HasPrecision(10)
                 .HasColumnName("unit_price");
+
+            entity.HasOne(d => d.Book).WithMany(p => p.InvoiceDetails)
+                .HasForeignKey(d => d.BookId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("fk_odd_b");
+
+            entity.HasOne(d => d.Invoice).WithOne(p => p.InvoiceDetail)
+                .HasForeignKey<InvoiceDetail>(d => d.InvoiceId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("fk_odd_od");
         });
 
         modelBuilder.Entity<User>(entity =>
@@ -184,6 +226,9 @@ public partial class CContext : DbContext
             entity.Property(e => e.UserType)
                 .HasMaxLength(10)
                 .HasColumnName("user_type");
+            entity.Property(e => e.Username)
+                .HasMaxLength(45)
+                .HasColumnName("username");
         });
 
         OnModelCreatingPartial(modelBuilder);

@@ -24,4 +24,14 @@ public partial class Book
     public string? Isbn { get; set; }
 
     public string? Status { get; set; }
+
+    public int? Quantity { get; set; }
+
+    public virtual Author Author { get; set; } = null!;
+
+    public virtual ICollection<Cart> Carts { get; set; } = new List<Cart>();
+
+    public virtual Category Category { get; set; } = null!;
+
+    public virtual ICollection<InvoiceDetail> InvoiceDetails { get; set; } = new List<InvoiceDetail>();
 }
