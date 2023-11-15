@@ -45,7 +45,7 @@ namespace DoAn.Areas.Admin.Controllers
 
             return View(invoiceDetail);
         }
-
+        
         // GET: Admin/InvoiceDetails/Create
         public IActionResult Create()
         {

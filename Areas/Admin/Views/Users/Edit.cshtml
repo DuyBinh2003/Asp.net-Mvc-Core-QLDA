@@ -7,12 +7,12 @@
 
 <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
     <div class="card">
-        <h5 class="card-header">Horizontal Form</h5>
+        <h5 class="card-header">Edit User</h5>
         <div class="card-body">
             <form asp-action="Edit">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <input type="hidden" asp-for="UserId" />
-                
+
                 <div class="form-group row">
                     <label asp-for="Name" class="col-3 col-lg-2 col-form-label text-left">Fullname</label>
                     <div class="col-9 col-lg-10">
@@ -22,7 +22,13 @@
                 <div class="form-group row">
                     <label asp-for="Email" class="col-3 col-lg-2 col-form-label text-left">Email</label>
                     <div class="col-9 col-lg-10">
-                        <input asp-for="Email" type="email" required="" data-parsley-type="email" class="form-control">
+                        <input asp-for="Email" type="email" required="" data-parsley-type="email" class="form-control" disabled>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label asp-for="Username" class="col-3 col-lg-2 col-form-label text-left">Username</label>
+                    <div class="col-9 col-lg-10">
+                        <input asp-for="Username" type="text" value=@Model.Username required="" class="form-control" disabled>
                     </div>
                 </div>
                 <div class="form-group row">
@@ -32,7 +38,7 @@
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label asp-for="UserType" class="col-3 col-lg-2 col-form-label text-left">User type</label>
+                    <label asp-for="UserType" class="col-3 col-lg-2 col-form-label text-left">Usertype</label>
                     <div class="col-9 col-lg-10">
                         <input asp-for="UserType" type="text" value=@Model.UserType class="form-control">
                     </div>
@@ -45,8 +51,8 @@
                     </div>
                     <div class="col-sm-6 pl-0">
                         <p class="text-right">
-                            <button type="submit" class="btn btn-space btn-succees">Cofirm</button>
-                            <button class="btn btn-space btn-secondary" asp-action="Index">Back to List</button>
+                            <button type="submit" class="btn btn-space btn-succees">Confirm</button>
+                            <a class="btn btn-space btn-secondary" asp-action="Index">Back to List</a>
                         </p>
                     </div>
                 </div>

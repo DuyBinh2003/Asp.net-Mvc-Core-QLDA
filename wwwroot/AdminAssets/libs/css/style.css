@@ -4503,7 +4503,11 @@ Pills vertical
     vertical-align: middle;
     border-top: 1px solid #e6e6f2;
     font-weight: normal;
+    font-size: 16px;
 }
+.table th img {
+    height: 120px;
+} 
 
 .table thead th {
     vertical-align: bottom;

@@ -12,12 +12,13 @@
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th scope="col">ID</th>
-                        <th scope="col">Name</th>
-                        <th scope="col">Email</th>
-                        <th scope="col">Password</th>
-                        <th scope="col">Type</th>
-                        <th scope="col">Action</th>
+                        <th scope="col" class="text-center">ID</th>
+                        <th scope="col" class="text-center">Name</th>
+                        <th scope="col" class="text-center">Email</th>
+                        <th scope="col" class="text-center">Username</th>
+                        <th scope="col" class="text-center">Password</th>
+                        <th scope="col" class="text-center">Type</th>
+                        <th scope="col" class="text-center">Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -26,12 +27,13 @@
                         foreach (var item in Model)
                         {
                             <tr>
-                                <td>@item.UserId</td>
-                                <td>@item.Name</td>
-                                <td>@item.Email</td>
-                                <td>@item.Password</td>
-                                <td>@item.UserType</td>
-                                <td>
+                                <td scope="col" class="text-center">@item.UserId</td>
+                                <td scope="col" class="text-center">@item.Name</td>
+                                <td scope="col" class="text-center">@item.Email</td>
+                                <td scope="col" class="text-center">@item.Username</td>
+                                <td scope="col" class="text-center">@item.Password</td>
+                                <td scope="col" class="text-center">@item.UserType</td>
+                                <td scope="col" class="text-center">
                                     <a class="btn btn-success btn-tone m-r-5" asp-action="Details" asp-route-id=@item.UserId>View</a>
                                     <a class="btn btn-primary btn-tone m-r-5" asp-action="Edit" asp-route-id=@item.UserId>Edit</a>
                                     <a class="btn btn-danger btn-tone m-r-5" asp-action="Delete" asp-route-id=@item.UserId>Delete</a>
