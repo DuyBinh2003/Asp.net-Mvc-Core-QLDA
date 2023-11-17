@@ -1,4 +1,5 @@
 using AspNetCoreHero.ToastNotification;
+using DoAn.MigrationSeeder;
 using DoAn.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -26,6 +27,20 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.UseAuthorization();
+
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+    try
+    {
+        var context = services.GetRequiredService<CContext>();
+        CContextSeeder.Seed(context);
+    }
+    catch (Exception ex)
+    {
+        // Log the error or handle it as needed
+    }
+}
 
 app.MapControllerRoute(
       name: "areas",

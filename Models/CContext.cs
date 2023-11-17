@@ -25,6 +25,8 @@ public partial class CContext : DbContext
 
     public virtual DbSet<Category> Categories { get; set; }
 
+    public virtual DbSet<Efmigrationshistory> Efmigrationshistories { get; set; }
+
     public virtual DbSet<Invoice> Invoices { get; set; }
 
     public virtual DbSet<InvoiceDetail> InvoiceDetails { get; set; }
@@ -154,6 +156,16 @@ public partial class CContext : DbContext
                 .HasColumnName("name");
         });
 
+        modelBuilder.Entity<Efmigrationshistory>(entity =>
+        {
+            entity.HasKey(e => e.MigrationId).HasName("PRIMARY");
+
+            entity.ToTable("__efmigrationshistory");
+
+            entity.Property(e => e.MigrationId).HasMaxLength(150);
+            entity.Property(e => e.ProductVersion).HasMaxLength(32);
+        });
+
         modelBuilder.Entity<Invoice>(entity =>
         {
             entity.HasKey(e => e.InvoiceId).HasName("PRIMARY");
@@ -198,7 +210,7 @@ public partial class CContext : DbContext
             entity.Property(e => e.InvoiceId).HasColumnName("invoice_id");
             entity.Property(e => e.BookId).HasColumnName("book_id");
             entity.Property(e => e.Quantity)
-                .HasDefaultValueSql("'-1'")
+                .HasDefaultValueSql("'1'")
                 .HasColumnName("quantity");
             entity.Property(e => e.UnitPrice)
                 .HasPrecision(10)

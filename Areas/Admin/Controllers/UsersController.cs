@@ -20,11 +20,14 @@ namespace DoAn.Areas.Admin.Controllers
         }
 
         // GET: Admin/Users
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int? page)
         {
-              return _context.Users != null ? 
-                          View(await _context.Users.ToListAsync()) :
-                          Problem("Entity set 'CContext.Users'  is null.");
+            var pageNumber = page == null || page <= 0 ? 1 : page.Value;
+            var pageSize = 15;
+
+            return _context.Users != null ? 
+                        View(await _context.Users.ToListAsync()) :
+                        Problem("Entity set 'CContext.Users'  is null.");
         }
 
         // GET: Admin/Users/Details/5

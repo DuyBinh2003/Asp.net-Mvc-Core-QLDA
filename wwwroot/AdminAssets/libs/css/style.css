@@ -263,6 +263,7 @@ label {
     border-radius: 2px;
 }
 
+
 .form-control:focus {
     color: #71748d;
     background-color: #fff;
@@ -270,7 +271,10 @@ label {
     outline: 0;
     box-shadow: 0 0 0 0.2rem rgba(214, 214, 255, .75);
 }
-
+.form-control.readonly {
+    cursor: pointer;
+    border-color
+}
 input[type=file] {
     color: #71748d;
     background-color: #fff;
