@@ -12,7 +12,7 @@
             <a asp-action="Create" class="btn btn-primary btn-sm">Create</a>
         </div>
         <div class="card-body">
-            <table class="table">
+            <table class="table table-striped">
                 <thead>
                     <tr>
                         <th scope="col" class="text-center">Invoice ID</th>
@@ -32,7 +32,7 @@
                                 <th scope="col" class="text-center">@invoice.InvoiceId</th>
                                 <th scope="col" class="text-center">
                                     <a asp-controller="Users" asp-action="Details" asp-route-id=@invoice.UserId>@invoice.User.Name</a>
-                                </th>
+                                </th>  
                                 <th scope="col" class="text-center">@invoice.Address</th>
                                 <th scope="col" class="text-center">@invoice.Sdt</th>
                                 <th scope="col" class="text-center">@invoice.TotalPrice
@@ -44,7 +44,6 @@
                                 </th>
                             </tr>
                         }
-                    
                 </tbody>
             </table>
         </div>
