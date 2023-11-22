@@ -54,7 +54,7 @@
                         
                         <th scope="col" class="text-center">Name</th>
                         <th scope="col" class="text-center">Description</th>
-                        <th scope="col" class="text-center">Quantity</th>
+                        
                         <th scope="col" class="text-center">Action</th>
                     </tr>
                 </thead>
@@ -67,8 +67,9 @@
                             @* <th scope="col" class="text-center">
                                 <a asp-controller="Users" asp-action="Details" asp-route-id=@invoice.UserId>@invoice.User.Name</a>
                             </th> *@
+                            
                             <th scope="col" class="text-center">@category.Description</th>
-                            <th></th>
+                            
                             <th scope="col" class="text-center">
                                 <a asp-controller="Categories" asp-action="Details" asp-route-id=@category.CategoryId class="btn btn-primary btn-sm">View</a>
                             </th>
