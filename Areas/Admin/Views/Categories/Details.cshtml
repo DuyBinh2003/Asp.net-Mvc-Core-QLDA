@@ -5,7 +5,7 @@
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
 }
 
-<h1>Details</h1>
+@* <h1>Details</h1>
 
 <div>
     <h4>Category</h4>
@@ -28,4 +28,57 @@
 <div>
     <a asp-action="Edit" asp-route-id="@Model.CategoryId">Edit</a> |
     <a asp-action="Index">Back to List</a>
+</div> *@
+
+<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+    <div class="card">
+        <h3 class="card-header">Danh mục sách</h3>
+        <h5 class="mt-3 ml-4">Khách hàng: @Model.Name</h5>
+        <h5 class="ml-4 mb-0">Mã số hoá đơn: @Model.Description</h5>
+        <div class="card-body">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col" class="text-center">Name</th>
+                        <th scope="col" class="text-center">Description</th>
+                        <th scope="col" class="text-center">Quantity</th>
+                        <th scope="col" class="text-center">Total</th>
+                    </tr>
+                </thead>
+                @* <tbody>
+                    @foreach (var cthd in Model.InvoiceDetails)
+                    {
+                        <tr>
+                            <th scope="col" class="text-center">
+                                <a asp-controller="Books" asp-action="Details" asp-route-id=@cthd.BookId>
+                                    <img src=@cthd.Book.ImgPath alt="" />
+                                </a>
+                            </th>
+                            <th scope="col" class="text-center">
+                                @cthd.UnitPrice
+                                <i class="fas fa-dollar-sign"></i>
+                            </th>
+                            <th scope="col" class="text-center">@cthd.Quantity</th>
+                            <th scope="col" class="text-center">
+                                @(@cthd.UnitPrice * @cthd.Quantity)
+                                <i class="fas fa-dollar-sign"></i>
+                            </th>
+                        </tr>
+                    }
+                    <tr>
+                        <th scope="col" class="text-left">
+                            <a class="btn btn-secondary" asp-action="">Back to List</a>
+                        </th>
+                        <th scope="col"></th>
+                        <th scope="col" class="text-center">Total Price Invoice</th>
+                        <th scope="col" class="text-center">
+                            @Model.TotalPrice
+                            <i class="fas fa-dollar-sign"></i>
+                        </th>
+                    </tr>
+                </tbody> *@
+            </table>
+        </div>
+    </div>
 </div>
+

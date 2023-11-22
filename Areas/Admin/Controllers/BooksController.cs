@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using DoAn.Models;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace DoAn.Areas.Admin.Controllers
 {
@@ -20,11 +21,20 @@ namespace DoAn.Areas.Admin.Controllers
         }
 
         // GET: Admin/Books
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int? page)
         {
-              return _context.Books != null ? 
-                          View(await _context.Books.ToListAsync()) :
-                          Problem("Entity set 'CContext.Books'  is null.");
+            //return _context.Books != null ?
+            //            View(await _context.Books.ToListAsync()) :
+            //            Problem("Entity set 'CContext.Books'  is null.");
+            var book = _context.Books
+                 .Include(s => s.InvoiceDetails)
+                 .Include(s => s.Author)
+                 .Include(s => s.Carts)
+                 .Include(s => s.Category)
+                 .ToList();
+            return _context.Books != null ?
+                        View(await _context.Books.ToListAsync()) :
+                        Problem("Entity set 'CContext.Books'  is null.");
         }
 
         // GET: Admin/Books/Details/5

@@ -10990,19 +10990,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\DELL\\.nuget\\packages\\": {}
+    "C:\\Users\\miynzi\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\code\\C#\\DoAn\\DoAn.csproj",
+      "projectUniqueName": "C:\\Users\\miynzi\\Desktop\\đồ án c#\\Asp.net-Mvc-Core-QLDA\\DoAn.csproj",
       "projectName": "DoAn",
-      "projectPath": "D:\\code\\C#\\DoAn\\DoAn.csproj",
-      "packagesPath": "C:\\Users\\DELL\\.nuget\\packages\\",
-      "outputPath": "D:\\code\\C#\\DoAn\\obj\\",
+      "projectPath": "C:\\Users\\miynzi\\Desktop\\đồ án c#\\Asp.net-Mvc-Core-QLDA\\DoAn.csproj",
+      "packagesPath": "C:\\Users\\miynzi\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\miynzi\\Desktop\\đồ án c#\\Asp.net-Mvc-Core-QLDA\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\DELL\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\miynzi\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -11082,7 +11082,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.403\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100\\RuntimeIdentifierGraph.json"
       }
     }
   }
