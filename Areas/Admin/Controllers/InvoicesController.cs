@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using DoAn.Models;
+using PagedList;
 
 namespace DoAn.Areas.Admin.Controllers
 {
@@ -26,7 +27,7 @@ namespace DoAn.Areas.Admin.Controllers
                  .Include(s => s.InvoiceDetails)
                  .Include(s => s.User)
                  .ToList();
-            return _context.Invoices != null ? 
+            return _context.Invoices != null ?
                       View(await _context.Invoices.ToListAsync()) :
                     Problem("Entity set 'CContext.Invoices'  is null.");
         }
