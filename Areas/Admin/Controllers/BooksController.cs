@@ -46,6 +46,10 @@ namespace DoAn.Areas.Admin.Controllers
             }
 
             var book = await _context.Books
+                .Include(s => s.InvoiceDetails)
+                 .Include(s => s.Author)
+                 .Include(s => s.Carts)
+                 .Include(s => s.Category)
                 .FirstOrDefaultAsync(m => m.BookId == id);
             if (book == null)
             {
