@@ -5,69 +5,49 @@
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
 }
 
-<h1>Details</h1>
-
-<div>
-    <h4>Book</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Price)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Price)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ImgPath)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ImgPath)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Description)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.AuthorId)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.AuthorId)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.CategoryId)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CategoryId)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.BookPath)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.BookPath)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Isbn)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Isbn)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Status)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Status)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model.BookId">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+<div class="col-xl-12 col-lg-6 col-md-12 col-sm-12 col-12">
+    <div class="card">
+        <h3 class="card-header">Chi tiết Sách</h3>
+        <div class="card-body">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col" class="text-center">Product</th>
+                        <th scope="col" class="text-center">Name</th>
+                        <th scope="col" class="text-center">Description</th>
+                        <th scope="col" class="text-center">Unit price</th>
+                        <th scope="col" class="text-center">Status</th>
+                        <th scope="col" class="text-center">Quantity</th>
+                        <th scope="col" class="text-center">Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="text-center">
+                            <img src="@Model.ImgPath" alt="" />
+                        </td>
+                        <td class="text-center">@Model.Name</td>
+                        <td class="text-center">@Model.Description</td>
+                        <td class="text-center">@Model.Price <i class="fas fa-dollar-sign"></i></td>
+                        <td class="text-center">@Model.Status</td>
+                        <td class="text-center">@Model.Quantity</td>
+                        <td class="text-center">
+                            @(Model.Price * Model.Quantity) <i class="fas fa-dollar-sign"></i>
+                        </td>
+                    </tr>
+                    <tr>
+                       <th scope="col" class="text-left">
+                            <a class="btn btn-secondary" asp-action="">Back to List</a>
+                        </th>
+                        @* <th scope="col"></th>
+                        <th scope="col" class="text-center">Total Price Invoice</th>
+                        <th scope="col" class="text-center">
+                            @Model.TotalPrice
+                            <i class="fas fa-dollar-sign"></i>
+                        </th> *@
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
 </div>

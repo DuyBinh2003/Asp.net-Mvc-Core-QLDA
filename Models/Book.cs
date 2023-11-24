@@ -29,6 +29,7 @@ public partial class Book
 
     public virtual Author Author { get; set; } = null!;
 
+
     public virtual ICollection<Cart> Carts { get; set; } = new List<Cart>();
 
     public virtual Category Category { get; set; } = null!;

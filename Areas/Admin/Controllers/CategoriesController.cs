@@ -22,9 +22,18 @@ namespace DoAn.Areas.Admin.Controllers
         // GET: Admin/Categories
         public async Task<IActionResult> Index()
         {
+<<<<<<< HEAD
             return _context.Categories != null ?
                 View(await _context.Categories.ToListAsync()) :
                 Problem("Entity set 'CContext.Categories'  is null.");
+=======
+            var category = _context.Categories
+                 .Include(s => s.Books)
+                 .ToList();
+            return _context.Categories != null ? 
+                          View(await _context.Categories.ToListAsync()) :
+                          Problem("Entity set 'CContext.Categories'  is null.");
+>>>>>>> 9e60f86d4a2a29ca3993af9248e3435816296f25
         }
 
         // GET: Admin/Categories/Details/5
@@ -36,6 +45,7 @@ namespace DoAn.Areas.Admin.Controllers
             }
 
             var category = await _context.Categories
+                .Include(s => s.Books)
                 .FirstOrDefaultAsync(m => m.CategoryId == id);
             if (category == null)
             {
