@@ -22,9 +22,9 @@ namespace DoAn.Areas.Admin.Controllers
         // GET: Admin/Categories
         public async Task<IActionResult> Index()
         {
-              return _context.Categories != null ? 
-                          View(await _context.Categories.ToListAsync()) :
-                          Problem("Entity set 'CContext.Categories'  is null.");
+            return _context.Categories != null ?
+                View(await _context.Categories.ToListAsync()) :
+                Problem("Entity set 'CContext.Categories'  is null.");
         }
 
         // GET: Admin/Categories/Details/5
