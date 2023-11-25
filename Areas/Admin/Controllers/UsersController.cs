@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using DoAn.Models;
+using System.Diagnostics.Metrics;
 
 namespace DoAn.Areas.Admin.Controllers
 {
@@ -39,11 +40,18 @@ namespace DoAn.Areas.Admin.Controllers
             }
 
             var user = await _context.Users
+                .Include(i=>i.Invoices)
+                .Include(s => s.Carts)
+                .ThenInclude(b=>b.Book)
                 .FirstOrDefaultAsync(m => m.UserId == id);
             if (user == null)
             {
                 return NotFound();
             }
+            decimal total = (decimal)user.Carts.Sum(cartItem => cartItem.Book.Price * cartItem.Quantity);
+            ViewBag.Total = total;
+
+            
 
             return View(user);
         }
@@ -162,5 +170,6 @@ namespace DoAn.Areas.Admin.Controllers
         {
           return (_context.Users?.Any(e => e.UserId == id)).GetValueOrDefault();
         }
+
     }
 }

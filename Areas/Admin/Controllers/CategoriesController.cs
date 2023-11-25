@@ -22,7 +22,7 @@ namespace DoAn.Areas.Admin.Controllers
         // GET: Admin/Categories
         public async Task<IActionResult> Index()
         {
-            var category = _context.Categories
+             var category = _context.Categories
                  .Include(s => s.Books)
                  .ToList();
             return _context.Categories != null ? 

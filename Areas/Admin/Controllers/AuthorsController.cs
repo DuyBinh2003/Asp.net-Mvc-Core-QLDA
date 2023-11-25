@@ -30,12 +30,14 @@ namespace DoAn.Areas.Admin.Controllers
         // GET: Admin/Authors/Details/5
         public async Task<IActionResult> Details(int? id)
         {
+
             if (id == null || _context.Authors == null)
             {
                 return NotFound();
             }
 
             var author = await _context.Authors
+                .Include(b => b.Books)
                 .FirstOrDefaultAsync(m => m.AuthorId == id);
             if (author == null)
             {

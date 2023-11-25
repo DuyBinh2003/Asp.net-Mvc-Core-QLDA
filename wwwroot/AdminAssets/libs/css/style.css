@@ -3117,7 +3117,7 @@ clip-path: polygon(10% 25%, 10% 0, 35% 0%, 65% 0%, 90% 0, 90% 25%, 90% 50%, 91% 
 }
 
 .btn-sm {
-    padding: 5px 12px;
+    /* padding: 5px 12px; */
     font-size: 14px;
 }
 
@@ -4509,8 +4509,10 @@ Pills vertical
     font-weight: normal;
     font-size: 16px;
 }
-.table th img {
+.table th img,
+ .table td img {
     height: 120px;
+
 } 
 
 .table thead th {
@@ -6984,3 +6986,9 @@ Media Query
 
 /* Custom, iPhone Retina */
 @media only screen and (max-width:320px) {}
+
+/*css for author index*/
+.author_index{
+    max-height:200px;
+    max-width:200px;
+}
