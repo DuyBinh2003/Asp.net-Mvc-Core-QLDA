@@ -1,7 +1,12 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\Areas",
+    "\\Areas\\Admin",
+    "\\Areas\\Admin\\Views",
+    "\\Areas\\Admin\\Views\\Authors",
+    "\\Areas\\Admin\\Views\\Users"
   ],
-  "SelectedNode": "\\DoAn.sln",
+  "SelectedNode": "\\Areas\\Admin\\Views\\Authors\\Details.cshtml",
   "PreviewInSolutionExplorer": false
 }
