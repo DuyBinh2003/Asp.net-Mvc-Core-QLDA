@@ -14,6 +14,7 @@
             <table class="table">
                 <thead>
                     <tr>
+                        <th scope="col" class="text-center">Name</th>
                         <th scope="col" class="text-center">Product</th>
                         <th scope="col" class="text-center">Unit price</th>
                         <th scope="col" class="text-center">Quantity</th>
@@ -24,6 +25,11 @@
                     @foreach (var cthd in Model.InvoiceDetails)
                     {
                         <tr>
+                            <th scope="col" class="text-center">
+                                <a asp-controller="Books" asp-action="Details" asp-route-id=@cthd.BookId>
+                                    @cthd.Book.Name
+                                </a>
+                            </th>
                             <th scope="col" class="text-center">
                                 <a asp-controller="Books" asp-action="Details" asp-route-id=@cthd.BookId >
                                     <img src=@cthd.Book.ImgPath alt="" />
@@ -42,6 +48,7 @@
                         <th scope="col" class="text-left">
                             <a class="btn btn-secondary" asp-action="">Back to List</a>
                         </th>
+                        <th scope="col"></th>
                         <th scope="col"></th>
                         <th scope="col" class="text-center">Total Price Invoice</th>
                         <th scope="col" class="text-center">@Model.TotalPrice

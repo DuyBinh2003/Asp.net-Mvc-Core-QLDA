@@ -3,47 +3,127 @@
 @{
     ViewData["Title"] = "Details";
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+    var total = ViewBag.Total;
+    int counter = 1;
+    int counter1 = 1;
 }
 
-<h1>Details</h1>
+<div class="row">
+    <div class=" col-xl-12 col-lg-12 col-md-12 col-sm-12 c">
+        <div class="card">
+            <div class="card-header p-4">
+                <h1 class="pt-2 d-inline-block ">Thông tin khách hàng</h1>
 
-<div>
-    <h4>User</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Email)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Email)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Password)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Password)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.UserType)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.UserType)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Username)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Username)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model.UserId">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+            </div>
+            <div class="card-body">
+                <div class="row mb-4">
+                    <div class="col-sm-6">
+                        <h2 class="text-dark mb-1">Fullname: @Model.Name</h2>
+                        <h5 class="mb-0">Email: @Model.Email</h5>
+                        <h5 class="mb-0">Usertype: @Model.UserType</h5>
+                    </div>
+                    <div class="col-sm-6">
+                        <h2 class="text-dark mb-1"></h2>
+                        <h5 class="mb-0 pt-4">Username: @Model.Username</h5>
+                        <h5 class="mb-0">Password: @Model.Password</h5>
+                    </div>
+                </div>
+               <div class="row">
+                   <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12 col-12">
+                        <h5>Giỏ Hàng</h5>
+                        <div class="table-responsive-sm">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th class="text-center">STT</th>
+                                        <th class="text-center">Item</th>
+                                        <th class="text-center">Image</th>
+                                        <th class="text-center">Unit Cost</th>
+                                        <th class="text-center">Quantity</th>
+                                        <th class="text-center">Total</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var cart in Model.Carts)
+                                    {
+                                        <tr>
+                                            <td class="text-center">@counter1</td>
+                                            <td scope="col" class="text-center">@cart.Book.Name</td>
+                                            <td class="text-center">
+                                                <a asp-controller ="Books" asp-action="Details" asp-route-id="@cart.BookId">
+                                                    <img src="@cart.Book.ImgPath">
+                                                </a>
+                                            </td>
+           
+                                            <td class="text-center">@cart.Book.Price</td>
+                                            <td class="text-center">@cart.Quantity</td>
+                                            <td class="text-center ">@(@cart.Book.Price * @cart.Quantity)</td>
+
+                                        </tr>
+                                        counter1++;
+
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                   </div>
+                    <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12 col-12">
+                        <h5>Hoá Đơn</h5>
+                        <div class="table-responsive-sm">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th class ="text-center">STT</th>
+                                        <th class="text-center">Address</th>
+                                        <th class="text-center">SDT</th>
+                                        <th class="text-center">Total</th>
+                                        <th class="text-center">Date</th>
+                                        <th class="text-center">action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var invoice in Model.Invoices)
+                                    {
+                                        <tr>
+                                            <td class="text-center">@counter</td>
+                                            <td class="text-center">@invoice.Address</td>
+        
+                                            <td class="text-center">@invoice.Sdt</td>
+                                            <td class="text-center ">@invoice.TotalPrice</td>
+                                            <td class=" text-center">@invoice.Date</td>
+                                            <td class="text-center">
+                                                <a asp-controller="invoices" asp-action="Details" asp-route-id ="@invoice.InvoiceId" class="btn btn-primary btn-sm">View</a>
+                                                </td>
+                                        </tr>
+                                        counter++;
+
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+               </div>
+                <div class="row">
+                    <div class="col-lg-4 col-sm-5">
+                    </div>
+                    <div class="col-lg-4 col-sm-5 ml-auto">
+                        <table class="table table-clear">
+                            <tbody>
+                                <tr>
+                                    <td class="left">
+                                        <strong class="text-dark">Subtotal</strong>
+                                    </td>
+                                    <td class="right">@total</td>
+                                </tr>
+                               
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <a  class="btn btn-secondary text-light" asp-action="" >Back to list</a>
+            </div>
+        </div>
+    </div>
 </div>

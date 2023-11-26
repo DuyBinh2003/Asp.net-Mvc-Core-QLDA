@@ -7,8 +7,15 @@
 
 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
     <div class="card">
+<<<<<<< HEAD
         <h5 class="card-header">Quản lý tài khoản</h5>
         <a class="btn btn-primary" asp-action="Create" >Create</a>
+=======
+        <div class="card-header d-flex justify-content-between align-items-center">
+            <h3 class="mb-0">Quản lý Khách Hàng</h3>
+            <a asp-action="Create" class="btn btn-primary btn-sm">Create</a>
+        </div>
+>>>>>>> 034a932b70fb32f5575bc562138a56cadaa8bcad
         <div class="card-body">
             <table class="table table-striped">
                 <thead>
@@ -37,7 +44,7 @@
                                 <td scope="col" class="text-center">
                                     <a class="btn btn-success btn-tone m-r-5" asp-action="Details" asp-route-id=@item.UserId>View</a>
                                     <a class="btn btn-primary btn-tone m-r-5" asp-action="Edit" asp-route-id=@item.UserId>Edit</a>
-                                    <a class="btn btn-danger btn-tone m-r-5" asp-action="Delete" asp-route-id=@item.UserId>Delete</a>
+                                    
                                 </td>
                             </tr>
                         }

@@ -5,6 +5,7 @@
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
 }
 
+<<<<<<< HEAD
 <h1>Index</h1>
 
 <p>
@@ -43,6 +44,63 @@
                 <a asp-action="Delete" asp-route-id="@item.AuthorId">Delete</a>
             </td>
         </tr>
+=======
+        
+                <div class="row">
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                        <div class="card">
+            <h4 class="card-header d-flex justify-content-between align-items-center ">
+                Danh sách tác giả  <a class=" btn btn-primary " asp-action="Create">Create</a>
+                </h4>
+            
+                                <div class="table-responsive">
+                                    <table id="example" class="table table-striped table-bordered second" style="width:100%">
+                                        <thead>
+                                <tr>
+                            <th class="text-center col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
+                                    @Html.DisplayNameFor(model => model.Name)
+                                </th>
+                            <th class="text-center col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3">
+                                    @Html.DisplayNameFor(model => model.ImgPath)
+                                </th>
+                            <th class="text-center col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4">
+                                    @Html.DisplayNameFor(model => model.Description)
+                                </th>
+                            <th class ="text-center col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2"></th>
+                            </tr>
+                                        </thead>
+                                        <tbody>
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr>
+                                <td class="text-center">
+                                                @Html.DisplayFor(modelItem => item.Name)
+                                            </td>
+                                <td class="text-center">
+                                    <img  class="author_index text-center" src=" @Html.DisplayFor(modelItem => item.ImgPath)">
+                                            </td>
+                                <td class="text-center">
+                                                @Html.DisplayFor(modelItem => item.Description)
+                                            </td>
+                                <td scope="col" class="text-center col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1">
+                                    <a class="btn btn-success btn-tone m-r-5" asp-action="Details" asp-route-id="@item.AuthorId">View</a>
+                                    
+                                   
+                                  
+                                </td>
+                                        </tr>
+                                     }
+    
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- ============================================================== -->
+                    <!-- end data table  -->
+                    <!-- ============================================================== -->
+>>>>>>> 034a932b70fb32f5575bc562138a56cadaa8bcad
 }
+
     </tbody>
-</table>
+</>
