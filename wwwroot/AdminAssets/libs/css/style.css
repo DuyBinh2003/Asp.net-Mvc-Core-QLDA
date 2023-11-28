@@ -4510,9 +4510,8 @@ Pills vertical
     font-size: 16px;
 }
 .table th img,
- .table td img {
+.table td img {
     height: 120px;
-
 } 
 
 .table thead th {

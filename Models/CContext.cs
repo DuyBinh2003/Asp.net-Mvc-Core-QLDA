@@ -34,13 +34,7 @@ public partial class CContext : DbContext
     public virtual DbSet<User> Users { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-<<<<<<< HEAD
-        => optionsBuilder.UseMySQL("Server=localhost;User=root;Password=PenGaming500;Database=c#;");
-=======
         => optionsBuilder.UseMySQL("Server=localhost;User=root;Password=Binh0366032155;Database=c#;");
->>>>>>> e8df973abc233778f8d3a4df09fbdb9ff56c39cb
-
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Author>(entity =>

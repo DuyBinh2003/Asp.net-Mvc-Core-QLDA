@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "E:\\clone git do an\\Asp.net-Mvc-Core-QLDA\\DoAn.csproj": {}
+    "D:\\code\\C#\\DoAn\\DoAn.csproj": {}
   },
   "projects": {
-    "E:\\clone git do an\\Asp.net-Mvc-Core-QLDA\\DoAn.csproj": {
+    "D:\\code\\C#\\DoAn\\DoAn.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\clone git do an\\Asp.net-Mvc-Core-QLDA\\DoAn.csproj",
+        "projectUniqueName": "D:\\code\\C#\\DoAn\\DoAn.csproj",
         "projectName": "DoAn",
-        "projectPath": "E:\\clone git do an\\Asp.net-Mvc-Core-QLDA\\DoAn.csproj",
-        "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-        "outputPath": "E:\\clone git do an\\Asp.net-Mvc-Core-QLDA\\obj\\",
+        "projectPath": "D:\\code\\C#\\DoAn\\DoAn.csproj",
+        "packagesPath": "C:\\Users\\DELL\\.nuget\\packages\\",
+        "outputPath": "D:\\code\\C#\\DoAn\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\DELL\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -102,7 +102,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.401\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.403\\RuntimeIdentifierGraph.json"
         }
       }
     }

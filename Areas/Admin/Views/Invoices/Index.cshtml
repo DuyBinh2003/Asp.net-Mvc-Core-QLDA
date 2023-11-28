@@ -25,7 +25,6 @@
                     </tr>
                 </thead>
                 <tbody>
-<<<<<<< HEAD
                     @foreach(var invoice in Model) 
                     {
                         <tr>
@@ -44,27 +43,6 @@
                             </th>
                         </tr>
                     }
-=======
-                    
-                        @foreach(var invoice in Model) 
-                        {
-                            <tr>
-                                <th scope="col" class="text-center">@invoice.InvoiceId</th>
-                                <th scope="col" class="text-center">
-                                    <a asp-controller="Users" asp-action="Details" asp-route-id=@invoice.UserId>@invoice.User.Name</a>
-                                </th>  
-                                <th scope="col" class="text-center">@invoice.Address</th>
-                                <th scope="col" class="text-center">@invoice.Sdt</th>
-                                <th scope="col" class="text-center">@invoice.TotalPrice
-                                <i class="fas fa-dollar-sign"></i>
-                                </th>
-                                <th scope="col" class="text-center">@invoice.Date</th>
-                                <th scope="col" class="text-center">
-                                    <a asp-controller="Invoices" asp-action="Details" asp-route-id=@invoice.InvoiceId class="btn btn-primary btn-sm">View</a>
-                                </th>
-                            </tr>
-                        }
->>>>>>> 9e60f86d4a2a29ca3993af9248e3435816296f25
                 </tbody>
             </table>
         </div>
