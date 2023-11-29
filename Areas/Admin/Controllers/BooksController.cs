@@ -50,6 +50,7 @@ namespace DoAn.Areas.Admin.Controllers
                  .Include(s => s.Author)
                  .Include(s => s.Carts)
                  .Include(s => s.Category)
+                 
                 .FirstOrDefaultAsync(m => m.BookId == id);
             if (book == null)
             {

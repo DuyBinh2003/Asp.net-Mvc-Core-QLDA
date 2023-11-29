@@ -4,8 +4,6 @@
     ViewData["Title"] = "Edit";
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
 }
-<h1>Edit Book</h1>
-<hr />
 @* <div class="row">
     <div class="col-md-4">
         <form asp-action="Edit">
@@ -62,9 +60,9 @@
         </form>
     </div>
 </div> *@
-<div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
+<div class="col-xl-8 col-lg-8 col-md-8 col-sm-8 col-8">
     <div class="card">
-        <h5 class="card-header">Edit User</h5>
+        <h3 class="card-header">Sửa thông tin Sách</h3>
         <div class="card-body">
             <form asp-action="Edit">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -72,56 +70,63 @@
 
                 <div class="form-group row">
                     <label asp-for="Name" class="col-3 col-lg-2 col-form-label text-left">Fullname</label>
-                    <div class="col-9 col-lg-10">
+                    <div class="col-7 col-lg-7">
                         <input asp-for="Name" type="text" class="form-control">
                     </div>
                 </div>
                 <div class="form-group row">
                     <label asp-for="Price" class="col-3 col-lg-2 col-form-label text-left">Price</label>
-                    <div class="col-9 col-lg-10">
-                        <input asp-for="Price" type="email" value=@Model.Price required="" data-parsley-type="email" class="form-control readonly" readonly>
+                    <div class="col-9 col-lg-7">
+                        <input asp-for="Price" type="text" class="form-control">
                     </div>
                 </div>
                 <div class="form-group row">
                     <label asp-for="ImgPath" class="col-3 col-lg-2 col-form-label text-left">ImgPath</label>
-                    <div class="col-9 col-lg-10">
+                    <div class="col-9 col-lg-7">
                         <input asp-for="ImgPath" type="text" value=@Model.ImgPath required="" class="form-control readonly" readonly>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label asp-for="Description" class="col-3 col-lg-2 col-form-label text-left">Description</label>
-                    <div class="col-9 col-lg-10">
+                    <div class="col-9 col-lg-7">
                         <input asp-for="Description" type="text" value=@Model.Description class="form-control">
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label asp-for="AuthorId" class="col-3 col-lg-2 col-form-label text-left">AuthorId</label>
-                    <div class="col-9 col-lg-10">
+                    <label asp-for="AuthorId" class="col-3 col-lg-2 col-form-label text-left">Author Id</label>
+                    <div class="col-9 col-lg-7">
                         <input asp-for="AuthorId" type="text" value=@Model.AuthorId class="form-control readonly" readonly tabindex="-1">
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label asp-for="CategoryId" class="col-3 col-lg-2 col-form-label text-left">CategoryId</label>
-                    <div class="col-9 col-lg-10">
-                        <input asp-for="CategoryId" type="text" value=@Model.CategoryId class="form-control">
+                    <label asp-for="CategoryId" class="col-3 col-lg-2 col-form-label text-left">Category Id</label>
+                    <div class="col-9 col-lg-7">
+                        <input asp-for="CategoryId" type="text" value=@Model.CategoryId class="form-control readonly" readonly tabindex="-1">
                     </div>
                 </div>
+                
                 <div class="form-group row">
                     <label asp-for="BookPath" class="col-3 col-lg-2 col-form-label text-left">BookPath</label>
-                    <div class="col-9 col-lg-10">
+                    <div class="col-9 col-lg-7">
                         <input asp-for="BookPath" type="text" value=@Model.BookPath class="form-control">
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label asp-for="Isbn" class="col-3 col-lg-2 col-form-label text-left">Isbn</label>
-                    <div class="col-9 col-lg-10">
+                    <label asp-for="Isbn" class="col-3 col-lg-2 col-form-label text-left">ISBN</label>
+                    <div class="col-9 col-lg-7">
                         <input asp-for="Isbn" type="text" value=@Model.Isbn class="form-control">
                     </div>
                 </div>
                 <div class="form-group row">
                     <label asp-for="Status" class="col-3 col-lg-2 col-form-label text-left">Status</label>
-                    <div class="col-9 col-lg-10">
+                    <div class="col-9 col-lg-7">
                         <input asp-for="Status" type="text" value=@Model.Status class="form-control">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label asp-for="Quantity" class="col-3 col-lg-2 col-form-label text-left">Quantity</label>
+                    <div class="col-9 col-lg-7">
+                        <input asp-for="Quantity" type="text" value=@Model.Quantity class="form-control">
                     </div>
                 </div>
                 <div class="row pt-2 pt-sm-5 mt-1">
