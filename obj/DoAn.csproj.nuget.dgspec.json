@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\miynzi\\Desktop\\Asp.net-Mvc-Core-QLDA\\DoAn.csproj": {}
+    "C:\\Users\\miynzi\\Desktop\\cũ\\DoAn.csproj": {}
   },
   "projects": {
-    "C:\\Users\\miynzi\\Desktop\\Asp.net-Mvc-Core-QLDA\\DoAn.csproj": {
+    "C:\\Users\\miynzi\\Desktop\\cũ\\DoAn.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\miynzi\\Desktop\\Asp.net-Mvc-Core-QLDA\\DoAn.csproj",
+        "projectUniqueName": "C:\\Users\\miynzi\\Desktop\\cũ\\DoAn.csproj",
         "projectName": "DoAn",
-        "projectPath": "C:\\Users\\miynzi\\Desktop\\Asp.net-Mvc-Core-QLDA\\DoAn.csproj",
+        "projectPath": "C:\\Users\\miynzi\\Desktop\\cũ\\DoAn.csproj",
         "packagesPath": "C:\\Users\\miynzi\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\miynzi\\Desktop\\Asp.net-Mvc-Core-QLDA\\obj\\",
+        "outputPath": "C:\\Users\\miynzi\\Desktop\\cũ\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\miynzi\\AppData\\Roaming\\NuGet\\NuGet.Config",
