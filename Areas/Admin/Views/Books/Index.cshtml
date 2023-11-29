@@ -15,14 +15,15 @@
             <table class="table">
                 <thead>
                     <tr>
-                        <th scope="col" class="text-center">ID</th>
+                        <td scope="col" class="text-center">Product</td>
                         <th scope="col" class="text-center">Name</th>
-                        <th scope="col" class="text-center">Product</th>
+                        <th scope="col" class="text-center">Category</th>
+                        
                         <th scope="col" class="text-center">Author</th>
-                        <th scope="col" class="text-center">Price</th>
+                        
                         <th scope="col" class="text-center">Description</th>
-                        <th scope="col" class="text-center">Status</th>
-                        <th scope="col" class="text-center">Quantity</th>
+                        
+                        <th scope="col" class="text-center">Price</th>
                         <th scope="col" class="text-center">Action</th>
                     </tr>
                 </thead>
@@ -32,15 +33,16 @@
                         foreach (var book in Model)
                         {
                             <tr>
-                                <td scope="col" class="text-center">@book.BookId</td>
+                                <th scope="col" class="text-center">
+                                    <a asp-controller="Books" asp-action="Details" asp-route-id=@book.CategoryId>
+                                        <img src=@book.ImgPath alt="" />
+                                    </a>
+                                </th>
+                                
+                                <td scope="col" class="text-center">@book.Name</td>
                                 <th scope="col" class="text-center">
                                     <a asp-controller="Categories" asp-action="Details" asp-route-id=@book.CategoryId>
                                         @book.Category.Name
-                                    </a>
-                                </th>
-                                <th scope="col" class="text-center">
-                                    <a asp-controller="Books" asp-action="Details" asp-route-id=@book.BookId>
-                                        <img src=@book.ImgPath alt="" />
                                     </a>
                                 </th>
                                 <th scope="col" class="text-center">
@@ -48,10 +50,11 @@
                                         @book.Author.Name
                                     </a>
                                 </th>
-                                <td scope="col" class="text-center">@book.Price</td>
+                                
                                 <td scope="col" class="text-center">@book.Description</td>
-                                <td scope="col" class="text-center">@book.Status</td>
-                                <td scope="col" class="text-center">@book.Quantity</td>
+                                
+                                
+                                <td class="text-center">@book.Price <i class="fas fa-dollar-sign"></i></td>
                                 <td scope="col" class="text-center">
                                     <a class="btn btn-success btn-tone m-r-5" asp-action="Details" asp-route-id=@book.BookId>View</a>
                                     <a class="btn btn-primary btn-tone m-r-5" asp-action="Edit" asp-route-id=@book.BookId>Edit</a>

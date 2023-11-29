@@ -12,12 +12,15 @@
 
 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
     <div class="card">
-        <h3 class="card-header">Danh mục sách</h3>
+        <h3 class="card-header">Chi tiết về Thể loại</h3>
+        <h2 class="card-header">@Model.Name</h2>
+        
         
         <div class="card-body">
             <table class="table">
                 <thead>
                     <tr>
+                        <th scope="col" class="text-center">ImgPath</th>
                         <th scope="col" class="text-center">Name</th>
                         <th scope="col" class="text-center">Description</th>
                         <th scope="col" class="text-center">Quantity</th>
@@ -30,8 +33,18 @@
                         @foreach (var category in Model.Books)
                         {
                             <tr>
-                                <th scope="col" class="text-center">@category.Name</th>
+                                <th scope="col" class="text-center">
+                                    <a asp-controller="Books" asp-action="Details" asp-route-id=@category.BookId>
+                                        <img src=@category.ImgPath alt="" />
+                                    </a>
+                                </th>
+                                <th scope="col" class="text-center">
+                                    <a asp-controller="Books" asp-action="Details" asp-route-id=@category.CategoryId>
+                                        @category.Name
+                                    </a>
+                                </th>
                                 <th scope="col" class="text-center">@category.Description</th>
+                                
                                 <th scope="col" class="text-center">@category.Quantity</th>
                             </tr>
                         }
