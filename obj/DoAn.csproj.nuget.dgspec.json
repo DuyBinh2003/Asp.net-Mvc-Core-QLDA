@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\miynzi\\Desktop\\cũ\\DoAn.csproj": {}
+    "C:\\Users\\miynzi\\Desktop\\c# chính thức\\DoAn.csproj": {}
   },
   "projects": {
-    "C:\\Users\\miynzi\\Desktop\\cũ\\DoAn.csproj": {
+    "C:\\Users\\miynzi\\Desktop\\c# chính thức\\DoAn.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\miynzi\\Desktop\\cũ\\DoAn.csproj",
+        "projectUniqueName": "C:\\Users\\miynzi\\Desktop\\c# chính thức\\DoAn.csproj",
         "projectName": "DoAn",
-        "projectPath": "C:\\Users\\miynzi\\Desktop\\cũ\\DoAn.csproj",
+        "projectPath": "C:\\Users\\miynzi\\Desktop\\c# chính thức\\DoAn.csproj",
         "packagesPath": "C:\\Users\\miynzi\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\miynzi\\Desktop\\cũ\\obj\\",
+        "outputPath": "C:\\Users\\miynzi\\Desktop\\c# chính thức\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\miynzi\\AppData\\Roaming\\NuGet\\NuGet.Config",

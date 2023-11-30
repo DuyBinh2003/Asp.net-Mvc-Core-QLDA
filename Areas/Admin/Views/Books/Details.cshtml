@@ -6,57 +6,92 @@
 }
 
 <div class="row">
-    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+    <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12 col-12">
         <div class="card">
-            <h3 class="card-header">Thông tin chi tiết Sách</h3>
+            <h3 class="card-header">Thông tin Sách</h3>
             <div class="card-body">
-                <h2 class="card-header">@Model.Name</h2>
+                <h2 class="text-center">@Model.Name</h2>
                 <table class="table">
                     <thead>
                         <tr>
-                            <th scope="col" class="text-center">Product</th>
-                            <th scope="col" class="text-center">Category</th>
-                            <th scope="col" class="text-center">Author</th>
-                            <th scope="col" class="text-center">Description</th>
-                            <th scope="col" class="text-center">Unit price</th>
-                            <th scope="col" class="text-center">Author ID</th>
-                            <th scope="col" class="text-center">Category ID</th>
-                            <th scope="col" class="text-center">Isbn</th>
-                            <th scope="col" class="text-center">Status</th>
-                            <th scope="col" class="text-center">Quantity</th>
+                            <th scope="col" class="text-center" colspan="2">
+                                <img src="@Model.ImgPath" alt="" />
+                            </th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
+                            <th scope="col" class="text-center">Category</th>
                             <td class="text-center">
-                                <img src="@Model.ImgPath" alt="" />
-                            </td>
-                            <th scope="col" class="text-center">
                                 <a asp-controller="Categories" asp-action="Details" asp-route-id=@Model.CategoryId>
                                     @Model.Category.Name
                                 </a>
-                            </th>
-                            <th scope="col" class="text-center">
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="col" class="text-center">Author</th>
+                            <td class="text-center">
                                 <a asp-controller="Authors" asp-action="Details" asp-route-id=@Model.AuthorId>
                                     @Model.Author.Name
                                 </a>
-                            </th>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="col" class="text-center">Description</th>
                             <td class="text-center">@Model.Description</td>
+                        </tr>
+                        <tr>
+                            <th scope="col" class="text-center">Unit price</th>
                             <td class="text-center">@Model.Price <i class="fas fa-dollar-sign"></i></td>
+                        </tr>
+                        <tr>
+                            <th scope="col" class="text-center">Author ID</th>
                             <td class="text-center">@Model.AuthorId</td>
+                        </tr>
+                        <tr>
+                            <th scope="col" class="text-center">Category ID</th>
                             <td class="text-center">@Model.CategoryId</td>
+                        </tr>
+                        <tr>
+                            <th scope="col" class="text-center">Isbn</th>
                             <td class="text-center">@Model.Isbn</td>
+                        </tr>
+                        <tr>
+                            <th scope="col" class="text-center">Status</th>
                             <td class="text-center">@Model.Status</td>
+                        </tr>
+                        <tr>
+                            <th scope="col" class="text-center">Quantity</th>
                             <td class="text-center">@Model.Quantity</td>
                         </tr>
                         <tr>
-                            <th>
+                            <td colspan="2">
                                 <a class="btn btn-secondary text-light" asp-action="">Back to list</a>
-                            </th>
+                            </td>
                         </tr>
                     </tbody>
-                    
                 </table>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12 col-12">
+        <div class="card">
+            <h3 class="card-header p-4 d-flex justify-content-between align-items-center">
+                Tác giả Sách
+                <a class="btn btn-primary" asp-controller="Authors" asp-action="Details" asp-route-id=@Model.AuthorId>View</a>
+            </h3>
+            <div class="card-body">
+                <div class="text-center">
+                    <h2>
+                        <a asp-controller="Authors" asp-action="Details" asp-route-id=@Model.AuthorId>
+                            @Model.Author.Name
+                        </a>
+                    </h2>
+                    <div>
+                        <img src="@Model.Author.ImgPath" alt="" />
+                    </div>
+                    <h5 class="mb-4 mt-4">@Model.Author.Description</h5>
+                </div>
             </div>
         </div>
     </div>
@@ -67,10 +102,9 @@
                 <table class="table">
                     <thead>
                         <tr>
-                            <th scope="col" class="text-center">Customer ID</th>
-                            <th scope="col" class="text-center">Unit Cost</th>
+                            <th scope="col" class="text-center">User ID</th>
+                            <th scope="col" class="text-center">Name</th>
                             <th scope="col" class="text-center">Quantity</th>
-                            <th scope="col" class="text-center">Total</th>
                             <th scope="col" class="text-center">Action</th>
                         </tr>
                     </thead>
@@ -79,23 +113,19 @@
                             @foreach (var cart in Model.Carts)
                             {
                             <tr>
-                                
                                 <th scope="col" class="text-center">
-                                    <a class="btn btn-outline-info" asp-controller="Users" asp-action="Details" asp-route-id=@cart.UserId>
-                                            @cart.UserId
+                                    <a class="btn btn-outline-info" asp-controller="Users" asp-action="Details" asp-route-id=@cart.BookId>
+                                            @cart.User.UserId
                                     </a>
                                 </th>
-                                <td class="text-center">
-                                    @cart.Book.Price
-                                    <i class="fas fa-dollar-sign"></i>
-                                </td>
+                                <th scope="col" class="text-center">
+                                    <a asp-controller="Users" asp-action="Details" asp-route-id=@cart.UserId>
+                                            @cart.User.Name
+                                    </a>
+                                </th>
                                 <td class="text-center">@cart.Quantity</td>
-                                <td class="text-center ">
-                                    @(@cart.Book.Price * @cart.Quantity)
-                                    <i class="fas fa-dollar-sign"></i>
-                                </td>
                                 <td scope="col" class="text-center">
-                                    <a class="btn btn-rounded btn-info" asp-controller="Users" asp-action="Details" asp-route-id=@cart.UserId>Detail</a>
+                                    <a class="btn btn-info" asp-controller="Users" asp-action="Details" asp-route-id=@cart.UserId>View</a>
                                 </td>
                             </tr>
                             }
@@ -138,7 +168,7 @@
                                     <i class="fas fa-dollar-sign"></i>
                                 </th>
                                 <td scope="col" class="text-center">
-                                    <a class="btn btn-rounded btn-success" asp-controller="Invoices" asp-action="Details" asp-route-id=@cthd.BookId>Detail</a>
+                                    <a class="btn btn-success" asp-controller="Invoices" asp-action="Details" asp-route-id=@cthd.BookId>View</a>
                                 </td>
                             </tr>
                         }
@@ -147,6 +177,3 @@
             </div>
         </div>
     </div>
-    
-    
-    

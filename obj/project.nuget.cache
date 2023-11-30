@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "2nssDFjLCaCEBC+q+5fe3f1d8v7S7pMx1FN7JJ5XFb9ZWR3yDTwHQ0+JFpMwXgz6q1GSdHsLZeqJm6pKsGI+Gg==",
+  "dgSpecHash": "2WZqPnaqg34+oOjLE0LacnCUqA+WQ4xXFmSo4tpy85W9yjc3eXVyP+1c4pYeG9Opjd4fjyjsc1v0x/cH+mErQg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\miynzi\\Desktop\\cũ\\DoAn.csproj",
+  "projectFilePath": "C:\\Users\\miynzi\\Desktop\\c# chính thức\\DoAn.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\miynzi\\.nuget\\packages\\aspnetcorehero.toastnotification\\1.1.0\\aspnetcorehero.toastnotification.1.1.0.nupkg.sha512",
     "C:\\Users\\miynzi\\.nuget\\packages\\bouncycastle.cryptography\\2.2.1\\bouncycastle.cryptography.2.2.1.nupkg.sha512",

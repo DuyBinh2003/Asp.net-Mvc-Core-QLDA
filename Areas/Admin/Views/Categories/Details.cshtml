@@ -40,7 +40,7 @@
                                 
                                 <th scope="col" class="text-center">@category.Quantity</th>
                                 <th scope="col" class="text-center">
-                                    <a class="btn btn-rounded btn-secondary" asp-controller="Books" asp-action="Details" asp-route-id=@category.BookId>Detail</a>
+                                    <a class="btn btn-primary" asp-controller="Books" asp-action="Details" asp-route-id=@category.BookId>View</a>
                                 </th>
                             </tr>
                         }
@@ -49,12 +49,6 @@
                         <th scope="col" class="text-left">
                             <a class="btn btn-secondary" asp-action="">Back to List</a>
                         </th>
-                        @* <th scope="col"></th>
-                        <th scope="col" class="text-center">Total Price Invoice</th>
-                        <th scope="col" class="text-center">
-                            @Model.TotalPrice
-                            <i class="fas fa-dollar-sign"></i>
-                        </th> *@
                     </tr>
                 </tbody>
             </table>

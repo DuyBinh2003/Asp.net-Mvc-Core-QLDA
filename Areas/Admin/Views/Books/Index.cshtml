@@ -18,6 +18,7 @@
                         <th scope="col" class="text-center">Book ID</th>
                         <td scope="col" class="text-center">Product</td>
                         <th scope="col" class="text-center">Name</th>
+                        <th scope="col" class="text-center">Author</th>
                         <th scope="col" class="text-center">Description</th>
                         <th scope="col" class="text-center">Action</th>
                     </tr>
@@ -35,6 +36,11 @@
                                     </a>
                                 </th>
                                 <td scope="col" class="text-center">@book.Name</td>
+                                <th scope="col" class="text-center">
+                                    <a asp-controller="Authors" asp-action="Details" asp-route-id=@book.AuthorId>
+                                        @book.Author.Name
+                                    </a>
+                                </th>
                                 <td scope="col" class="text-center">@book.Description</td>
                                 <td scope="col" class="text-center">
                                     <a class="btn btn-success btn-tone m-r-5" asp-action="Details" asp-route-id=@book.BookId>View</a>

@@ -26,6 +26,7 @@ namespace DoAn.Areas.Admin.Controllers
             var invoice = _context.Invoices
                  .Include(s => s.InvoiceDetails)
                  .Include(s => s.User)
+                 //.Include(s => s.Cart)
                  .ToList();
             return _context.Invoices != null ?
                       View(await _context.Invoices.ToListAsync()) :
