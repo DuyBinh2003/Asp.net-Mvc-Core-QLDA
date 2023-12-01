@@ -27,6 +27,7 @@
 
     <!-- Custom styles for this template -->
     <link href="~/assets/css/style.css" rel="stylesheet" />
+
     <!-- responsive style -->
     <link href="~/assets/css/responsive.css" rel="stylesheet" />
 </head>
@@ -57,7 +58,7 @@
                                 <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                             </li>
                             <li class="nav-item @(ViewContext.RouteData.Values["controller"].ToString().ToLower() == "home" && ViewContext.RouteData.Values["action"].ToString().ToLower() == "menu" ? "active" : "")">
-                                <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Menu">Category</a>
+                                <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Menu">Book</a>
                             </li>
                             <li class="nav-item @(ViewContext.RouteData.Values["controller"].ToString().ToLower() == "home" && ViewContext.RouteData.Values["action"].ToString().ToLower() == "about" ? "active" : "")">
                                 <a class="nav-link" asp-area="" asp-controller="Home" asp-action="About">About</a>

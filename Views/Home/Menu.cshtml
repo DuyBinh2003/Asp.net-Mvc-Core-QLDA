@@ -2,5 +2,6 @@
     ViewData["Title"] = "Menu";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+@model List<Book>
 
-@Html.Partial("_MenuPartialView")
+<partial name="_MenuPartialView" model="@Model" />

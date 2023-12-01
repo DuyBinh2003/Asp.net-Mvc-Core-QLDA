@@ -50,9 +50,6 @@ namespace DoAn.Areas.Admin.Controllers
             }
             decimal total = (decimal)user.Carts.Sum(cartItem => cartItem.Book.Price * cartItem.Quantity);
             ViewBag.Total = total;
-
-            
-
             return View(user);
         }
 

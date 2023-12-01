@@ -23,19 +23,17 @@ namespace DoAn.Areas.Admin.Controllers
         public async Task<IActionResult> Index()
         {
               return _context.Authors != null ? 
-                          View(await _context.Authors.ToListAsync()) :
-                          Problem("Entity set 'CContext.Authors'  is null.");
+                View(await _context.Authors.ToListAsync()) :
+                Problem("Entity set 'CContext.Authors'  is null.");
         }
 
         // GET: Admin/Authors/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-
             if (id == null || _context.Authors == null)
             {
                 return NotFound();
             }
-
             var author = await _context.Authors
                 .Include(b => b.Books)
                 .FirstOrDefaultAsync(m => m.AuthorId == id);
@@ -43,7 +41,6 @@ namespace DoAn.Areas.Admin.Controllers
             {
                 return NotFound();
             }
-
             return View(author);
         }
 

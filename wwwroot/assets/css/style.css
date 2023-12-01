@@ -662,6 +662,11 @@ a:focus {
   background-color: #e69c00;
 }
 
+.product_section {
+    background: white;
+    color: black;
+}
+
 .book_section {
   position: relative;
 }

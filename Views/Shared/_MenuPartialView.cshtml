@@ -1,7 +1,5 @@
-﻿
-@*
-    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model List<Book>
+
 <section class="food_section layout_padding">
     <div class="container">
         <div class="heading_container heading_center">
@@ -9,7 +7,6 @@
                 Our Books
             </h2>
         </div>
-
         <ul class="filters_menu">
             <li class="active" data-filter="*">All</li>
             <li data-filter=".anime">Anime</li>
@@ -17,7 +14,10 @@
             <li data-filter=".romance">Romance</li>
             <li data-filter=".cook">Cook</li>
         </ul>
-
+        @foreach (var book in Model)
+        {
+            <h1>@book.Name</h1>
+        }
         <div class="filters-content">
             <div class="row grid">
                 <div class="col-sm-6 col-lg-4 all history">

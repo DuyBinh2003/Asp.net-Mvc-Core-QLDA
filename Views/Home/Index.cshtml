@@ -4,7 +4,7 @@
 
 <!-- slide -->
 @section SlideOrder{
-    @Html.Partial("_SlideOrderPartialView")
+    <partial name="_SlideOrderPartialView" />
 }
 <section class="offer_section layout_padding-bottom">
     <div class="offer_container">
@@ -96,15 +96,9 @@
     </div>
 </section>
 
-<!--
-    Menu
--->
-@Html.Partial("_MenuPartialView")
+<partial name="_MenuPartialView" model=@ViewData["Books"] />
 
-<!--
-    About
--->
-@Html.Partial("_AboutPartialView")
+<partial name="_AboutPartialView" />
 
 <section class="client_section layout_padding-bottom">
     <div class="container">
