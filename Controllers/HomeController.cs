@@ -25,7 +25,9 @@ namespace DoAn.Controllers
 
         public async Task<IActionResult> Menu()
         {
-            var books = await _context.Books.ToListAsync();
+            var books = await _context.Books
+                .Include(c => c.Category)
+                .ToListAsync();
             return View(books);
         }
         public IActionResult About()
