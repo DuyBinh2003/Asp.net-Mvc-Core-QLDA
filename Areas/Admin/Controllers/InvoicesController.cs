@@ -43,6 +43,7 @@ namespace DoAn.Areas.Admin.Controllers
 
             var invoice = await _context.Invoices
                 .Include(u => u.User)
+                
                 .Include(s => s.InvoiceDetails)
                 .ThenInclude(c => c.Book)
                 .FirstOrDefaultAsync(m => m.InvoiceId == id);

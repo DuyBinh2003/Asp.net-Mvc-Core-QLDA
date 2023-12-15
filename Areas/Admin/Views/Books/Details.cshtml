@@ -5,175 +5,141 @@
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
 }
 
-<div class="row">
-    <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12 col-12">
-        <div class="card">
-            <h3 class="card-header">Thông tin Sách</h3>
-            <div class="card-body">
-                <h2 class="text-center">@Model.Name</h2>
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th scope="col" class="text-center" colspan="2">
-                                <img src="@Model.ImgPath" alt="" />
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <th scope="col" class="text-center">Category</th>
-                            <td class="text-center">
-                                <a asp-controller="Categories" asp-action="Details" asp-route-id=@Model.CategoryId>
-                                    @Model.Category.Name
-                                </a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="col" class="text-center">Author</th>
-                            <td class="text-center">
-                                <a asp-controller="Authors" asp-action="Details" asp-route-id=@Model.AuthorId>
-                                    @Model.Author.Name
-                                </a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="col" class="text-center">Description</th>
-                            <td class="text-center">@Model.Description</td>
-                        </tr>
-                        <tr>
-                            <th scope="col" class="text-center">Unit price</th>
-                            <td class="text-center">@Model.Price <i class="fas fa-dollar-sign"></i></td>
-                        </tr>
-                        <tr>
-                            <th scope="col" class="text-center">Author ID</th>
-                            <td class="text-center">@Model.AuthorId</td>
-                        </tr>
-                        <tr>
-                            <th scope="col" class="text-center">Category ID</th>
-                            <td class="text-center">@Model.CategoryId</td>
-                        </tr>
-                        <tr>
-                            <th scope="col" class="text-center">Isbn</th>
-                            <td class="text-center">@Model.Isbn</td>
-                        </tr>
-                        <tr>
-                            <th scope="col" class="text-center">Status</th>
-                            <td class="text-center">@Model.Status</td>
-                        </tr>
-                        <tr>
-                            <th scope="col" class="text-center">Quantity</th>
-                            <td class="text-center">@Model.Quantity</td>
-                        </tr>
-                        <tr>
-                            <td colspan="2">
-                                <a class="btn btn-secondary text-light" asp-action="">Back to list</a>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+    <div class="card">
+        <div class="card-header p-4">
+            <h1>Thông tin Sách</h1>
+            <h2 class="text-center">@Model.Name</h2>
         </div>
-    </div>
-    <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12 col-12">
-        <div class="card">
-            <h3 class="card-header p-4 d-flex justify-content-between align-items-center">
-                Tác giả Sách
-                <a class="btn btn-primary" asp-controller="Authors" asp-action="Details" asp-route-id=@Model.AuthorId>View</a>
-            </h3>
-            <div class="card-body">
-                <div class="text-center">
-                    <h2>
-                        <a asp-controller="Authors" asp-action="Details" asp-route-id=@Model.AuthorId>
-                            @Model.Author.Name
-                        </a>
-                    </h2>
-                    <div>
-                        <img src="@Model.Author.ImgPath" alt="" />
+        <div class="card-body">
+            <div class="row">
+                <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12 col-12">
+                    <div class="table-responsive-sm">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th scope="col" class="text-center" colspan="2">
+                                        <img src="@Model.ImgPath" alt="" />
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th scope="col" class="text-center">Category</th>
+                                    <td class="text-center">
+                                        <a asp-controller="Categories" asp-action="Details" asp-route-id=@Model.CategoryId>
+                                            @Model.Category.Name
+                                        </a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="col" class="text-center">Author</th>
+                                    <td class="text-center">
+                                        <a asp-controller="Authors" asp-action="Details" asp-route-id=@Model.AuthorId>
+                                            @Model.Author.Name
+                                        </a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="col" class="text-center">Description</th>
+                                    <td class="text-center">@Model.Description</td>
+                                </tr>
+                                <tr>
+                                    <th scope="col" class="text-center">Unit price</th>
+                                    <td class="text-center">@Model.Price <i class="fas fa-dollar-sign"></i></td>
+                                </tr>
+                                <tr>
+                                    <th scope="col" class="text-center">Isbn</th>
+                                    <td class="text-center">@Model.Isbn</td>
+                                </tr>
+                                <tr>
+                                    <th scope="col" class="text-center">Status</th>
+                                    <td class="text-center">@Model.Status</td>
+                                </tr>
+                                <tr>
+                                    <th scope="col" class="text-center">Quantity</th>
+                                    <td class="text-center">@Model.Quantity</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">
+                                        <a class="btn btn-secondary text-light" asp-action="">Back to list</a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
-                    <h5 class="mb-4 mt-4">@Model.Author.Description</h5>
+                </div>
+                <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12 col-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="text-center">
+                                <h3 class="card-header p-4 d-flex justify-content-between align-items-center">
+                                    Tác giả:
+                                    <div>
+                                        <a asp-controller="Authors" asp-action="Details" asp-route-id=@Model.AuthorId>
+                                            @Model.Author.Name
+                                        </a>
+                                    </div>
+                                    <div>
+                                        <a class="btn btn-primary" asp-controller="Authors" asp-action="Details" asp-route-id=@Model.AuthorId>View</a>
+                                    </div>
+                                </h3>
+                                <div>
+                                    <img src="@Model.Author.ImgPath" alt="" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                    <h2>Khách hàng đặt sản phẩm</h2>
+                    <div class="table-responsive-sm">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th scope="col" class="text-center">FullName</th>
+                                    <th scope="col" class="text-center">UserName</th>   
+                                    <th scope="col" class="text-center">Unit cost</th>
+                                    <th scope="col" class="text-center">Quantity</th>
+                                    <th scope="col" class="text-center">Total</th>
+                                    <th scope="col" class="text-center">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    @foreach (var cart in Model.Carts)
+                                    {
+                                    <tr>
+                                        <th scope="col" class="text-center">
+                                            <a asp-controller="Users" asp-action="Details" asp-route-id=@cart.UserId>
+                                                    @cart.User.Name
+                                            </a>
+                                        </th>
+                                        <th scope="col" class="text-center">
+                                            <a asp-controller="Users" asp-action="Details" asp-route-id=@cart.UserId>
+                                                    @cart.User.Username
+                                            </a>
+                                        </th>
+                                        <td class="text-center">@cart.Book.Price
+                                            <i class="fas fa-dollar-sign"></i>
+                                        </td>                                       
+                                        <td class="text-center">@cart.Quantity</td>
+                                        <td class="text-center">@(@cart.Book.Price * @cart.Quantity)
+                                            <i class="fas fa-dollar-sign"></i>
+                                        </td>
+                                        <td scope="col" class="text-center">
+                                            <a class="btn btn-primary" asp-controller="Users" asp-action="Details" asp-route-id=@cart.UserId>View</a>
+                                        </td>
+                                    </tr>
+                                    }
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6">
-        <div class="card">
-            <h3 class="card-header">Khách hàng đã đặt</h3>
-            <div class="card-body">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th scope="col" class="text-center">User ID</th>
-                            <th scope="col" class="text-center">Name</th>
-                            <th scope="col" class="text-center">Quantity</th>
-                            <th scope="col" class="text-center">Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            @foreach (var cart in Model.Carts)
-                            {
-                            <tr>
-                                <th scope="col" class="text-center">
-                                    <a class="btn btn-outline-info" asp-controller="Users" asp-action="Details" asp-route-id=@cart.BookId>
-                                            @cart.User.UserId
-                                    </a>
-                                </th>
-                                <th scope="col" class="text-center">
-                                    <a asp-controller="Users" asp-action="Details" asp-route-id=@cart.UserId>
-                                            @cart.User.Name
-                                    </a>
-                                </th>
-                                <td class="text-center">@cart.Quantity</td>
-                                <td scope="col" class="text-center">
-                                    <a class="btn btn-info" asp-controller="Users" asp-action="Details" asp-route-id=@cart.UserId>View</a>
-                                </td>
-                            </tr>
-                            }
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6">
-        <div class="card">
-            <h3 class="card-header">Hoá đơn đã đặt</h3>
-            <div class="card-body">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th scope="col" class="text-center">Invoice ID</th>
-                            <th scope="col" class="text-center">Unit price</th>
-                            <th scope="col" class="text-center">Quantity</th>
-                            <th scope="col" class="text-center">Total</th>
-                            <th scope="col" class="text-center">Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var cthd in Model.InvoiceDetails)
-                        {
-                            <tr>
-                                <th scope="col" class="text-center">
-                                    <a class="btn btn-outline-success" asp-controller="Invoices" asp-action="Details" asp-route-id=@cthd.BookId>
-                                        @cthd.InvoiceId
-                                    </a>
-                                </th>
-                                <th scope="col" class="text-center">
-                                    @cthd.UnitPrice
-                                    <i class="fas fa-dollar-sign"></i>
-                                </th>
-                                <th scope="col" class="text-center">@cthd.Quantity</th>
-                                <th scope="col" class="text-center">
-                                    @(@cthd.UnitPrice * @cthd.Quantity)
-                                    <i class="fas fa-dollar-sign"></i>
-                                </th>
-                                <td scope="col" class="text-center">
-                                    <a class="btn btn-success" asp-controller="Invoices" asp-action="Details" asp-route-id=@cthd.BookId>View</a>
-                                </td>
-                            </tr>
-                        }
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
+</div>

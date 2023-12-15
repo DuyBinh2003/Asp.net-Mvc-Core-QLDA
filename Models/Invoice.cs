@@ -22,4 +22,6 @@ public partial class Invoice
     public virtual ICollection<InvoiceDetail> InvoiceDetails { get; set; } = new List<InvoiceDetail>();
 
     public virtual User User { get; set; } = null!;
+
+    //public virtual ICollection<Cart> Carts { get; set; } = new List<Cart>();
 }
