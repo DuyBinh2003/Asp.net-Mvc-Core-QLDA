@@ -17,7 +17,9 @@ namespace DoAn.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var books = await _context.Books.ToListAsync();
+            var books = await _context.Books
+                .Include(c => c.Category)
+                .ToListAsync();
             ViewData["Books"] = books;
 
             return View();
@@ -36,7 +38,7 @@ namespace DoAn.Controllers
         }
         public async Task<IActionResult> Product(int? id)
         {
-            if (id == null || _context.Authors == null)
+            if (id == null || _context.Books == null)
             {
                 return NotFound();
             }
@@ -52,6 +54,37 @@ namespace DoAn.Controllers
             ViewBag.Book = book;
             ViewBag.OtherBooks = orderBooks;
             return View();
+        }
+        public async Task<IActionResult> Order(int? id)
+        {
+            if (id == null || _context.Books == null)
+            {
+                return NotFound();
+            }
+            var book = await _context.Books
+                .Include(a => a.Author)
+                .FirstOrDefaultAsync(m => m.BookId == id);
+            if (book == null)
+            {
+                return NotFound();
+            }
+            return View(book);
+        }
+        public async Task<IActionResult> Cart(int? id)
+        {
+            if (id == null || _context.Carts == null)
+            {
+                return NotFound();
+            }
+            var carts = await _context.Carts
+                .Where(p => p.UserId == id)
+                .Include(b => b.Book)
+                .ToListAsync();
+            if (carts == null)
+            {
+                return NotFound();
+            }
+            return View(carts);
         }
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

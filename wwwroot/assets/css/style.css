@@ -30,6 +30,40 @@ body {
   padding-bottom: 90px;
 }
 
+/* table */
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+}
+td img {
+    height: 150px;
+}
+td {
+    font-size: 18px;
+    border-right: 1px solid transparent; 
+    border-left: 1px solid transparent; 
+}
+tr {
+    border-bottom: 2px solid #0c0c0c;
+}
+
+th:last-child,
+td:last-child {
+    border-right: none;
+}
+th {
+    background-color: #0c0c0c;
+    color: #ffffff
+}
+
+
 h1,
 h2 {
   font-family: 'Dancing Script', cursive;
@@ -619,6 +653,11 @@ a:focus {
   color: #ffffff;
 }
 
+.product_section {
+    background: #ffffff;
+    color: #222831;
+}
+
 .about_section .row {
   -webkit-box-align: center;
       -ms-flex-align: center;
@@ -726,19 +765,6 @@ a:focus {
 
 .book_section .form_container button:hover {
   background-color: #e69c00;
-}
-
-.book_section .map_container {
-  width: 100%;
-  height: 345px;
-  border-radius: 10px;
-  overflow: hidden;
-}
-
-.book_section .map_container #googleMap {
-  height: 100%;
-  min-height: 100%;
-  width: 100%;
 }
 
 /* client section start */
@@ -902,6 +928,12 @@ a:focus {
 .contact_section .form_container button:hover {
   background-color: #e69c00;
 }
+
+/* Cart */
+.cart {
+    font-family: 'Open Sans', sans-serif;
+}
+
 
 /* footer section*/
 .footer_section {

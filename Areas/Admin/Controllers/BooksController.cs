@@ -21,7 +21,7 @@ namespace DoAn.Areas.Admin.Controllers
         }
 
         // GET: Admin/Books
-        public async Task<IActionResult> Index(int? page)
+        public async Task<IActionResult> Index()
         {
             //return _context.Books != null ?
             //            View(await _context.Books.ToListAsync()) :
@@ -50,7 +50,6 @@ namespace DoAn.Areas.Admin.Controllers
                  .Include(s => s.Author)
                  .Include(s => s.Carts)
                  .Include(s => s.Category)
-                 
                 .FirstOrDefaultAsync(m => m.BookId == id);
             if (book == null)
             {
