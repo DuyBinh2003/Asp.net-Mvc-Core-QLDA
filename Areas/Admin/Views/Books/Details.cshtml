@@ -8,7 +8,7 @@
 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
     <div class="card">
         <div class="card-header p-4">
-            <h1>Thông tin Sách</h1>
+            <h3>Thông tin Sách</h3>
             <h2 class="text-center">@Model.Name</h2>
         </div>
         <div class="card-body">
@@ -60,11 +60,6 @@
                                     <th scope="col" class="text-center">Quantity</th>
                                     <td class="text-center">@Model.Quantity</td>
                                 </tr>
-                                <tr>
-                                    <td colspan="2">
-                                        <a class="btn btn-secondary text-light" asp-action="">Back to list</a>
-                                    </td>
-                                </tr>
                             </tbody>
                         </table>
                     </div>
@@ -99,44 +94,47 @@
                         <table class="table table-striped">
                             <thead>
                                 <tr>
-                                    <th scope="col" class="text-center">FullName</th>
-                                    <th scope="col" class="text-center">UserName</th>   
-                                    <th scope="col" class="text-center">Unit cost</th>
+                                    <th scope="col" class="text-center">InvoiceID</th>
+                                    <th scope="col" class="text-center">Name</th>   
+                                    <th scope="col" class="text-center">Unit price</th>
                                     <th scope="col" class="text-center">Quantity</th>
                                     <th scope="col" class="text-center">Total</th>
                                     <th scope="col" class="text-center">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    @foreach (var cart in Model.Carts)
-                                    {
+                                @foreach (var cthd in Model.InvoiceDetails)
+                                {
                                     <tr>
                                         <th scope="col" class="text-center">
-                                            <a asp-controller="Users" asp-action="Details" asp-route-id=@cart.UserId>
-                                                    @cart.User.Name
+                                            <a asp-controller="Invoices" asp-action="Details" asp-route-id=@cthd.Invoice.InvoiceId>
+                                                @cthd.Invoice.InvoiceId
                                             </a>
                                         </th>
                                         <th scope="col" class="text-center">
-                                            <a asp-controller="Users" asp-action="Details" asp-route-id=@cart.UserId>
-                                                    @cart.User.Username
+                                            <a asp-controller="Users" asp-action="Details" asp-route-id=@cthd.Invoice.User.UserId>
+                                                @cthd.Invoice.User.Name
                                             </a>
                                         </th>
-                                        <td class="text-center">@cart.Book.Price
-                                            <i class="fas fa-dollar-sign"></i>
-                                        </td>                                       
-                                        <td class="text-center">@cart.Quantity</td>
-                                        <td class="text-center">@(@cart.Book.Price * @cart.Quantity)
+                                        <td class="text-center">
+                                            @cthd.Book.Price
                                             <i class="fas fa-dollar-sign"></i>
                                         </td>
+                                        <td class="text-center">@cthd.Quantity</td>
+                                        <th scope="col" class="text-center">
+                                            @(@cthd.UnitPrice * @cthd.Quantity)
+                                            <i class="fas fa-dollar-sign"></i>
+                                        </th>
                                         <td scope="col" class="text-center">
-                                            <a class="btn btn-primary" asp-controller="Users" asp-action="Details" asp-route-id=@cart.UserId>View</a>
+                                            <a class="btn btn-primary" asp-controller="Invoices" asp-action="Details" asp-route-id=@cthd.Invoice.InvoiceId>View</a>
                                         </td>
                                     </tr>
-                                    }
-                                </tr>
+                                }
                             </tbody>
                         </table>
+                    </div>
+                    <div>
+                        <a class="btn btn-secondary" asp-action="">Back to list</a>
                     </div>
                 </div>
             </div>
