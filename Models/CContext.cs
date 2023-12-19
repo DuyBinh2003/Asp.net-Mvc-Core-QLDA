@@ -10,8 +10,7 @@ public partial class CContext : DbContext
     {
     }
 
-    public CContext(DbContextOptions<CContext> options)
-        : base(options)
+    public CContext(DbContextOptions<CContext> options): base(options)
     {
     }
 
