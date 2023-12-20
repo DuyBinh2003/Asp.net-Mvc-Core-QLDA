@@ -75,13 +75,11 @@ namespace DoAn.MigrationSeeder
                             Name = $"Book{i} - {category.Name}",
                             Description = $"Description for Book{i} in {category.Name}",
                             ImgPath = "https://cdn.bigmall.vn/picture/450/450/22609",
-                            BookPath = "test",
                             AuthorId = 1, 
                             CategoryId = category.CategoryId,
-                            Isbn = $"ISBN{i}",
                             Price = random.Next(10, 101), 
                             Quantity = 100, 
-                            Status = "Available"
+                            Rate = 0
                         };
                         context.Books.Add(book);
                     }
@@ -167,6 +165,36 @@ namespace DoAn.MigrationSeeder
                             Quantity = random.Next(1, 4) // Số lượng từ 1 đến 3
                         };
                         context.Carts.Add(cart);
+                    }
+                }
+                context.SaveChanges();
+            }
+            
+            if (!context.Reviews.Any())
+            {
+                Random random = new Random();
+
+                foreach (var user in context.Users)
+                {
+                    var selectedBooks = new List<int>();
+                    for (int i = 1; i <= 3; i++) // Mỗi người dùng có 3 cart
+                    {
+                        int id;
+                        do
+                        {
+                            id = random.Next(1, 21);
+                        } while (selectedBooks.Contains(id));
+
+                        selectedBooks.Add(id);
+
+                        var Review = new Review
+                        {
+                            UserId = user.UserId,
+                            BookId = id,
+                            Content = $"{user.Name} comment...",
+                            Rate = random.Next(1, 6)
+                        };
+                        context.Reviews.Add(Review);
                     }
                 }
                 context.SaveChanges();

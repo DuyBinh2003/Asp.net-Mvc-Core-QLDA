@@ -19,11 +19,7 @@ public partial class Book
 
     public int CategoryId { get; set; }
 
-    public string? BookPath { get; set; }
-
-    public string? Isbn { get; set; }
-
-    public string? Status { get; set; }
+    public double? Rate { get; set; }
 
     public int? Quantity { get; set; }
 

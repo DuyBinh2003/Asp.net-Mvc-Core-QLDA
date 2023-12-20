@@ -47,6 +47,8 @@ namespace DoAn.Areas.Admin.Controllers
 
             var book = await _context.Books
                 .Include(s => s.InvoiceDetails)
+                    .ThenInclude(i => i.Invoice)
+                        .ThenInclude(i => i.User)
                  .Include(s => s.Author)
                  .Include(s => s.Carts)
                  .Include(s => s.Category)

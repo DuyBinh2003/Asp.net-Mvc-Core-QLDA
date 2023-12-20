@@ -50,7 +50,9 @@ namespace DoAn.Controllers
                 return NotFound();
             }
             var orderBooks = await _context.Books
-                .Where(p => p.CategoryId == book.CategoryId).ToListAsync();
+                .Where(p => p.CategoryId == book.CategoryId)
+                .Include(a => a.Author)
+                .ToListAsync();
             ViewBag.Book = book;
             ViewBag.OtherBooks = orderBooks;
             return View();

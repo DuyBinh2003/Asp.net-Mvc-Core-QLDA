@@ -10,16 +10,13 @@ public partial class CContext : DbContext
     {
     }
 
-    public CContext(DbContextOptions<CContext> options)
-        : base(options)
+    public CContext(DbContextOptions<CContext> options): base(options)
     {
     }
 
     public virtual DbSet<Author> Authors { get; set; }
 
     public virtual DbSet<Book> Books { get; set; }
-
-    public virtual DbSet<BookOwner> BookOwners { get; set; }
 
     public virtual DbSet<Cart> Carts { get; set; }
 
@@ -32,6 +29,7 @@ public partial class CContext : DbContext
     public virtual DbSet<InvoiceDetail> InvoiceDetails { get; set; }
 
     public virtual DbSet<User> Users { get; set; }
+    public virtual DbSet<Review> Reviews { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         => optionsBuilder.UseMySQL("Server=localhost;User=root;Password=PenGaming500;Database=c#;");
@@ -67,9 +65,6 @@ public partial class CContext : DbContext
 
             entity.Property(e => e.BookId).HasColumnName("book_id");
             entity.Property(e => e.AuthorId).HasColumnName("author_id");
-            entity.Property(e => e.BookPath)
-                .HasMaxLength(255)
-                .HasColumnName("book_path");
             entity.Property(e => e.CategoryId).HasColumnName("category_id");
             entity.Property(e => e.Description)
                 .HasColumnType("text")
@@ -77,21 +72,18 @@ public partial class CContext : DbContext
             entity.Property(e => e.ImgPath)
                 .HasMaxLength(255)
                 .HasColumnName("img_path");
-            entity.Property(e => e.Isbn)
-                .HasMaxLength(13)
-                .HasColumnName("ISBN");
             entity.Property(e => e.Name)
                 .HasMaxLength(50)
                 .HasColumnName("name");
             entity.Property(e => e.Price)
                 .HasPrecision(10)
                 .HasColumnName("price");
+            entity.Property(e => e.Rate)
+                .HasDefaultValueSql("'0'")
+                .HasColumnName("rate");
             entity.Property(e => e.Quantity)
                 .HasDefaultValueSql("'0'")
                 .HasColumnName("quantity");
-            entity.Property(e => e.Status)
-                .HasMaxLength(10)
-                .HasColumnName("status");
 
             entity.HasOne(d => d.Author).WithMany(p => p.Books)
                 .HasForeignKey(d => d.AuthorId)
@@ -103,16 +95,7 @@ public partial class CContext : DbContext
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("fk_b_ct");
         });
-
-        modelBuilder.Entity<BookOwner>(entity =>
-        {
-            entity.HasKey(e => new { e.BookId, e.UserId }).HasName("PRIMARY");
-
-            entity.ToTable("book_owner");
-
-            entity.Property(e => e.BookId).HasColumnName("book_id");
-            entity.Property(e => e.UserId).HasColumnName("user_id");
-        });
+        
 
         modelBuilder.Entity<Cart>(entity =>
         {
@@ -251,6 +234,28 @@ public partial class CContext : DbContext
             entity.Property(e => e.Username)
                 .HasMaxLength(45)
                 .HasColumnName("username");
+        });
+
+        modelBuilder.Entity<Review>(entity =>
+        {
+            entity.HasKey(e => e.ReviewId).HasName("PRIMARY");
+
+            entity.ToTable("review");
+
+            entity.HasIndex(e => e.UserId, "fk_rv_u_idx");
+
+            entity.HasIndex(e => e.BookId, "pk_rv_b_idx");
+
+            entity.Property(e => e.ReviewId).HasColumnName("review_id");
+            entity.Property(e => e.UserId).HasColumnName("user_id");
+            entity.Property(e => e.BookId).HasColumnName("book_id");
+
+            entity.Property(e => e.Content)
+                .HasMaxLength(225)
+                .HasColumnName("content");
+            entity.Property(e => e.Rate)
+                 .HasDefaultValueSql("'1'")
+                 .HasColumnName("rate");
         });
 
         OnModelCreatingPartial(modelBuilder);

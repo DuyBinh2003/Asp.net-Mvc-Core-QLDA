@@ -3,6 +3,7 @@
     // Tạo một HashSet để lưu trữ các giá trị Category.Name duy nhất
     var uniqueCategories = new HashSet<string>();
 
+
     // Lặp qua danh sách sách để thêm các giá trị Category.Name vào tập hợp uniqueCategories
     foreach (var book in Model)
     {
@@ -34,6 +35,7 @@
                     @foreach (var book in Model)
             {
                     <div class="col-sm-6 col-lg-4 all @book.Category.Name " data-book-name="@book.Name">
+
                         <div>
                             <div class="box">
                                 <div>
@@ -81,7 +83,7 @@
                             </div>
                         </div>
                     </div>
-                    counter++;
+                    
                 }
                 </div>
             </div>
