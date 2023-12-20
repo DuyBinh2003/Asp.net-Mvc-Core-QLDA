@@ -3,6 +3,7 @@ using System;
 using DoAn.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DoAn.Migrations
 {
     [DbContext(typeof(CContext))]
-    partial class CContextModelSnapshot : ModelSnapshot
+    [Migration("20231220070828_update_book")]
+    partial class update_book
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -239,42 +242,6 @@ namespace DoAn.Migrations
                     b.ToTable("invoice_detail", (string)null);
                 });
 
-            modelBuilder.Entity("DoAn.Models.Review", b =>
-                {
-                    b.Property<int>("ReviewId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasColumnName("review_id");
-
-                    b.Property<int>("BookId")
-                        .HasColumnType("int")
-                        .HasColumnName("book_id");
-
-                    b.Property<string>("Content")
-                        .HasMaxLength(225)
-                        .HasColumnType("varchar(225)")
-                        .HasColumnName("content");
-
-                    b.Property<double?>("Rate")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("double")
-                        .HasColumnName("rate")
-                        .HasDefaultValueSql("'1'");
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("int")
-                        .HasColumnName("user_id");
-
-                    b.HasKey("ReviewId")
-                        .HasName("PRIMARY");
-
-                    b.HasIndex(new[] { "UserId" }, "fk_rv_u_idx");
-
-                    b.HasIndex(new[] { "BookId" }, "pk_rv_b_idx");
-
-                    b.ToTable("review", (string)null);
-                });
-
             modelBuilder.Entity("DoAn.Models.User", b =>
                 {
                     b.Property<int>("UserId")
@@ -387,25 +354,6 @@ namespace DoAn.Migrations
                     b.Navigation("Book");
 
                     b.Navigation("Invoice");
-                });
-
-            modelBuilder.Entity("DoAn.Models.Review", b =>
-                {
-                    b.HasOne("DoAn.Models.Book", "Book")
-                        .WithMany()
-                        .HasForeignKey("BookId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("DoAn.Models.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Book");
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("DoAn.Models.Author", b =>
