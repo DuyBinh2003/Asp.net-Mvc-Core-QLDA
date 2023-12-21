@@ -52,16 +52,47 @@ namespace DoAn.Controllers
         [HttpPost]
         public IActionResult AddReview(string content, int rating, int bookId)
         {
+            var userId = HttpContext.Session.GetInt32("UserId");
             var newReview = new Review
             {
                 Content = content,
                 Rate = rating,
                 BookId = bookId,
-                UserId = 1
+                UserId = int.Parse(userId.ToString())
             };
 
             _context.Reviews.Add(newReview);
             _context.SaveChanges();
+            return RedirectToAction("Detail", "Product", new { id = bookId });
+        }
+        [HttpPost]
+        public IActionResult AddCart(int quantity, int bookId)
+        {
+            var userId = HttpContext.Session.GetInt32("UserId");
+            var existingCartItem = _context.Carts
+            .FirstOrDefault(item => item.BookId == bookId && item.UserId == int.Parse(userId.ToString()));
+
+            if (existingCartItem == null)
+            {
+                // Nếu chưa có, thêm một dòng mới
+                var newCartItem = new Cart
+                {
+                    BookId = bookId,
+                    UserId = int.Parse(userId.ToString()),
+                    Quantity = quantity
+                };
+
+                _context.Carts.Add(newCartItem);
+            }
+            else
+            {
+                // Nếu đã tồn tại, cập nhật quantity
+                existingCartItem.Quantity += quantity;
+                _context.Carts.Update(existingCartItem);
+            }
+
+            _context.SaveChanges();
+
             return RedirectToAction("Detail", "Product", new { id = bookId });
         }
     }
