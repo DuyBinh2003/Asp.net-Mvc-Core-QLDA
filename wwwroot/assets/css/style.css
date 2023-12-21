@@ -1267,3 +1267,13 @@ a:focus {
     height: 100%;
     width: 100%
 }
+
+/* product */
+.img-user {
+    height: 40px;
+    width: 40px;
+}
+
+.bg-blue {
+    background-color: aqua;
+}

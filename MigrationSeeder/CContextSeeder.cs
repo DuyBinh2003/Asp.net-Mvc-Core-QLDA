@@ -75,7 +75,7 @@ namespace DoAn.MigrationSeeder
                             Name = $"Book{i} - {category.Name}",
                             Description = $"Description for Book{i} in {category.Name}",
                             ImgPath = "https://cdn.bigmall.vn/picture/450/450/22609",
-                            AuthorId = 1, 
+                            AuthorId = random.Next(1, 11), 
                             CategoryId = category.CategoryId,
                             Price = random.Next(10, 101), 
                             Quantity = 100, 

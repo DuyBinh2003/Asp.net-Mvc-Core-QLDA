@@ -36,27 +36,8 @@ namespace DoAn.Controllers
         {
             return View();
         }
-        public async Task<IActionResult> Product(int? id)
-        {
-            if (id == null || _context.Books == null)
-            {
-                return NotFound();
-            }
-            var book = await _context.Books
-                .Include(a => a.Author)
-                .FirstOrDefaultAsync(m => m.BookId == id);
-            if (book == null)
-            {
-                return NotFound();
-            }
-            var orderBooks = await _context.Books
-                .Where(p => p.CategoryId == book.CategoryId)
-                .Include(a => a.Author)
-                .ToListAsync();
-            ViewBag.Book = book;
-            ViewBag.OtherBooks = orderBooks;
-            return View();
-        }
+        
+
         public async Task<IActionResult> Order(int? id)
         {
             if (id == null || _context.Books == null)
@@ -71,22 +52,6 @@ namespace DoAn.Controllers
                 return NotFound();
             }
             return View(book);
-        }
-        public async Task<IActionResult> Cart(int? id)
-        {
-            if (id == null || _context.Carts == null)
-            {
-                return NotFound();
-            }
-            var carts = await _context.Carts
-                .Where(p => p.UserId == id)
-                .Include(b => b.Book)
-                .ToListAsync();
-            if (carts == null)
-            {
-                return NotFound();
-            }
-            return View(carts);
         }
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
