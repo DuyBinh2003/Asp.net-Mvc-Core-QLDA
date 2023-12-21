@@ -62,7 +62,6 @@ namespace DoAn.Controllers
 
             _context.Reviews.Add(newReview);
             _context.SaveChanges();
-
             return RedirectToAction("Detail", "Product", new { id = bookId });
         }
     }

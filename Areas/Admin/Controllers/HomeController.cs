@@ -1,10 +1,12 @@
-﻿using DoAn.Models;
+﻿using DoAn.Filters;
+using DoAn.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace DoAn.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [AdminAuthorization]
     public class HomeController : Controller
     {
         private readonly CContext _context;

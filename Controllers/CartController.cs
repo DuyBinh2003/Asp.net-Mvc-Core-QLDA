@@ -14,7 +14,7 @@ namespace DoAn.Controllers
         }
         public async Task<IActionResult> Index()
         {
-            var userId = TempData["UserId"];
+            var userId = HttpContext.Session.GetInt32("UserId");
             if (userId == null || _context.Carts == null)
             {
                 return NotFound();

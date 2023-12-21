@@ -73,11 +73,21 @@ namespace DoAn.Areas.Authentication.Controllers
 
                 if (user != null)
                 {
-                    // Store user information in TempData
-                    TempData["UserId"] = user.UserId;
-                    TempData["Username"] = user.Username;
+                    // Store user information in session
+                    HttpContext.Session.SetInt32("UserId", user.UserId);
+                    HttpContext.Session.SetString("Username", user.Username);
+                    HttpContext.Session.SetString("UserType", user.UserType.ToString()); // Assuming UserType is an enumeration
 
+                    // Check if the user is an admin
+                    var isAdmin = (user.UserType == "admin"); 
 
+                    if (isAdmin)
+                    {
+                        // Redirect to Admin area's HomeController/Index
+                        return RedirectToAction("Index", "Home", new { area = "Admin" });
+                    }
+
+                    // Redirect to regular user's HomeController/Index
                     return RedirectToAction("Index", "Home", new { area = "" });
                 }
 
@@ -86,6 +96,7 @@ namespace DoAn.Areas.Authentication.Controllers
 
             return View();
         }
+
 
     }
 }
