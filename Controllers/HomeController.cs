@@ -17,6 +17,13 @@ namespace DoAn.Controllers
 
         public async Task<IActionResult> Index()
         {
+            // Check if the UserId session variable is null
+            if (HttpContext.Session.GetInt32("UserId") == null)
+            {
+                // UserId is null, redirect to the login page in the "Authorization" area
+                return RedirectToAction("Login", "Account", new { area = "Authentication" });
+            }
+
             var books = await _context.Books
                 .Include(c => c.Category)
                 .ToListAsync();

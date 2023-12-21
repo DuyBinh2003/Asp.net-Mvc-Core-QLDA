@@ -2,6 +2,11 @@ using AspNetCoreHero.ToastNotification;
 using DoAn.MigrationSeeder;
 using DoAn.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,6 +15,15 @@ var conn = builder.Configuration.GetConnectionString("conn");
 builder.Services.AddDbContext<CContext>(options => options.UseMySQL(conn));
 builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
 builder.Services.AddNotyf(config => { config.DurationInSeconds = 10; config.IsDismissable = true; config.Position = NotyfPosition.BottomRight; });
+
+// Add session services
+builder.Services.AddDistributedMemoryCache(); // Use an appropriate distributed cache in production
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromMinutes(30); // Adjust the timeout as needed
+    options.Cookie.HttpOnly = true;
+    options.Cookie.IsEssential = true;
+});
 
 var app = builder.Build();
 
@@ -26,6 +40,9 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.UseAuthorization();
+
+// Add session middleware
+app.UseSession();
 
 using (var scope = app.Services.CreateScope())
 {

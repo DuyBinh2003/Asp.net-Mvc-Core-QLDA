@@ -73,11 +73,19 @@ namespace DoAn.Areas.Authentication.Controllers
 
                 if (user != null)
                 {
-                    // Store user information in TempData
-                    TempData["UserId"] = user.UserId;
-                    TempData["Username"] = user.Username;
+                    // Store user information in session
+                    HttpContext.Session.SetInt32("UserId", user.UserId);
+                    HttpContext.Session.SetString("Username", user.Username);
 
+                    // Set a flag in the session to indicate admin status
+                    var isAdmin = (user.Username == "admin"); // Replace with your actual admin check
+                    HttpContext.Session.SetString("IsAdmin", isAdmin.ToString());
 
+                    if (isAdmin)
+                    {
+                        // Redirect to Admin area's HomeController/Index
+                        return RedirectToAction("Index", "Home", new { area = "Admin" });
+                    }
                     return RedirectToAction("Index", "Home", new { area = "" });
                 }
 

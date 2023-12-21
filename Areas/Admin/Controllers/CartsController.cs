@@ -6,10 +6,12 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using DoAn.Models;
+using DoAn.Filters;
 
 namespace DoAn.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [AdminAuthorization]
     public class CartsController : Controller
     {
         private readonly CContext _context;
