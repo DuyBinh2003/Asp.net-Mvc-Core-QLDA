@@ -8,7 +8,8 @@ namespace DoAn.MigrationSeeder
         
         public static void Seed(CContext context)
         {
-            
+            Random random = new Random();
+
             // Kiểm tra xem có người dùng nào trong database chưa
             if (!context.Users.Any())
             {
@@ -64,7 +65,6 @@ namespace DoAn.MigrationSeeder
             // Seeding books
             if (!context.Books.Any())
             {
-                Random random = new Random();
 
                 foreach (var category in context.Categories)
                 {
@@ -75,7 +75,7 @@ namespace DoAn.MigrationSeeder
                             Name = $"Book{i} - {category.Name}",
                             Description = $"Description for Book{i} in {category.Name}",
                             ImgPath = "https://cdn.bigmall.vn/picture/450/450/22609",
-                            AuthorId = 1, 
+                            AuthorId = random.Next(1, 11), 
                             CategoryId = category.CategoryId,
                             Price = random.Next(10, 101), 
                             Quantity = 100, 
@@ -112,7 +112,7 @@ namespace DoAn.MigrationSeeder
             // Seeding invoiceDetails
             if (!context.InvoiceDetails.Any())
             {
-                Random random = new Random();
+
 
                 foreach (var invoice in context.Invoices)
                 {
@@ -143,7 +143,7 @@ namespace DoAn.MigrationSeeder
             // Seedign cart
             if (!context.Carts.Any())
             {
-                Random random = new Random();
+
 
                 foreach (var user in context.Users)
                 {
@@ -172,7 +172,7 @@ namespace DoAn.MigrationSeeder
             
             if (!context.Reviews.Any())
             {
-                Random random = new Random();
+
 
                 foreach (var user in context.Users)
                 {

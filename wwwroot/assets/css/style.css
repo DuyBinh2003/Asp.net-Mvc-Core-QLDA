@@ -122,6 +122,9 @@ a:focus {
   -webkit-box-shadow: none;
           box-shadow: none;
 }
+.buy-btn {
+    width: 200px;
+}
 
 /*header section*/
 .hero_area {
@@ -685,17 +688,7 @@ a:focus {
   margin-top: 15px;
 }
 
-.about_section .detail-box a {
-  display: inline-block;
-  padding: 10px 45px;
-  background-color: #ffbe33;
-  color: #ffffff;
-  border-radius: 45px;
-  -webkit-transition: all 0.3s;
-  transition: all 0.3s;
-  border: none;
-  margin-top: 15px;
-}
+
 
 .about_section .detail-box a:hover {
   background-color: #e69c00;
@@ -1267,6 +1260,7 @@ a:focus {
     height: 100%;
     width: 100%
 }
+<<<<<<< HEAD
 /*# sourceMappingURL=style.css.map */
 /*Search Bar*/
 .search-box {
@@ -1332,4 +1326,15 @@ input::-webkit-inner-spin-button {
 .order-subtotal {
     display: flex;
     justify-content: end;
+=======
+
+/* product */
+.img-user {
+    height: 40px;
+    width: 40px;
+}
+
+.bg-blue {
+    background-color: aqua;
+>>>>>>> 68dea501a43aaa4867a582302cc783548bfbe6ef
 }

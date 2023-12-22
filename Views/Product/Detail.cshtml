@@ -1,0 +1,186 @@
+﻿@{
+    var book = ViewBag.Book as Book;
+    var otherBooks = ViewBag.OtherBooks as List<Book>;
+    var comments = ViewBag.Comments as List<Review>;
+}
+
+@if (book != null)
+{
+    <section class="about_section layout_padding product_section">
+        <div class="row">
+            <div class="col-md-8">
+                <form method="post" action="@Url.Action("AddCart", "Product")" class="d-flex shadow py-4 mb-5 bg-body rounded px-2">
+                    <div class="col-md-5 d-flex flex-column align-items-center">
+                        <div class="img-box">
+                            <img src=@book.ImgPath alt="">
+                        </div>
+                        <div class="mt-3 d-flex align-items-center justify-content-center">
+                            <a id="subQuantity" class="bg-warning icon btn mr-2" onclick="updateQuantity(-1)">
+                                <i class="fas fa-minus text-white"></i>
+                            </a>
+                            <input id="quantity" type="text" name="quantity" value="1" class="mr-2 w-25 text-center"/>
+                            <input type="hidden" name="bookId" value="@book.BookId" />
+                            <a id="plusQuantity" class="bg-warning icon btn" onclick="updateQuantity(1)">
+                                <i class="fas fa-plus text-white"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-md-7">
+                        <div class="detail-box h-100 d-flex flex-column justify-content-between">
+                            <div class="heading_container">
+                                <h2>@book.Name</h2>
+                            </div>
+                            <div class="row mt-2">
+                                <div class="col d-flex flex-column align-items-center border-right border-dark">
+                                    <h5>Rating</h5>
+                                    <div class="d-flex">
+                                        @for (int i = 1; i <= 5; i++)
+                                        {
+                                            @if (i > (int)Math.Round((double)book.Rate))
+                                            {
+                                                <i class="far fa-star text-warning mr-1"></i>
+                                            }
+                                            else
+                                            {
+                                                <i class="fas fa-star text-warning mr-1"></i>
+                                            }
+                                        }
+                                    </div>
+                                </div>
+                                <div class="col d-flex flex-column align-items-center border-right border-dark">
+                                    <h5>Comments</h5>
+                                    <h6 class="text-secondary">@comments.Count</h6>
+                                </div>
+                                <div class="col d-flex flex-column align-items-center border-right border-dark">
+                                    <h5>In stock</h5>
+                                    <h6 class="text-secondary">@book.Quantity</h6>
+                                </div>
+                                <div class="col d-flex flex-column align-items-center">
+                                    <h5>Sold</h5>
+                                    <h6 class="text-secondary">@ViewBag.TotalSoldQuantity</h6>
+                                </div>
+                            </div>
+                            <div>
+                                <p>@book.Description@book.Description@book.Description@book.Description@book.Description@book.Description</p>
+                                <p class="text-right">- @book.Author.Name -</p>
+                            </div>
+                            <div class="d-flex justify-content-around">
+                                <a asp-action="Order" asp-route-id="@book.BookId" class="d-flex align-items-center btn bg-warning px-4 text-dark">
+                                    <p class="m-0 mr-1">Buy now</p>
+                                    <p id="price" class="m-0">@book.Price</p>
+                                    <i class="fa fas fa-dollar-sign ml-2"></i>
+                                </a>
+                                <button type="submit" class="btn bg-warning px-4 py-2">
+                                    Add to cart
+                                    <i class="fas fa-shopping-cart ml-2"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <div class="shadow py-4 mb-5 bg-body rounded">
+                    <h3 class="font-weight-bold ml-4 mb-4">Comment</h3>
+                    <div class="d-flex p-4">
+                        <img class="img-user" src="https://cdn-icons-png.flaticon.com/512/64/64572.png" alt="user profile">
+                        <form class="d-flex flex-column w-100 ml-4" method="post" action="@Url.Action("AddReview", "Product")">
+                            <input type="text" name="content" placeholder="Comment here" class="w-100 border-top-0 border-left-0 border-right-0 px-3 py-1 custom-range border-secondary" />
+                            <input type="hidden" name="rating" id="rating" value="0">
+                            <input type="hidden" name="bookId" value="@book.BookId">
+                            <div class="mt-2 d-flex justify-content-between align-items-center">
+                                <div id="ratingStars">
+                                    @for (int i = 1; i <= 5; i++)
+                                    {
+                                        <i class="far fa-star text-warning mr-1"></i>
+                                    }
+                                </div>
+                                <button type="submit" class="btn px-4 py-2 bg-warning">Comment</button>
+                            </div>
+                        </form>
+                    </div>
+                    <div>
+                        @foreach (var comment in @comments)
+                        {
+                            <div class="d-flex border-top p-4 border-secondary">
+                                <img class="img-user" src="https://cdn-icons-png.flaticon.com/512/64/64572.png" alt="user profile">
+                                <div class="d-flex flex-column ml-4">
+                                    <h6 class="font-weight-bold">@comment.User.Name</h6>
+                                    <div class="d-flex align-items-center mb-4">
+                                        <h8 class="text-secondary mb-0 mr-2">Rating</h8>
+                                        @for (int i = 1; i <= 5; i++)
+                                        {
+                                            @if (i > comment.Rate)
+                                            {
+                                                <i class="far fa-star text-warning mr-1"></i>
+                                            }
+                                            else
+                                            {
+                                                <i class="fas fa-star text-warning mr-1"></i>
+                                            }
+                                        }
+                                    </div>
+                                    <h8 class="">@comment.Content</h8>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 h-100">
+                <div class"d-flex flex-column">
+                    @foreach (var orther in @otherBooks)
+                    {
+                        <div class="d-flex shadow py-3 pr-3 mb-2 bg-body rounded">
+                            <div class="w-25">
+                                <img src="@orther.ImgPath" class="w-100" />
+                            </div>
+                            <div class="w-75 d-flex flex-column justify-content-around py-2">
+                                <div class="d-flex justify-content-between">
+                                    <h5>@orther.Name</h5>
+                                    <h4 class="text-danger">@orther.Price <i class="fas fa-dollar-sign"></i></h4>
+                                </div>
+                                <div class="d-flex justify-content-between align-center">
+                                    <h7>@orther.Description</h7>
+                                    <a asp-controller="Product" asp-action="Detail" asp-route-id="@orther.BookId" class="bg-warning icon">
+                                        <i class="fas fa-shopping-cart text-white"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+        <script>
+            // quantity
+            function updateQuantity(x) {
+                console.log(@book.Price)
+                var quantityInput = document.getElementById("quantity");
+                var priceElement = document.getElementById("price");
+                var currentValue = parseInt(quantityInput.value, 10);
+                quantityInput.value = Math.max(currentValue + x, 1);
+                var newPrice = @book.Price * quantityInput.value
+                priceElement.innerText = newPrice.toFixed(2)
+            }
+
+            // rating
+            const ratingStars = document.getElementById('ratingStars');
+            const stars = ratingStars.getElementsByTagName('i');
+            let selectedRating = 0;
+
+            for (let i = 0; i < stars.length; i++) {
+                stars[i].addEventListener('click', function () {
+                    for (let j = 0; j <= i; j++) {
+                        stars[j].classList.remove('far');
+                        stars[j].classList.add('fas');
+                    }
+                    for (let j = i + 1; j < stars.length; j++) {
+                        stars[j].classList.remove('fas');
+                        stars[j].classList.add('far');
+                    }
+                    selectedRating = i + 1;
+                    document.getElementById('rating').value = selectedRating;
+                });
+            }
+        </script>
+    </section>
+}

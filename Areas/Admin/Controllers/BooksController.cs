@@ -7,10 +7,12 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using DoAn.Models;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using DoAn.Filters;
 
 namespace DoAn.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [AdminAuthorization]
     public class BooksController : Controller
     {
         private readonly CContext _context;

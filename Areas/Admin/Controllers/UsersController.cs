@@ -7,10 +7,12 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using DoAn.Models;
 using System.Diagnostics.Metrics;
+using DoAn.Filters;
 
 namespace DoAn.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [AdminAuthorization]
     public class UsersController : Controller
     {
         private readonly CContext _context;

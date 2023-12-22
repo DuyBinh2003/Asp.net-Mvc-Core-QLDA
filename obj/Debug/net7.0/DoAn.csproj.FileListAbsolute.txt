@@ -2202,6 +2202,7 @@ C:\Users\Admin\Asp.net-Mvc-Core-QLDA\obj\Debug\net7.0\DoAn.pdb
 C:\Users\Admin\Asp.net-Mvc-Core-QLDA\obj\Debug\net7.0\DoAn.genruntimeconfig.cache
 C:\Users\Admin\Asp.net-Mvc-Core-QLDA\obj\Debug\net7.0\ref\DoAn.dll
 =======
+>>>>>>> 68dea501a43aaa4867a582302cc783548bfbe6ef
 C:\Users\Think\Source\Repos\Asp.net-Mvc-Core-QLDA\bin\Debug\net7.0\appsettings.Development.json
 C:\Users\Think\Source\Repos\Asp.net-Mvc-Core-QLDA\bin\Debug\net7.0\appsettings.json
 C:\Users\Think\Source\Repos\Asp.net-Mvc-Core-QLDA\bin\Debug\net7.0\DoAn.staticwebassets.runtime.json
