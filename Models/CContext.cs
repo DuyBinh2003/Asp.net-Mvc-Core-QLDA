@@ -32,7 +32,7 @@ public partial class CContext : DbContext
     public virtual DbSet<Review> Reviews { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        => optionsBuilder.UseMySQL("Server=localhost;User=root;Password=PenGaming500;Database=c#;");
+        => optionsBuilder.UseMySQL("Server=localhost;User=root;Password=Binh0366032155;Database=c#;");
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Author>(entity =>
@@ -222,6 +222,12 @@ public partial class CContext : DbContext
             entity.Property(e => e.Email)
                 .HasMaxLength(50)
                 .HasColumnName("email");
+            entity.Property(e => e.Sdt)
+                .HasMaxLength(10)
+                .HasColumnName("sdt");
+            entity.Property(e => e.Address)
+                .HasMaxLength(40)
+                .HasColumnName("Address");
             entity.Property(e => e.Name)
                 .HasMaxLength(50)
                 .HasColumnName("name");

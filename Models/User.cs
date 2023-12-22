@@ -16,6 +16,8 @@ public partial class User
     public string UserType { get; set; } = null!;
 
     public string Username { get; set; } = null!;
+    public string Sdt { get; set; } = null!;
+    public string Address { get; set; } = null!;
 
     public virtual ICollection<Cart> Carts { get; set; } = new List<Cart>();
 

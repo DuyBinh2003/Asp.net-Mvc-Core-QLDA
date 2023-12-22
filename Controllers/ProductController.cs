@@ -63,7 +63,11 @@ namespace DoAn.Controllers
             {
                 return NotFound();
             }
+            var userId = HttpContext.Session.GetInt32("UserId");
+            var user = await _context.Users
+                .FirstOrDefaultAsync(m => m.UserId == int.Parse(userId.ToString()));
             ViewBag.Book = book;
+            ViewBag.User = user;
             ViewBag.Quantity= quantity;
             return View();
         }

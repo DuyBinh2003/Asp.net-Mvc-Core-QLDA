@@ -43,7 +43,7 @@ th, td {
     text-align: center;
 }
 td img {
-    height: 150px;
+    height: 110px;
 }
 td {
     font-size: 18px;
@@ -1260,7 +1260,6 @@ a:focus {
     height: 100%;
     width: 100%
 }
-<<<<<<< HEAD
 /*# sourceMappingURL=style.css.map */
 /*Search Bar*/
 .search-box {
@@ -1326,7 +1325,7 @@ input::-webkit-inner-spin-button {
 .order-subtotal {
     display: flex;
     justify-content: end;
-=======
+}
 
 /* product */
 .img-user {
@@ -1336,5 +1335,4 @@ input::-webkit-inner-spin-button {
 
 .bg-blue {
     background-color: aqua;
->>>>>>> 68dea501a43aaa4867a582302cc783548bfbe6ef
 }

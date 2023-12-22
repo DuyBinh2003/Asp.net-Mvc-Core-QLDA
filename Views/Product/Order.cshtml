@@ -1,5 +1,6 @@
 ﻿@{
     var book = ViewBag.Book as Book;
+    var user = ViewBag.User as User;
 }
 <head>
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@600&display=swap" rel="stylesheet">
@@ -16,79 +17,59 @@
             </h2>
         </div>
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-4">
                 <div class="form_container">
                     <form action="">
                         <div>
-                            <input type="text" class="form-control" placeholder="Name" value="default" />
+                            <input type="text" class="form-control mb-2" placeholder="Name" value="@user.Name" />
+                            <input type="hidden" class="form-control mb-2" name="userID" value="@user.UserId" />
                         </div>
                         <div>
-                            <input type="text" class="form-control" placeholder="Phone Number" value="default" />
+                            <input type="email" class="form-control mb-2" placeholder="Your Email" value="@user.Email" />
                         </div>
                         <div>
-                            <input type="email" class="form-control" placeholder="Your Email" value="default" />
+                            <input type="text" class="form-control mb-2" placeholder="Phone Number" value="@user.Sdt"/>
                         </div>
-                        <input type="text" class="form-control" placeholder="Adress" value="default" />
                         <div>
-
-                            <i style="margin-left: 10px" class="fa fa-sticky-note-o" aria-hidden="true"> note</i>
-                            <input type="text" class="form-control width : 300px" placeholder="Note" value="default" />
-
+                            <input type="text" class="form-control mb-2" placeholder="Adress" value="@user.Address" />
+                        </div>
+                        <div>
+                            <input type="text" class="form-control mb-2 width : 300px" placeholder="Note" />
                         </div>
                         <div class="btn_box">
-                            <button class="d-flex align-items-start">
-                                Order   <p id="total-price">  $@(@Model.Price)</p>
+                            <button class="px-4">
+                                Order now @book.Price
                             </button>
-                            <div class="order-subtotal">
-                                
-                            </div>
                         </div>
                     </form>
                 </div>
             </div>
-            <div class="col-md-6">
-                <div class="d-flex">
-                    <div class="img-box">
-                        <img src="@Model.ImgPath" alt="" />
-                        <p class="text-right">
-
-                            - @Model.Author.Name -
-                        </p>
-                        <div class="stepped-button">
-                            <button class="stepped-btn btn btn-primary" id="decrement" onclick="stepper(this)" style="border:none"> - </button>
-                            <input type="number" min="0" max="100" step="1" value="1" id="my-input" readonly>
-                            <button class="stepped-btn btn btn-primary " id="increment" onclick="stepper(this)" style="border:none"> + </button>
-                        </div>
-                    </div>
-
-                </div>
+            <div class="offset-1 col-md-7">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Product</th>
+                            <th>Quantity</th>
+                            <th>Price</th>
+                            <th>Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @for (int i = 1; i <= 5; i++)
+                        {
+                            <tr>
+                                <td>#</td>
+                                <td>Book.Name</td>
+                                <td>Quantity</td>
+                                <td>Book.Price</td>
+                                <td></td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
 </section>
-<script>
-    const myInput = document.getElementById("my-input"); // Lấy phần tử input
-    const totalPriceElement = document.getElementById("total-price"); // Lấy phần tử hiển thị tổng
-    const bookPrice = @Model.Price; // Giá của sách từ model (giả sử là giá trị số)
-
-    function stepper(btn) {
-        let id = btn.getAttribute("id");
-        let min = myInput.getAttribute("min");
-        let max = myInput.getAttribute("max");
-        let step = myInput.getAttribute("step");
-        let val = myInput.getAttribute("value");
-        let calcStep = (id == "increment") ? (step * 1) : (step * -1);
-        let newValue = parseInt(val) + calcStep;
-
-        if (newValue >= min && newValue <= max) {
-            myInput.setAttribute("value", newValue);
-            updateTotal(newValue); // Gọi hàm để cập nhật tổng
-        }
-    }
-
-    function updateTotal(quantity) {
-        let total = quantity * bookPrice; // Tính tổng dựa trên số lượng và giá của sách
-        totalPriceElement.innerText = `$${total.toFixed(2)}`; // Cập nhật hiển thị tổng
-    }
-</script>
 

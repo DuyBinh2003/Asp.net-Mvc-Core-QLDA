@@ -1,0 +1,75 @@
+﻿@{
+    var cart = ViewBag.Cart as List<Cart>;
+    var user = ViewBag.User as User;
+}
+<head>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="path/to/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+
+</head>
+
+<section class="book_section layout_padding">
+    <div class="container">
+        <div class="heading_container">
+            <h2>
+                Order Books
+            </h2>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form_container">
+                    <form method="post" action="@Url.Action("BuyCart", "Order")">
+                        <div>
+                            <input type="text" class="form-control mb-2" placeholder="Name" value="@user.Name" />
+                            <input type="hidden" class="form-control mb-2" name="userId" value="@user.UserId" />
+                        </div>
+                        <div>
+                            <input type="text" name="sdt" class="form-control mb-2" placeholder="Phone Number" value="@user.Sdt" />
+                        </div>
+                        <div>
+                            <input type="text" name="address" class="form-control mb-2" placeholder="Adress" value="@user.Address" />
+                        </div>
+                        <div>
+                            <input type="text" name="note" class="form-control mb-2 width : 300px" placeholder="Note" />
+                        </div>
+                        <div class="btn_box text-center">
+                            <button class="px-4">
+                                Order now @ViewBag.TotalPrice
+                                <i class="fa fas fa-dollar-sign ml-2"></i>  
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="offset-1 col-md-7">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Product</th>
+                            <th>Quantity</th>
+                            <th>Price</th>
+                            <th>Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in cart)
+                        {
+                            <tr>
+                                <td>@item.Book.Name</td>
+                                <td>@item.Quantity</td>
+                                <td>@item.Book.Price
+                                    <i class="fa fas fa-dollar-sign ml-2"></i>
+                                </td>
+                                <td>@(item.Book.Price * item.Quantity)
+                                    <i class="fa fas fa-dollar-sign ml-2"></i>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>
+

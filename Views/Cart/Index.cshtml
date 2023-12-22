@@ -1,12 +1,13 @@
 ﻿@{
-    ViewData["Title"] = "Menu";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    var carts = ViewBag.Carts as List<Cart>;
     decimal totalPrice = 0;
 }
 
 @model List<Cart>
 
-<div class="cart pt-5 pb-5">
+@if(Model != null)
+{
+    <div class="cart pt-5 pb-5">
     <div class="row">
         <div class="col-md-10 offset-1">
             <h1 class="text-center pb-2">Giỏ hàng</h1>
@@ -23,18 +24,42 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var cart in Model)
+                    @foreach (var cart in carts)
                     {
-                        @(@totalPrice += (decimal)@cart.Book.Price * cart.Quantity)
+                        totalPrice += (decimal)cart.Book.Price * cart.Quantity;
                         <tr>
                             <td>#</td>
                             <td>@cart.Book.Name</td>
                             <td>
                                 <img src="@cart.Book.ImgPath" />
                             </td>
-                            <td>@cart.Quantity</td>
-                            <td>@cart.Book.Price</td>
-                            <td>@(@cart.Book.Price * @cart.Quantity)</td>
+                            <td>
+                                <div class="d-flex align-items-center justify-content-center" >
+                                    <form method ="post" action="@Url.Action("UpdateQuantity", "Cart")">
+                                        <input type="hidden" name="bookId" value="@cart.BookId" />
+                                        <input type="hidden" name="userId" value="@cart.UserId" />
+                                        <input type="hidden" name="newQuantity" value=@(@cart.Quantity - 1) />
+                                        <button type="submit" class="btn bg-warning mr-4">
+                                            <i class="fas fa-minus text-white"></i>
+                                        </button>
+                                    </form>
+                                    @cart.Quantity
+                                    <form method="post" action="@Url.Action("UpdateQuantity", "Cart")">
+                                        <input type="hidden" name="bookId" value="@cart.BookId" />
+                                        <input type="hidden" name="userId" value="@cart.UserId" />
+                                        <input type="hidden" name="newQuantity" value=@(@cart.Quantity + 1) />
+                                        <button class="btn bg-warning ml-4">
+                                            <i class="fas fa-plus text-white"></i>
+                                        </button>
+                                    </form>
+                                </div>
+                            </td>
+                            <td>@cart.Book.Price
+                                <i class="fa fas fa-dollar-sign ml-2"></i>
+                            </td>
+                            <td>@(@cart.Book.Price * @cart.Quantity)
+                                <i class="fa fas fa-dollar-sign ml-2"></i>
+                            </td>
                             <td>
                                 <form method="post" action="@Url.Action("RemoveItem", "Cart")">
                                     <input type="hidden" name="bookId" value="@cart.BookId" />
@@ -57,6 +82,12 @@
             </div>
         </div>
     </div>
-</div>
+    </div>
+}
+else
+{
+    <h2 class="layout_padding text-center">Your cart is empty</h2>
+}
+
 
 

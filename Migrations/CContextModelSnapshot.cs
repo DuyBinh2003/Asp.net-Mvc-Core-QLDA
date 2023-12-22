@@ -282,6 +282,12 @@ namespace DoAn.Migrations
                         .HasColumnType("int")
                         .HasColumnName("user_id");
 
+                    b.Property<string>("Address")
+                        .IsRequired()
+                        .HasMaxLength(40)
+                        .HasColumnType("varchar(40)")
+                        .HasColumnName("Address");
+
                     b.Property<string>("Email")
                         .HasMaxLength(50)
                         .HasColumnType("varchar(50)")
@@ -296,6 +302,12 @@ namespace DoAn.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("varchar(50)")
                         .HasColumnName("password");
+
+                    b.Property<string>("Sdt")
+                        .IsRequired()
+                        .HasMaxLength(10)
+                        .HasColumnType("varchar(10)")
+                        .HasColumnName("sdt");
 
                     b.Property<string>("UserType")
                         .IsRequired()
