@@ -66,21 +66,17 @@
               "target": "Package",
               "version": "[7.0.10, )"
             },
-            "PagedList": {
-              "target": "Package",
-              "version": "[1.17.0, )"
-            },
             "PagedList.Core.Mvc": {
               "target": "Package",
               "version": "[3.0.0, )"
             },
-            "PagedList.Mvc": {
-              "target": "Package",
-              "version": "[4.5.0, )"
-            },
             "Pomelo.EntityFrameworkCore.MySql": {
               "target": "Package",
               "version": "[7.0.0, )"
+            },
+            "X.PagedList.Mvc.Core": {
+              "target": "Package",
+              "version": "[8.4.7, )"
             }
           },
           "imports": [

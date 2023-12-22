@@ -1,4 +1,4 @@
-﻿@model IEnumerable<DoAn.Models.Invoice>
+﻿@model X.PagedList.IPagedList<DoAn.Models.Invoice>
 
 @{
     ViewData["Title"] = "Index";
@@ -9,6 +9,13 @@
     <div class="card">
         <div class="card-header d-flex justify-content-between align-items-center">
             <h3 class="mb-0">Quản lý Hoá đơn</h3>
+            <form asp-action="Index" method="get" class="form-inline">
+                <div class="form-group">
+                    <label for="searchString" class="sr-only">Search:</label>
+                    <input type="text" name="searchString" id="searchString" class="form-control" placeholder="Search" value="@ViewData["CurrentFilter"]" />
+                </div>
+                <button type="submit" class="btn btn-primary btn-sm">Search</button>
+            </form>
             <a asp-action="Create" class="btn btn-primary btn-sm">Create</a>
         </div>
         <div class="card-body">
@@ -30,7 +37,7 @@
                         <tr>
                             <th scope="col" class="text-center">@invoice.InvoiceId</th>
                             <th scope="col" class="text-center">
-                                <a asp-controller="Users" asp-action="Details" asp-route-id=@invoice.UserId>@invoice.User.Name</a>
+                                <a asp-controller="Users" asp-action="Details" asp-route-id="@invoice.UserId">@invoice.User.Name</a>
                             </th>
                             <th scope="col" class="text-center">@invoice.Address</th>
                             <th scope="col" class="text-center">@invoice.Sdt</th>
@@ -40,12 +47,54 @@
                             </th>
                             <th scope="col" class="text-center">@invoice.Date</th>
                             <th scope="col" class="text-center">
-                                <a asp-controller="Invoices" asp-action="Details" asp-route-id=@invoice.InvoiceId class="btn btn-success btn-tone m-r-5">View</a>
+                                <a asp-controller="Invoices" asp-action="Details" asp-route-id="@invoice.InvoiceId" class="btn btn-success btn-tone m-r-5">View</a>
                             </th>
                         </tr>
                     }
                 </tbody>
             </table>
+        </div>
+
+        <div class="pagination-container">
+            <nav aria-label="Page navigation example">
+                <ul class="pagination justify-content-center">
+                    @if (Model.PageCount > 1)
+                    {
+                        <li class="page-item @(Model.IsFirstPage ? "disabled" : "")">
+                            <a class="page-link" href="@Url.Action("Index", new { page = 1, searchString = ViewData["CurrentFilter"] })" aria-label="First">
+                                <span aria-hidden="true">&laquo;&laquo;</span>
+                            </a>
+                        </li>
+                        @if (Model.HasPreviousPage)
+                        {
+                            <li class="page-item">
+                                <a class="page-link" href="@Url.Action("Index", new { page = Model.PageNumber - 1, searchString = ViewData["CurrentFilter"] })" aria-label="Previous">
+                                    <span aria-hidden="true">&laquo;</span>
+                                </a>
+                            </li>
+                        }
+                        @for (int i = 1; i <= Model.PageCount; i++)
+                        {
+                            <li class="page-item @(i == Model.PageNumber ? "active" : "")">
+                                <a class="page-link" href="@Url.Action("Index", new { page = i, searchString = ViewData["CurrentFilter"] })">@i</a>
+                            </li>
+                        }
+                        @if (Model.HasNextPage)
+                        {
+                            <li class="page-item">
+                                <a class="page-link" href="@Url.Action("Index", new { page = Model.PageNumber + 1, searchString = ViewData["CurrentFilter"] })" aria-label="Next">
+                                    <span aria-hidden="true">&raquo;</span>
+                                </a>
+                            </li>
+                        }
+                        <li class="page-item @(Model.IsLastPage ? "disabled" : "")">
+                            <a class="page-link" href="@Url.Action("Index", new { page = Model.PageCount, searchString = ViewData["CurrentFilter"] })" aria-label="Last">
+                                <span aria-hidden="true">&raquo;&raquo;</span>
+                            </a>
+                        </li>
+                    }
+                </ul>
+            </nav>
         </div>
     </div>
 </div>

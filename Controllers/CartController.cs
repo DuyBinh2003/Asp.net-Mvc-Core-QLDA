@@ -27,7 +27,8 @@ namespace DoAn.Controllers
             {
                 return NotFound();
             }
-            return View(carts);
+            ViewBag.Carts = carts;
+            return View();
         }
         public async Task<IActionResult> Order()
         {

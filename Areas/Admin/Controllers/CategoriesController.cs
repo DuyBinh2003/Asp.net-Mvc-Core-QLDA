@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using DoAn.Models;
 using DoAn.Filters;
+using X.PagedList.Mvc.Core;
+using X.PagedList;
 
 namespace DoAn.Areas.Admin.Controllers
 {
@@ -22,16 +24,25 @@ namespace DoAn.Areas.Admin.Controllers
         }
 
         // GET: Admin/Categories
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string searchString, int? page)
         {
-       
-            var category = _context.Categories
-                 .Include(s => s.Books)
-                 .ToList();
-            return _context.Categories != null ? 
-                          View(await _context.Categories.ToListAsync()) :
-                          Problem("Entity set 'CContext.Categories'  is null.");
+            ViewData["CurrentFilter"] = searchString;
+
+            IQueryable<Category> categoriesQuery = _context.Categories;
+
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                categoriesQuery = categoriesQuery.Where(c => c.Name.Contains(searchString));
+            }
+
+            int pageNumber = page ?? 1;
+            int pageSize = 5;
+
+            var categories = await categoriesQuery.ToPagedListAsync(pageNumber, pageSize);
+
+            return View(categories);
         }
+
 
         // GET: Admin/Categories/Details/5
         public async Task<IActionResult> Details(int? id)

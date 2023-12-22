@@ -8,6 +8,8 @@ using Microsoft.EntityFrameworkCore;
 using DoAn.Models;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using DoAn.Filters;
+using X.PagedList.Mvc.Core;
+using X.PagedList;
 
 namespace DoAn.Areas.Admin.Controllers
 {
@@ -23,21 +25,29 @@ namespace DoAn.Areas.Admin.Controllers
         }
 
         // GET: Admin/Books
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string searchString, int? page)
         {
-            //return _context.Books != null ?
-            //            View(await _context.Books.ToListAsync()) :
-            //            Problem("Entity set 'CContext.Books'  is null.");
-            var book = _context.Books
-                 .Include(s => s.InvoiceDetails)
-                 .Include(s => s.Author)
-                 .Include(s => s.Carts)
-                 .Include(s => s.Category)
-                 .ToList();
-            return _context.Books != null ?
-                        View(await _context.Books.ToListAsync()) :
-                        Problem("Entity set 'CContext.Books'  is null.");
+            ViewData["CurrentFilter"] = searchString;
+
+            IQueryable<Book> booksQuery = _context.Books
+                .Include(s => s.InvoiceDetails)
+                .Include(s => s.Author)
+                .Include(s => s.Carts)
+                .Include(s => s.Category);
+
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                booksQuery = booksQuery.Where(b => b.Name.Contains(searchString));
+            }
+
+            int pageNumber = page ?? 1;
+            int pageSize = 5;
+
+            var books = await booksQuery.ToPagedListAsync(pageNumber, pageSize);
+
+            return View(books);
         }
+
 
         // GET: Admin/Books/Details/5
         public async Task<IActionResult> Details(int? id)

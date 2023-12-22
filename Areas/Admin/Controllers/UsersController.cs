@@ -8,6 +8,8 @@ using Microsoft.EntityFrameworkCore;
 using DoAn.Models;
 using System.Diagnostics.Metrics;
 using DoAn.Filters;
+using X.PagedList.Mvc.Core;
+using X.PagedList;
 
 namespace DoAn.Areas.Admin.Controllers
 {
@@ -23,14 +25,23 @@ namespace DoAn.Areas.Admin.Controllers
         }
 
         // GET: Admin/Users
-        public async Task<IActionResult> Index(int? page)
+        public async Task<IActionResult> Index(string searchString, int? page)
         {
-            var pageNumber = page == null || page <= 0 ? 1 : page.Value;
-            var pageSize = 15;
+            ViewData["CurrentFilter"] = searchString;
 
-            return _context.Users != null ? 
-                        View(await _context.Users.ToListAsync()) :
-                        Problem("Entity set 'CContext.Users'  is null.");
+            IQueryable<User> usersQuery = _context.Users;
+
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                usersQuery = usersQuery.Where(u => u.Username.Contains(searchString));
+            }
+
+            int pageNumber = page ?? 1;
+            int pageSize = 5;
+
+            var users = await usersQuery.ToPagedListAsync(pageNumber, pageSize);
+
+            return View(users);
         }
 
         // GET: Admin/Users/Details/5
