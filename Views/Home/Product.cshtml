@@ -1,0 +1,66 @@
+﻿@{
+    var book = ViewBag.Book as Book;
+    var otherBooks = ViewBag.OtherBooks as List<Book>;
+}
+
+@if(book != null) {
+    <section class="about_section layout_padding product_section">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="row shadow py-4 mb-5 bg-body rounded">
+                    <div class="col-md-5">
+                        <div class="img-box">
+                            <img src=@book.ImgPath alt="">
+                        </div>
+                    </div>
+                    <div class="col-md-7">
+                        <div class="detail-box">
+                            <div class="heading_container">
+                                <h2>@book.Name</h2>
+                            </div>
+                            <p>@book.Description@book.Description@book.Description@book.Description@book.Description@book.Description</p>
+                            <p class="text-right">- @book.Author.Name -</p>
+                            <div class="d-flex">
+                                <a href="">
+                                    Buy now @book.Price
+                                    <i class="fa fas fa-dollar-sign ml-2"></i>
+                                </a>
+                                <a href="" class="ml-4">
+                                    Add to cart
+                                    <i class="fas fa-shopping-cart ml-2"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row shadow py-4 mb-5 bg-body rounded">
+                    <h3 class="ml-4">Comment</h3>
+                </div>
+            </div>
+            <div class="col-md-4 h-100">
+                <div class"d-flex flex-column">
+                    @foreach (var orther in @otherBooks)
+                    {
+                        <div class="d-flex shadow py-3 pr-3 mb-2 bg-body rounded">
+                            <div class="w-25">
+                                <img src="@orther.ImgPath" class="w-100"/>
+                            </div>
+                            <div class="w-75 d-flex flex-column justify-content-around py-2">
+                                <div class="d-flex justify-content-between">
+                                    <h5>@orther.Name</h5>
+                                    <h4 class="text-danger">@orther.Price <i class="fas fa-dollar-sign"></i></h4>
+                                </div> 
+                                <div class="d-flex justify-content-between align-center">
+                                    <h7>@orther.Description</h7>
+                                    <a class="bg-warning icon">
+                                        <i class="fas fa-shopping-cart text-white"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </section>
+}

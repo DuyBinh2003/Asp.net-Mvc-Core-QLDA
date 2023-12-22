@@ -1,6 +1,12 @@
 ﻿@{
     var book = ViewBag.Book as Book;
 }
+<head>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="path/to/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+
+</head>
 
 <section class="book_section layout_padding">
     <div class="container">
@@ -14,21 +20,28 @@
                 <div class="form_container">
                     <form action="">
                         <div>
-                            <input type="text" class="form-control" placeholder="Your Name" />
+                            <input type="text" class="form-control" placeholder="Name" value="default" />
                         </div>
                         <div>
-                            <input type="text" class="form-control" placeholder="Phone Number" />
+                            <input type="text" class="form-control" placeholder="Phone Number" value="default" />
                         </div>
                         <div>
-                            <input type="email" class="form-control" placeholder="Your Email" />
+                            <input type="email" class="form-control" placeholder="Your Email" value="default" />
                         </div>
+                        <input type="text" class="form-control" placeholder="Adress" value="default" />
                         <div>
-                            <input type="date" class="form-control">
+
+                            <i style="margin-left: 10px" class="fa fa-sticky-note-o" aria-hidden="true"> note</i>
+                            <input type="text" class="form-control width : 300px" placeholder="Note" value="default" />
+
                         </div>
                         <div class="btn_box">
-                            <button>
-                                Order Now
+                            <button class="d-flex align-items-start">
+                                Order   <p id="total-price">  $@(@Model.Price)</p>
                             </button>
+                            <div class="order-subtotal">
+                                
+                            </div>
                         </div>
                     </form>
                 </div>
@@ -36,12 +49,46 @@
             <div class="col-md-6">
                 <div class="d-flex">
                     <div class="img-box">
-                        <img src="@book.ImgPath" alt="" />
-                        <p class="text-right">- @book.Author.Name -</p>
+                        <img src="@Model.ImgPath" alt="" />
+                        <p class="text-right">
+
+                            - @Model.Author.Name -
+                        </p>
+                        <div class="stepped-button">
+                            <button class="stepped-btn btn btn-primary" id="decrement" onclick="stepper(this)" style="border:none"> - </button>
+                            <input type="number" min="0" max="100" step="1" value="1" id="my-input" readonly>
+                            <button class="stepped-btn btn btn-primary " id="increment" onclick="stepper(this)" style="border:none"> + </button>
+                        </div>
                     </div>
+
                 </div>
             </div>
         </div>
     </div>
 </section>
+<script>
+    const myInput = document.getElementById("my-input"); // Lấy phần tử input
+    const totalPriceElement = document.getElementById("total-price"); // Lấy phần tử hiển thị tổng
+    const bookPrice = @Model.Price; // Giá của sách từ model (giả sử là giá trị số)
+
+    function stepper(btn) {
+        let id = btn.getAttribute("id");
+        let min = myInput.getAttribute("min");
+        let max = myInput.getAttribute("max");
+        let step = myInput.getAttribute("step");
+        let val = myInput.getAttribute("value");
+        let calcStep = (id == "increment") ? (step * 1) : (step * -1);
+        let newValue = parseInt(val) + calcStep;
+
+        if (newValue >= min && newValue <= max) {
+            myInput.setAttribute("value", newValue);
+            updateTotal(newValue); // Gọi hàm để cập nhật tổng
+        }
+    }
+
+    function updateTotal(quantity) {
+        let total = quantity * bookPrice; // Tính tổng dựa trên số lượng và giá của sách
+        totalPriceElement.innerText = `$${total.toFixed(2)}`; // Cập nhật hiển thị tổng
+    }
+</script>
 
