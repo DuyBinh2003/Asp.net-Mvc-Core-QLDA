@@ -29,19 +29,19 @@
                         <div>
                             <input type="email" class="form-control" placeholder="Your Email" value="default" />
                         </div>
-                            <input type="text" class="form-control" placeholder="Adress" value="default" />
+                        <input type="text" class="form-control" placeholder="Adress" value="default" />
                         <div>
-                          
+
                             <i style="margin-left: 10px" class="fa fa-sticky-note-o" aria-hidden="true"> note</i>
-                            <input type="text" class="form-control width : 300px"  placeholder="Note" value="default" />
-                            
+                            <input type="text" class="form-control width : 300px" placeholder="Note" value="default" />
+
                         </div>
                         <div class="btn_box">
-                            <button>
-                                Order 
+                            <button class="d-flex align-items-start">
+                                Order   <p id="total-price">  $@(@Model.Price)</p>
                             </button>
                             <div class="order-subtotal">
-                                <p id="total-price">Total: <span class="custom-color-yellow">$@(@Model.Price)</span></p>
+                                
                             </div>
                         </div>
                     </form>
@@ -54,14 +54,14 @@
                         <p class="text-right">
 
                             - @Model.Author.Name -
-                        </p>    
+                        </p>
                         <div class="stepped-button">
                             <button class="stepped-btn btn btn-primary" id="decrement" onclick="stepper(this)" style="border:none"> - </button>
                             <input type="number" min="0" max="100" step="1" value="1" id="my-input" readonly>
                             <button class="stepped-btn btn btn-primary " id="increment" onclick="stepper(this)" style="border:none"> + </button>
                         </div>
                     </div>
-                   
+
                 </div>
             </div>
         </div>
@@ -89,7 +89,7 @@
 
     function updateTotal(quantity) {
         let total = quantity * bookPrice; // Tính tổng dựa trên số lượng và giá của sách
-        totalPriceElement.innerText = `Total: $${total.toFixed(2)}`; // Cập nhật hiển thị tổng
+        totalPriceElement.innerText = `$${total.toFixed(2)}`; // Cập nhật hiển thị tổng
     }
 </script>
 
