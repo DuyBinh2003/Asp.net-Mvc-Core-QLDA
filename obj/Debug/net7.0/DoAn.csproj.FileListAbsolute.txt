@@ -2201,3 +2201,6 @@ C:\Users\Think\Source\Repos\Asp.net-Mvc-Core-QLDA\obj\Debug\net7.0\refint\DoAn.d
 C:\Users\Think\Source\Repos\Asp.net-Mvc-Core-QLDA\obj\Debug\net7.0\DoAn.pdb
 C:\Users\Think\Source\Repos\Asp.net-Mvc-Core-QLDA\obj\Debug\net7.0\DoAn.genruntimeconfig.cache
 C:\Users\Think\Source\Repos\Asp.net-Mvc-Core-QLDA\obj\Debug\net7.0\ref\DoAn.dll
+C:\Users\Think\source\repos\Asp.net-Mvc-Core-QLDA\bin\Debug\net7.0\JetBrains.Annotations.dll
+C:\Users\Think\source\repos\Asp.net-Mvc-Core-QLDA\bin\Debug\net7.0\X.PagedList.dll
+C:\Users\Think\source\repos\Asp.net-Mvc-Core-QLDA\bin\Debug\net7.0\X.PagedList.Mvc.Core.dll
