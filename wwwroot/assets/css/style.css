@@ -122,6 +122,9 @@ a:focus {
   -webkit-box-shadow: none;
           box-shadow: none;
 }
+.buy-btn {
+    width: 200px;
+}
 
 /*header section*/
 .hero_area {

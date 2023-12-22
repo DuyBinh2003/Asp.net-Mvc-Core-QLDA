@@ -49,6 +49,24 @@ namespace DoAn.Controllers
             return View();
         }
 
+        public async Task<IActionResult> Order(int id, int? quantity)
+        {
+            if (quantity == null) quantity = 1;  
+            if (_context.Books == null)
+            {
+                return NotFound();
+            }
+            var book = await _context.Books
+                .Include(a => a.Author)
+                .FirstOrDefaultAsync(m => m.BookId == id);
+            if (book == null)
+            {
+                return NotFound();
+            }
+            ViewBag.Book = book;
+            ViewBag.Quantity= quantity;
+            return View();
+        }
         [HttpPost]
         public IActionResult AddReview(string content, int rating, int bookId)
         {

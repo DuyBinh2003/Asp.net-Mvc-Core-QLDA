@@ -1,6 +1,7 @@
 ﻿@{
     ViewData["Title"] = "Menu";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    decimal totalPrice = 0;
 }
 
 @model List<Cart>
@@ -24,6 +25,7 @@
                 <tbody>
                     @foreach (var cart in Model)
                     {
+                        @(@totalPrice += (decimal)@cart.Book.Price * cart.Quantity)
                         <tr>
                             <td>#</td>
                             <td>@cart.Book.Name</td>
@@ -34,15 +36,25 @@
                             <td>@cart.Book.Price</td>
                             <td>@(@cart.Book.Price * @cart.Quantity)</td>
                             <td>
-                                <a href="">
-                                    <i class="fa fa-solid fa-trash"></i>
-                                </a>
+                                <form method="post" action="@Url.Action("RemoveItem", "Cart")">
+                                    <input type="hidden" name="bookId" value="@cart.BookId" />
+                                    <input type="hidden" name="userId" value="@cart.UserId" />
+                                    <button type="submit" class="btn bg-warning">
+                                        <i class="fa fa-solid fa-trash text-white"></i>
+                                    </button>
+                                </form>
                             </td>
                         </tr>
                     }
                 </tbody>
             </table>
-
+            <div class="d-flex justify-content-end">
+                <a asp-action="Order" class="mt-4 mr-4 d-flex align-items-center justify-content-center btn bg-warning px-4 text-dark buy-btn">
+                    <p class="m-0 mr-1">Buy now</p>
+                    <p id="price" class="m-0">@totalPrice</p>
+                    <i class="fa fas fa-dollar-sign ml-2"></i>
+                </a>
+            </div>
         </div>
     </div>
 </div>

@@ -30,5 +30,21 @@ namespace DoAn.Controllers
             return View(carts);
         }
 
+        [HttpPost]
+        public IActionResult RemoveItem(int bookId, int userId)
+        {
+            // Tìm mục giỏ hàng cần xóa
+            var cartItem = _context.Carts.FirstOrDefault(item => item.BookId == bookId && item.UserId == userId);
+
+            if (cartItem != null)
+            {
+                // Xóa mục giỏ hàng
+                _context.Carts.Remove(cartItem);
+                _context.SaveChanges();
+            }
+
+            // Chuyển hướng về trang giỏ hàng hoặc trang khác tùy thuộc vào logic của bạn
+            return RedirectToAction("Index", "Cart");
+        }
     }
 }
