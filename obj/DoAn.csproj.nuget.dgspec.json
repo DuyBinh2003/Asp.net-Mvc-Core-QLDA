@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Think\\source\\repos\\Asp.net-Mvc-Core-QLDA\\DoAn.csproj": {}
+    "C:\\Users\\Admin\\Asp.net-Mvc-Core-QLDA\\DoAn.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Think\\source\\repos\\Asp.net-Mvc-Core-QLDA\\DoAn.csproj": {
+    "C:\\Users\\Admin\\Asp.net-Mvc-Core-QLDA\\DoAn.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Think\\source\\repos\\Asp.net-Mvc-Core-QLDA\\DoAn.csproj",
+        "projectUniqueName": "C:\\Users\\Admin\\Asp.net-Mvc-Core-QLDA\\DoAn.csproj",
         "projectName": "DoAn",
-        "projectPath": "C:\\Users\\Think\\source\\repos\\Asp.net-Mvc-Core-QLDA\\DoAn.csproj",
-        "packagesPath": "C:\\Users\\Think\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Think\\source\\repos\\Asp.net-Mvc-Core-QLDA\\obj\\",
+        "projectPath": "C:\\Users\\Admin\\Asp.net-Mvc-Core-QLDA\\DoAn.csproj",
+        "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Admin\\Asp.net-Mvc-Core-QLDA\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Think\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -22,7 +22,6 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -99,7 +98,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.401\\RuntimeIdentifierGraph.json"
         }
       }
     }

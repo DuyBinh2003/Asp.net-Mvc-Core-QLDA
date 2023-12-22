@@ -49,18 +49,66 @@ namespace DoAn.Controllers
             return View();
         }
 
+        public async Task<IActionResult> Order(int id, int? quantity)
+        {
+            if (quantity == null) quantity = 1;  
+            if (_context.Books == null)
+            {
+                return NotFound();
+            }
+            var book = await _context.Books
+                .Include(a => a.Author)
+                .FirstOrDefaultAsync(m => m.BookId == id);
+            if (book == null)
+            {
+                return NotFound();
+            }
+            ViewBag.Book = book;
+            ViewBag.Quantity= quantity;
+            return View();
+        }
         [HttpPost]
         public IActionResult AddReview(string content, int rating, int bookId)
         {
+            var userId = HttpContext.Session.GetInt32("UserId");
             var newReview = new Review
             {
                 Content = content,
                 Rate = rating,
                 BookId = bookId,
-                UserId = 1
+                UserId = int.Parse(userId.ToString())
             };
 
             _context.Reviews.Add(newReview);
+            _context.SaveChanges();
+            return RedirectToAction("Detail", "Product", new { id = bookId });
+        }
+        [HttpPost]
+        public IActionResult AddCart(int quantity, int bookId)
+        {
+            var userId = HttpContext.Session.GetInt32("UserId");
+            var existingCartItem = _context.Carts
+            .FirstOrDefault(item => item.BookId == bookId && item.UserId == int.Parse(userId.ToString()));
+
+            if (existingCartItem == null)
+            {
+                // Nếu chưa có, thêm một dòng mới
+                var newCartItem = new Cart
+                {
+                    BookId = bookId,
+                    UserId = int.Parse(userId.ToString()),
+                    Quantity = quantity
+                };
+
+                _context.Carts.Add(newCartItem);
+            }
+            else
+            {
+                // Nếu đã tồn tại, cập nhật quantity
+                existingCartItem.Quantity += quantity;
+                _context.Carts.Update(existingCartItem);
+            }
+
             _context.SaveChanges();
 
             return RedirectToAction("Detail", "Product", new { id = bookId });
