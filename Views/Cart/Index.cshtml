@@ -1,15 +1,15 @@
 ﻿@{
-    var carts = ViewBag.Carts as List<Cart>;
+    var carts = ViewBag.Cart as List<Cart>;
     decimal totalPrice = 0;
 }
 
 @model List<Cart>
 
-@if(Model != null)
+@if (carts.Any())
 {
     <div class="cart pt-5 pb-5">
-    <div class="row">
-        <div class="col-md-10 offset-1">
+        <div class="row">
+            <div class="col-md-10 offset-1">
             <h1 class="text-center pb-2">Giỏ hàng</h1>
             <table>
                 <thead>
@@ -24,7 +24,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var cart in carts)
+                    @foreach (var cart in @carts)
                     {
                         totalPrice += (decimal)cart.Book.Price * cart.Quantity;
                         <tr>
@@ -35,7 +35,7 @@
                             </td>
                             <td>
                                 <div class="d-flex align-items-center justify-content-center" >
-                                    <form method ="post" action="@Url.Action("UpdateQuantity", "Cart")">
+                                    <form method="post" action="@Url.Action("UpdateQuantity", "Cart")">
                                         <input type="hidden" name="bookId" value="@cart.BookId" />
                                         <input type="hidden" name="userId" value="@cart.UserId" />
                                         <input type="hidden" name="newQuantity" value=@(@cart.Quantity - 1) />
@@ -81,7 +81,7 @@
                 </a>
             </div>
         </div>
-    </div>
+        </div>
     </div>
 }
 else

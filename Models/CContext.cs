@@ -160,7 +160,7 @@ public partial class CContext : DbContext
                 .HasMaxLength(255)
                 .HasColumnName("address");
             entity.Property(e => e.Date)
-                .HasColumnType("date")
+                .HasColumnType("datetime")
                 .HasColumnName("date");
             entity.Property(e => e.Note)
                 .HasColumnType("text")

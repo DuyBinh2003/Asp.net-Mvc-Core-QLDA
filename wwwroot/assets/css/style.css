@@ -1336,3 +1336,6 @@ input::-webkit-inner-spin-button {
 .bg-blue {
     background-color: aqua;
 }
+.order-img {
+    height: 360px;
+}

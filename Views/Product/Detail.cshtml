@@ -65,7 +65,7 @@
                                 <p class="text-right">- @book.Author.Name -</p>
                             </div>
                             <div class="d-flex justify-content-around">
-                                <a asp-action="Order" asp-route-id="@book.BookId" class="d-flex align-items-center btn bg-warning px-4 text-dark">
+                                <a id="orderLink" href="/Product/Order/1" class="d-flex align-items-center btn bg-warning px-4 text-dark">
                                     <p class="m-0 mr-1">Buy now</p>
                                     <p id="price" class="m-0">@book.Price</p>
                                     <i class="fa fas fa-dollar-sign ml-2"></i>
@@ -153,13 +153,17 @@
         <script>
             // quantity
             function updateQuantity(x) {
-                console.log(@book.Price)
                 var quantityInput = document.getElementById("quantity");
                 var priceElement = document.getElementById("price");
+                var buyElement = document.getElementById('orderLink');
                 var currentValue = parseInt(quantityInput.value, 10);
+
                 quantityInput.value = Math.max(currentValue + x, 1);
                 var newPrice = @book.Price * quantityInput.value
                 priceElement.innerText = newPrice.toFixed(2)
+
+                var newUrl = '@Url.Action("Order")' + '/' + @book.BookId + '?quantity=' + quantityInput.value;
+                buyElement.href = newUrl
             }
 
             // rating

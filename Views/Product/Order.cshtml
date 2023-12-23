@@ -11,63 +11,44 @@
 
 <section class="book_section layout_padding">
     <div class="container">
-        <div class="heading_container">
-            <h2>
-                Order Books
-            </h2>
-        </div>
+        
         <div class="row">
-            <div class="col-md-4">
+            <div class="offset-1 col-md-5">
+                <h2 class="w-100 text-center mb-4">
+                    Order Books
+                </h2>
                 <div class="form_container">
-                    <form action="">
+                    <form method="post" action="@Url.Action("BuyProduct", "Order")">
                         <div>
-                            <input type="text" class="form-control mb-2" placeholder="Name" value="@user.Name" />
-                            <input type="hidden" class="form-control mb-2" name="userID" value="@user.UserId" />
+                            <input type="text" class="form-control mb-4" placeholder="Name" value="@user.Name" />
+                            <input type="hidden" name="userId" value="@user.UserId" />
+                            <input type="hidden" name="bookId" value="@book.BookId" />
+                            <input type="hidden" name="price" value="@book.Price" />
+                            <input type="hidden" name="quantity" value="@ViewBag.Quantity" />
                         </div>
                         <div>
-                            <input type="email" class="form-control mb-2" placeholder="Your Email" value="@user.Email" />
+                            <input type="text" name="sdt" class="form-control mb-4" placeholder="Phone Number" value="@user.Sdt" />
                         </div>
                         <div>
-                            <input type="text" class="form-control mb-2" placeholder="Phone Number" value="@user.Sdt"/>
+                            <input type="text" name="address" class="form-control mb-4" placeholder="Adress" value="@user.Address" />
                         </div>
                         <div>
-                            <input type="text" class="form-control mb-2" placeholder="Adress" value="@user.Address" />
+                            <input type="text" name="note" class="form-control mb-4 width : 300px" placeholder="Note" />
                         </div>
-                        <div>
-                            <input type="text" class="form-control mb-2 width : 300px" placeholder="Note" />
-                        </div>
-                        <div class="btn_box">
-                            <button class="px-4">
-                                Order now @book.Price
+                        <div class="btn_box text-center">
+                            <button type="submit" class="px-4">
+                                Order now @(book.Price * @ViewBag.Quantity)
                             </button>
                         </div>
                     </form>
                 </div>
             </div>
-            <div class="offset-1 col-md-7">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>Product</th>
-                            <th>Quantity</th>
-                            <th>Price</th>
-                            <th>Total</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @for (int i = 1; i <= 5; i++)
-                        {
-                            <tr>
-                                <td>#</td>
-                                <td>Book.Name</td>
-                                <td>Quantity</td>
-                                <td>Book.Price</td>
-                                <td></td>
-                            </tr>
-                        }
-                    </tbody>
-                </table>
+            <div class="offset-1 col-md-5">
+                <div class="d-flex flex-column align-items-center">
+                    <h2>@book.Name</h2>
+                    <img class="order-img my-2" src="@book.ImgPath" />
+                    <p>Quantity: @ViewBag.Quantity</p>
+                </div>
             </div>
         </div>
     </div>

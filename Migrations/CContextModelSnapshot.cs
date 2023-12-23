@@ -179,7 +179,7 @@ namespace DoAn.Migrations
                         .HasColumnName("address");
 
                     b.Property<DateTime>("Date")
-                        .HasColumnType("date")
+                        .HasColumnType("datetime")
                         .HasColumnName("date");
 
                     b.Property<string>("Note")

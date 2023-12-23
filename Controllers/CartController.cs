@@ -27,7 +27,7 @@ namespace DoAn.Controllers
             {
                 return NotFound();
             }
-            ViewBag.Carts = carts;
+            ViewBag.Cart = carts;
             return View();
         }
         public async Task<IActionResult> Order()
@@ -53,7 +53,6 @@ namespace DoAn.Controllers
             ViewBag.TotalPrice = totalPrice;
             return View();
         }
-
         [HttpPost]
         public IActionResult RemoveItem(int bookId, int userId)
         {

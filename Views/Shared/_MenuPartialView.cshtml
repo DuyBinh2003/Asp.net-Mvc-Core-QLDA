@@ -43,15 +43,15 @@
                     <div class="col-sm-6 col-lg-4 all @book.Category.Name " data-book-name="@book.Name">
                         <div>
                             <div class="box">
-                                <a asp-controller="product" asp-action="detail" asp-route-id="@book.BookId" class="img-box">
+                                <div class="img-box">
                                     <img src="@book.ImgPath" alt="">
-                                </a>
+                                </div>
                                 <div class="detail-box">
                                     <h5>@book.Name</h5>
                                     <p>@book.Description</p>
                                     <div class="options">
                                         <h6>@book.Price</h6>
-                                        <a>
+                                        <a asp-controller="product" asp-action="detail" asp-route-id="@book.BookId">
                                             <i class="fas fa-shopping-cart text-white"></i>
                                         </a>
                                     </div>
