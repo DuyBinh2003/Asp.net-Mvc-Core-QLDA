@@ -9,6 +9,7 @@
     <link href="~/AdminAssets/vendor/fonts/circular-std/style.css" rel="stylesheet">
     <link rel="stylesheet" href="~/AdminAssets/libs/css/style.css">
     <link rel="stylesheet" href="~/AdminAssets/vendor/fonts/fontawesome/css/fontawesome-all.css">
+    
     <style>
         html,
         body {
@@ -24,6 +25,7 @@
             padding-bottom: 40px;
         }
     </style>
+    @using AspNetCoreHero.ToastNotification
     @RenderSection("Styles", required: false)
 </head>
 
@@ -32,6 +34,21 @@
         @RenderBody()
     </div>
 
+    <!-- jQery -->
+    <script src="~/assets/js/jquery-3.4.1.min.js"></script>
+    <!-- popper js -->
+    <!-- bootstrap js -->
+    <script src="~/assets/js/bootstrap.js"></script>
+    <!-- owl slider -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+    <!-- isotope js -->
+    <script src="https://unpkg.com/isotope-layout@3.0.4/dist/isotope.pkgd.min.js"></script>
+    <!-- nice select -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/js/jquery.nice-select.min.js"></script>
+    <!-- custom js -->
+    <script src="~/assets/js/custom.js"></script>
+    <!-- Invoke Notyf -->
+    @await Component.InvokeAsync("Notyf")
     @RenderSection("Scripts", required: false)
 </body>
 

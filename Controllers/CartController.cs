@@ -1,16 +1,20 @@
 ﻿using DoAn.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using AspNetCoreHero.ToastNotification.Notyf;
+using AspNetCoreHero.ToastNotification.Abstractions;
 
 namespace DoAn.Controllers
 {
     public class CartController : Controller
     {
         private readonly CContext _context;
+        private readonly INotyfService _notyf;
 
-        public CartController(CContext context)
+        public CartController(CContext context, INotyfService notyf)
         {  
             _context = context;
+            _notyf = notyf;
         }
         public async Task<IActionResult> Index()
         {
@@ -64,6 +68,7 @@ namespace DoAn.Controllers
                 // Xóa mục giỏ hàng
                 _context.Carts.Remove(cartItem);
                 _context.SaveChanges();
+                _notyf.Success("Book removed successful");
             }
 
             // Chuyển hướng về trang giỏ hàng hoặc trang khác tùy thuộc vào logic của bạn
@@ -79,6 +84,7 @@ namespace DoAn.Controllers
             {
                 cartItem.Quantity = newQuantity;
                 _context.SaveChanges();
+                _notyf.Success("Quantity updated successful");
             }
 
             // Chuyển hướng về trang giỏ hàng hoặc trang khác tùy thuộc vào logic của bạn

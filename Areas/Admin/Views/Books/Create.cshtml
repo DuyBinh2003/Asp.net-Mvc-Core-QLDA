@@ -45,16 +45,21 @@
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label asp-for="AuthorId" class="col-3 col-lg-2 col-form-label text-left">AuthorId</label>
+                    <label asp-for="AuthorId" class="col-3 col-lg-2 col-form-label text-left">Author</label>
                     <div class="col-9 col-lg-10">
-                        <input asp-for="AuthorId" class="form-control" />
+                        <select asp-for="AuthorId" asp-items="@(new SelectList(ViewBag.Authors, "AuthorId", "Name"))" class="form-control">
+                            <option value="">Select Author</option>
+                        </select>
                         <span asp-validation-for="AuthorId" class="text-danger"></span>
                     </div>
                 </div>
+
                 <div class="form-group row">
-                    <label asp-for="CategoryId" class="col-3 col-lg-2 col-form-label text-left">CategoryId</label>
+                    <label asp-for="CategoryId" class="col-3 col-lg-2 col-form-label text-left">Category</label>
                     <div class="col-9 col-lg-10">
-                        <input asp-for="CategoryId" class="form-control" />
+                        <select asp-for="CategoryId" asp-items="@(new SelectList(ViewBag.Categories, "CategoryId", "Name"))" class="form-control">
+                            <option value="">Select Category</option>
+                        </select>
                         <span asp-validation-for="CategoryId" class="text-danger"></span>
                     </div>
                 </div>

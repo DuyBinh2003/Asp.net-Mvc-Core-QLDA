@@ -1,8 +1,11 @@
 ﻿using DoAn.Models;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq;
+using AspNetCoreHero.ToastNotification.Notyf;
+using AspNetCoreHero.ToastNotification.Abstractions;
 
 namespace DoAn.Areas.Authentication.Controllers
 {
@@ -11,9 +14,12 @@ namespace DoAn.Areas.Authentication.Controllers
     {
         private readonly CContext _context;
 
-        public AccountController(CContext context)
+        private readonly INotyfService _notyf;
+
+        public AccountController(CContext context, INotyfService notyf)
         {
             _context = context;
+            _notyf = notyf;
         }
 
         // GET: /Authentication/Account/SignUp
@@ -32,6 +38,7 @@ namespace DoAn.Areas.Authentication.Controllers
                 if (_context.Users.Any(u => u.Username == username))
                 {
                     ModelState.AddModelError("Username", "Username already exists.");
+                    _notyf.Error("Username already exists.");
                     return View();
                 }
 
@@ -49,9 +56,10 @@ namespace DoAn.Areas.Authentication.Controllers
                 _context.Users.Add(user);
                 _context.SaveChanges();
 
+                _notyf.Success("Sign up successful");
                 return RedirectToAction("Login");
             }
-
+            _notyf.Error("Sign up unsuccessful");
             return View();
         }
 
@@ -84,17 +92,32 @@ namespace DoAn.Areas.Authentication.Controllers
                     if (isAdmin)
                     {
                         // Redirect to Admin area's HomeController/Index
+                        _notyf.Success("Login successful as Admin");
                         return RedirectToAction("Index", "Home", new { area = "Admin" });
                     }
 
                     // Redirect to regular user's HomeController/Index
+                    _notyf.Success("Login successful");
                     return RedirectToAction("Index", "Home", new { area = "" });
                 }
 
                 ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+                
             }
-
+            _notyf.Error("Username or password invalid");
             return View();
+        }
+        //Sign out
+        public IActionResult Logout()
+        {
+            // Clear user-related session values
+            HttpContext.Session.Remove("UserId");
+            HttpContext.Session.Remove("Username");
+            HttpContext.Session.Remove("UserType");
+
+            // Redirect to the login page
+            _notyf.Success("Logout successful");
+            return RedirectToAction("Login", "Account", new { area = "Authentication" });
         }
 
 

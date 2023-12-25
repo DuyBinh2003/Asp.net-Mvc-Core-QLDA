@@ -1,7 +1,11 @@
 ﻿using DoAn.Filters;
 using DoAn.Models;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using AspNetCoreHero.ToastNotification.Notyf;
+using AspNetCoreHero.ToastNotification.Abstractions;
 
 namespace DoAn.Areas.Admin.Controllers
 {
@@ -10,10 +14,12 @@ namespace DoAn.Areas.Admin.Controllers
     public class HomeController : Controller
     {
         private readonly CContext _context;
+        private readonly INotyfService _notyf;
 
-        public HomeController(CContext context)
+        public HomeController(CContext context, INotyfService notyf)
         {
             _context = context;
+            _notyf = notyf;
         }
         public async Task<IActionResult> Index()
         {
@@ -68,6 +74,18 @@ namespace DoAn.Areas.Admin.Controllers
             ViewBag.UniqueYears = invoices.Select(i => i.Date.Year).Distinct().OrderByDescending(y => y).ToList();
 
             return View();
+        }
+        //Sign out
+        public IActionResult Logout()
+        {
+            // Clear user-related session values
+            HttpContext.Session.Remove("UserId");
+            HttpContext.Session.Remove("Username");
+            HttpContext.Session.Remove("UserType");
+
+            // Redirect to the login page in the Authentication area
+            _notyf.Success("Logout successful");
+            return RedirectToAction("Login", "Account", new { area = "Authentication" });
         }
     }
 }

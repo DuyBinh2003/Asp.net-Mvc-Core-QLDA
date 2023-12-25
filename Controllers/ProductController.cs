@@ -2,16 +2,20 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Net;
+using AspNetCoreHero.ToastNotification.Notyf;
+using AspNetCoreHero.ToastNotification.Abstractions;
 
 namespace DoAn.Controllers
 {
     public class ProductController : Controller
     {
         private readonly CContext _context;
+        private readonly INotyfService _notyf;
 
-        public ProductController(CContext context)
+        public ProductController(CContext context, INotyfService notyf)
         {
             _context = context;
+            _notyf = notyf;
         }
         public async Task<IActionResult> Detail(int? id)
         {
@@ -85,6 +89,7 @@ namespace DoAn.Controllers
 
             _context.Reviews.Add(newReview);
             _context.SaveChanges();
+            _notyf.Success("Added Book review successful");
             return RedirectToAction("Detail", "Product", new { id = bookId });
         }
         [HttpPost]
@@ -114,7 +119,7 @@ namespace DoAn.Controllers
             }
 
             _context.SaveChanges();
-
+            _notyf.Success("Book added to cart successful");
             return RedirectToAction("Detail", "Product", new { id = bookId });
         }
     }

@@ -9,6 +9,8 @@ using DoAn.Models;
 using DoAn.Filters;
 using X.PagedList.Mvc.Core;
 using X.PagedList;
+using AspNetCoreHero.ToastNotification.Notyf;
+using AspNetCoreHero.ToastNotification.Abstractions;
 
 namespace DoAn.Areas.Admin.Controllers
 {
@@ -17,10 +19,12 @@ namespace DoAn.Areas.Admin.Controllers
     public class InvoicesController : Controller
     {
         private readonly CContext _context;
+        private readonly INotyfService _notyf;
 
-        public InvoicesController(CContext context)
+        public InvoicesController(CContext context, INotyfService notyf)
         {
             _context = context;
+            _notyf = notyf;
         }
 
         // GET: Admin/Invoices
@@ -34,11 +38,17 @@ namespace DoAn.Areas.Admin.Controllers
 
             if (!string.IsNullOrEmpty(searchString))
             {
-                invoicesQuery = invoicesQuery.Where(i => i.User.Name.Contains(searchString));
+                invoicesQuery = invoicesQuery.Where(i =>
+                    i.User.Name.Contains(searchString) ||
+                    i.Address.Contains(searchString) ||
+                    i.Sdt.Contains(searchString) ||
+                    i.TotalPrice.ToString().Contains(searchString) ||
+                    i.Date.ToString().Contains(searchString) || // Format Date for search
+                    i.InvoiceId.ToString().Contains(searchString));
             }
 
             int pageNumber = page ?? 1;
-            int pageSize = 5;
+            int pageSize = 20;
 
             var invoices = await invoicesQuery.ToPagedListAsync(pageNumber, pageSize);
 
@@ -84,6 +94,7 @@ namespace DoAn.Areas.Admin.Controllers
             {
                 _context.Add(invoice);
                 await _context.SaveChangesAsync();
+                _notyf.Success("Invoice created successful");
                 return RedirectToAction(nameof(Index));
             }
             return View(invoice);

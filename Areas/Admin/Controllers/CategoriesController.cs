@@ -9,6 +9,8 @@ using DoAn.Models;
 using DoAn.Filters;
 using X.PagedList.Mvc.Core;
 using X.PagedList;
+using AspNetCoreHero.ToastNotification.Notyf;
+using AspNetCoreHero.ToastNotification.Abstractions;
 
 namespace DoAn.Areas.Admin.Controllers
 {
@@ -17,10 +19,12 @@ namespace DoAn.Areas.Admin.Controllers
     public class CategoriesController : Controller
     {
         private readonly CContext _context;
+        private readonly INotyfService _notyf;
 
-        public CategoriesController(CContext context)
+        public CategoriesController(CContext context, INotyfService notyf)
         {
             _context = context;
+            _notyf = notyf;
         }
 
         // GET: Admin/Categories
@@ -32,11 +36,14 @@ namespace DoAn.Areas.Admin.Controllers
 
             if (!string.IsNullOrEmpty(searchString))
             {
-                categoriesQuery = categoriesQuery.Where(c => c.Name.Contains(searchString));
+                categoriesQuery = categoriesQuery.Where(c =>
+                    c.CategoryId.ToString().Contains(searchString) ||
+                    c.Name.Contains(searchString) ||
+                    c.Description.Contains(searchString));
             }
 
             int pageNumber = page ?? 1;
-            int pageSize = 5;
+            int pageSize = 10;
 
             var categories = await categoriesQuery.ToPagedListAsync(pageNumber, pageSize);
 
@@ -80,8 +87,10 @@ namespace DoAn.Areas.Admin.Controllers
             {
                 _context.Add(category);
                 await _context.SaveChangesAsync();
+                _notyf.Success("Category created successful");
                 return RedirectToAction(nameof(Index));
             }
+            _notyf.Error("Category created unsuccessful");
             return View(category);
         }
 
@@ -131,8 +140,10 @@ namespace DoAn.Areas.Admin.Controllers
                         throw;
                     }
                 }
+                _notyf.Success("Category edit successful");
                 return RedirectToAction(nameof(Index));
             }
+            _notyf.Error("Category edit unsuccessful");
             return View(category);
         }
 
@@ -170,6 +181,7 @@ namespace DoAn.Areas.Admin.Controllers
             }
             
             await _context.SaveChangesAsync();
+            _notyf.Success("Category delete successful");
             return RedirectToAction(nameof(Index));
         }
 

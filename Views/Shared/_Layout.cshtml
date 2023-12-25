@@ -56,9 +56,9 @@
                                 <a class="user_link" asp-controller="Cart" asp-action="Index">
                                     <i class="fas fa-shopping-cart" aria-hidden="true"></i>
                                 </a>
-                                <a href="" class="user_link">
-                                    <i class="fas fa-sign-out-alt" aria-hidden="true"></i>
-                                </a>
+                            <a href="@Url.Action("Logout", "Home")" class="user_link">
+                                <i class="fas fa-sign-out-alt" aria-hidden="true"></i>
+                            </a>
 
                             </div>
                         </div>
@@ -168,5 +168,6 @@
         <!-- Google Map -->
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCh39n5U-4IoWpsVGUHWdqB6puEkhRLdmI&callback=myMap"></script>
         <!-- End Google Map -->
+    @await Component.InvokeAsync("Notyf")
     </body>
 </html>

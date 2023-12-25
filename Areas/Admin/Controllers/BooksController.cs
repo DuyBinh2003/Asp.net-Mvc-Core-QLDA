@@ -10,6 +10,8 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using DoAn.Filters;
 using X.PagedList.Mvc.Core;
 using X.PagedList;
+using AspNetCoreHero.ToastNotification.Notyf;
+using AspNetCoreHero.ToastNotification.Abstractions;
 
 namespace DoAn.Areas.Admin.Controllers
 {
@@ -18,10 +20,12 @@ namespace DoAn.Areas.Admin.Controllers
     public class BooksController : Controller
     {
         private readonly CContext _context;
+        private readonly INotyfService _notyf;
 
-        public BooksController(CContext context)
+        public BooksController(CContext context, INotyfService notyf)
         {
             _context = context;
+            _notyf = notyf;
         }
 
         // GET: Admin/Books
@@ -37,7 +41,11 @@ namespace DoAn.Areas.Admin.Controllers
 
             if (!string.IsNullOrEmpty(searchString))
             {
-                booksQuery = booksQuery.Where(b => b.Name.Contains(searchString));
+                booksQuery = booksQuery.Where(b =>
+                    b.Name.Contains(searchString) ||
+                    b.Author.Name.Contains(searchString) ||
+                    b.Description.Contains(searchString) ||
+                    b.BookId.ToString().Contains(searchString));
             }
 
             int pageNumber = page ?? 1;
@@ -76,6 +84,8 @@ namespace DoAn.Areas.Admin.Controllers
         // GET: Admin/Books/Create
         public IActionResult Create()
         {
+            ViewBag.Authors = _context.Authors.ToList();
+            ViewBag.Categories = _context.Categories.ToList();
             return View();
         }
 
@@ -84,14 +94,17 @@ namespace DoAn.Areas.Admin.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("BookId,Name,Price,ImgPath,Description,AuthorId,CategoryId,BookPath,Isbn,Status")] Book book)
+        public async Task<IActionResult> Create([Bind("BookId,Name,Price,ImgPath,Description,AuthorId,CategoryId,Rate,Quantity")] Book book)
         {
-            if (ModelState.IsValid)
+            
             {
                 _context.Add(book);
                 await _context.SaveChangesAsync();
+                _notyf.Success("Book created successful");
                 return RedirectToAction(nameof(Index));
             }
+           
+            _notyf.Error("Book create unsuccessful");
             return View(book);
         }
 
@@ -116,14 +129,14 @@ namespace DoAn.Areas.Admin.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("BookId,Name,Price,ImgPath,Description,AuthorId,CategoryId,BookPath,Isbn,Status")] Book book)
+        public async Task<IActionResult> Edit(int id, [Bind("BookId,Name,Price,ImgPath,Description,AuthorId,CategoryId,Rate,Quantity")] Book book)
         {
             if (id != book.BookId)
             {
                 return NotFound();
             }
 
-            if (ModelState.IsValid)
+            
             {
                 try
                 {
@@ -141,8 +154,10 @@ namespace DoAn.Areas.Admin.Controllers
                         throw;
                     }
                 }
+                _notyf.Success("Book edited successful");
                 return RedirectToAction(nameof(Index));
             }
+            _notyf.Error("Book edit unsuccessful");
             return View(book);
         }
 
@@ -180,6 +195,7 @@ namespace DoAn.Areas.Admin.Controllers
             }
             
             await _context.SaveChangesAsync();
+            _notyf.Success("Book deleted successful");
             return RedirectToAction(nameof(Index));
         }
 

@@ -10,6 +10,8 @@ using System.Diagnostics.Metrics;
 using DoAn.Filters;
 using X.PagedList.Mvc.Core;
 using X.PagedList;
+using AspNetCoreHero.ToastNotification.Notyf;
+using AspNetCoreHero.ToastNotification.Abstractions;
 
 namespace DoAn.Areas.Admin.Controllers
 {
@@ -18,10 +20,12 @@ namespace DoAn.Areas.Admin.Controllers
     public class UsersController : Controller
     {
         private readonly CContext _context;
+        private readonly INotyfService _notyf;
 
-        public UsersController(CContext context)
+        public UsersController(CContext context, INotyfService notyf)
         {
             _context = context;
+            _notyf = notyf;
         }
 
         // GET: Admin/Users
@@ -33,11 +37,17 @@ namespace DoAn.Areas.Admin.Controllers
 
             if (!string.IsNullOrEmpty(searchString))
             {
-                usersQuery = usersQuery.Where(u => u.Username.Contains(searchString));
+                usersQuery = usersQuery.Where(u =>
+                    u.UserId.ToString().Contains(searchString) ||
+                    u.Name.Contains(searchString) ||
+                    u.Email.Contains(searchString) ||
+                    u.Username.Contains(searchString) ||
+                    u.Password.Contains(searchString) ||
+                    u.UserType.Contains(searchString));
             }
 
             int pageNumber = page ?? 1;
-            int pageSize = 5;
+            int pageSize = 10;
 
             var users = await usersQuery.ToPagedListAsync(pageNumber, pageSize);
 
@@ -83,8 +93,10 @@ namespace DoAn.Areas.Admin.Controllers
             {
                 _context.Add(user);
                 await _context.SaveChangesAsync();
+                _notyf.Success("User created successful");
                 return RedirectToAction(nameof(Index));
             }
+            _notyf.Error("User created unsuccessful");
             return View(user);
         }
 
@@ -134,8 +146,10 @@ namespace DoAn.Areas.Admin.Controllers
                         throw;
                     }
                 }
+                _notyf.Success("User edit successful");
                 return RedirectToAction(nameof(Index));
             }
+            _notyf.Error("User edit unsuccessful");
             return View(user);
         }
 
@@ -153,7 +167,7 @@ namespace DoAn.Areas.Admin.Controllers
             {
                 return NotFound();
             }
-
+            
             return View(user);
         }
 
@@ -173,6 +187,7 @@ namespace DoAn.Areas.Admin.Controllers
             }
             
             await _context.SaveChangesAsync();
+            _notyf.Success("User delete successful");
             return RedirectToAction(nameof(Index));
         }
 

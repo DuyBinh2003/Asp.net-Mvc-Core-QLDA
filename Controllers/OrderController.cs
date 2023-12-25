@@ -2,16 +2,18 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Net;
-
+using AspNetCoreHero.ToastNotification.Notyf;
+using AspNetCoreHero.ToastNotification.Abstractions;
 namespace DoAn.Controllers
 {
     public class OrderController : Controller
     {
         private readonly CContext _context;
-
-        public OrderController(CContext context)
+        private readonly INotyfService _notyf;
+        public OrderController(CContext context, INotyfService notyf)
         {
             _context = context;
+            _notyf = notyf;
         }
         [HttpPost]
         public IActionResult BuyCart(int userId, string sdt, string address, string note)
@@ -48,7 +50,7 @@ namespace DoAn.Controllers
 
             _context.Carts.RemoveRange(cartItems);
             _context.SaveChanges();
-
+            _notyf.Success("Books in cart ordered successful");
             return RedirectToAction("Index", "Home");
         }
         [HttpPost]
@@ -85,6 +87,7 @@ namespace DoAn.Controllers
                 _context.InvoiceDetails.Add(newInvoiceDetail);
             }
             _context.SaveChanges();
+            _notyf.Success("Book in history ordered successful");
 
             return RedirectToAction("Index", "Home");
         }
@@ -113,7 +116,7 @@ namespace DoAn.Controllers
             };
             _context.InvoiceDetails.Add(newInvoiceDetail);
             _context.SaveChanges();
-
+            _notyf.Success("Book ordered successful");
             return RedirectToAction("Index", "Home");
         }
     }
