@@ -12,10 +12,14 @@
             Thông tin tác giả
             <a class="btn btn-secondary" asp-action="">Back to List</a>
         </h3>
-        <div class="text-center">
-            <h2 class="text-dark mb-4 mt-2">@Model.Name</h2>
-            <h5 class=""><img src="@Model.ImgPath" /></h5>
-            <h5 class="mb-4 mt-4">@Model.Description</h5>
+        <div class="d-flex px-4 justify-content-center">
+            <div class ="author-img mr-4">
+                <img class="w-100" src="@Model.ImgPath" />
+            </div>
+            <div class="ml-4">
+                <h2 class="text-dark mb-4 mt-2">@Model.Name</h2>
+                <h5 class="mb-4 mt-4">@Model.Description</h5>
+            </div>
         </div>
         <div class="card-body">
             <h3>Sách của tác giả</h3>
@@ -51,8 +55,7 @@
                     <table class="table table-clear">
                         <tbody>
                             <tr>
-                                <td class="left">
-                                </td>
+                                <td class="left"></td>
                                 <td class="right"></td>
                             </tr>
                         </tbody>

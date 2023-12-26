@@ -164,7 +164,9 @@ body {
     background-color: #efeff6;
     -webkit-font-smoothing: antialiased;
 }
-
+.author-img {
+    width: 200px;
+}
 h1,
 h2,
 h3,

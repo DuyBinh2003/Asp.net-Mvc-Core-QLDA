@@ -129,7 +129,7 @@
                 <div class"d-flex flex-column">
                     @foreach (var orther in @otherBooks)
                     {
-                        <div class="d-flex shadow py-3 pr-3 mb-2 bg-body rounded">
+                        <a asp-controller="Product" asp-action="Detail" asp-route-id="@orther.BookId" class="d-flex shadow py-3 pr-3 mb-2 bg-body rounded text-dark">
                             <div class="w-25">
                                 <img src="@orther.ImgPath" class="w-100" />
                             </div>
@@ -138,14 +138,14 @@
                                     <h5>@orther.Name</h5>
                                     <h4 class="text-danger">@orther.Price <i class="fas fa-dollar-sign"></i></h4>
                                 </div>
-                                <div class="d-flex justify-content-between align-center">
+                                <div class="d-flex justify-content-between align-items-center">
                                     <h7>@orther.Description</h7>
-                                    <a asp-controller="Product" asp-action="Detail" asp-route-id="@orther.BookId" class="bg-warning icon">
+                                    <div class="bg-warning icon">
                                         <i class="fas fa-shopping-cart text-white"></i>
-                                    </a>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        </a>
                     }
                 </div>
             </div>
