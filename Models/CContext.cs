@@ -32,7 +32,7 @@ public partial class CContext : DbContext
     public virtual DbSet<Review> Reviews { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        => optionsBuilder.UseMySQL("Server=localhost;User=root;Password=Binh0366032155;Database=c#;");
+        => optionsBuilder.UseMySQL("Server=localhost;User=root;Password=Binh0366032155;Database=clickjacking;");
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Author>(entity =>

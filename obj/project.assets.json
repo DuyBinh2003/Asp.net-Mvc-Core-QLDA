@@ -11086,11 +11086,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\code\\C#\\DoAn\\DoAn.csproj",
+      "projectUniqueName": "D:\\code\\C#\\Asp.net-Mvc-Core-QLDA\\DoAn.csproj",
       "projectName": "DoAn",
-      "projectPath": "D:\\code\\C#\\DoAn\\DoAn.csproj",
+      "projectPath": "D:\\code\\C#\\Asp.net-Mvc-Core-QLDA\\DoAn.csproj",
       "packagesPath": "C:\\Users\\DELL\\.nuget\\packages\\",
-      "outputPath": "D:\\code\\C#\\DoAn\\obj\\",
+      "outputPath": "D:\\code\\C#\\Asp.net-Mvc-Core-QLDA\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\DELL\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -11113,6 +11113,11 @@
         "warnAsError": [
           "NU1605"
         ]
+      },
+      "restoreAuditProperties": {
+        "enableAudit": "true",
+        "auditLevel": "low",
+        "auditMode": "direct"
       }
     },
     "frameworks": {
@@ -11177,7 +11182,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.403\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.204\\RuntimeIdentifierGraph.json"
       }
     }
   }

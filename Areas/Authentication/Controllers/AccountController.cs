@@ -6,6 +6,9 @@ using System;
 using System.Linq;
 using AspNetCoreHero.ToastNotification.Notyf;
 using AspNetCoreHero.ToastNotification.Abstractions;
+using System.Net.Http;
+using System.Text;
+using System.Text.Json;
 
 namespace DoAn.Areas.Authentication.Controllers
 {
@@ -16,10 +19,13 @@ namespace DoAn.Areas.Authentication.Controllers
 
         private readonly INotyfService _notyf;
 
-        public AccountController(CContext context, INotyfService notyf)
+        private readonly IHttpClientFactory _httpClientFactory;
+
+        public AccountController(CContext context, INotyfService notyf, IHttpClientFactory httpClientFactory)
         {
             _context = context;
             _notyf = notyf;
+            _httpClientFactory = httpClientFactory;
         }
 
         // GET: /Authentication/Account/SignUp
@@ -71,41 +77,45 @@ namespace DoAn.Areas.Authentication.Controllers
             return View();
         }
 
-        // POST: /Authentication/Account/Login
         [HttpPost]
-        public IActionResult Login(string username, string password)
+        public async Task<IActionResult> Login(string username, string password)
         {
-            if (ModelState.IsValid)
+            // Tạo đối tượng user
+            var user = new User
             {
-                var user = _context.Users.SingleOrDefault(u => u.Username == username && u.Password == password);
+                Username = username,
+                Password = password // Mã hóa mật khẩu trước khi lưu trong thực tế
+            };
 
-                if (user != null)
-                {
-                    // Store user information in session
-                    HttpContext.Session.SetInt32("UserId", user.UserId);
-                    HttpContext.Session.SetString("Username", user.Username);
-                    HttpContext.Session.SetString("UserType", user.UserType.ToString()); // Assuming UserType is an enumeration
+            // Tạo dữ liệu JSON để gọi API
+            var loginData = new LoginData
+            {
+                Username = username,
+                Password = password
+            };
 
-                    // Check if the user is an admin
-                    var isAdmin = (user.UserType == "admin"); 
+            var jsonContent = new StringContent(JsonSerializer.Serialize(loginData), Encoding.UTF8, "application/json");
 
-                    if (isAdmin)
-                    {
-                        // Redirect to Admin area's HomeController/Index
-                        _notyf.Success("Login successful as Admin");
-                        return RedirectToAction("Index", "Home", new { area = "Admin" });
-                    }
+            // Tạo HttpClient từ IHttpClientFactory
+            var client = _httpClientFactory.CreateClient();
 
-                    // Redirect to regular user's HomeController/Index
-                    _notyf.Success("Login successful");
-                    return RedirectToAction("Index", "Home", new { area = "" });
-                }
+            // Gọi API để kiểm tra thông tin người dùng
+            var apiResponse = await client.PostAsync("http://localhost:7147/api/account/login", jsonContent);
 
-                ModelState.AddModelError(string.Empty, "Invalid login attempt.");
-                
+            if (apiResponse.IsSuccessStatusCode)
+            {
+                // Nếu API trả về thành công, lưu người dùng vào cơ sở dữ liệu
+                _context.Users.Add(user);
+                await _context.SaveChangesAsync();
+
+                // Chuyển hướng người dùng đến trang chủ hoặc trang khác
+                return Redirect("http://localhost:7147/");
             }
-            _notyf.Error("Username or password invalid");
-            return View();
+            else
+            {
+                _notyf.Error("Sign up unsuccessful");
+                return View();
+            }
         }
         //Sign out
         public IActionResult Logout()

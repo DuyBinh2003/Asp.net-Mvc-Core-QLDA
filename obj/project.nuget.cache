@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "Z8aP8/x4RJA1364M53AlVb93qs9Cqan19JzcAEcnGEOrs7SWCdYC+KTVrUspEic1Mw0eHyNw8jjKsCxEwViAhg==",
+  "dgSpecHash": "sgFPE9eDE8VisL3yYxkCOcHQyGxoxUu6DISZC0XXEp1NrSgEqR+vZKwA1S3LoxEOBVr5DTy7yUcMgJXnkkxeSw==",
   "success": true,
-  "projectFilePath": "D:\\code\\C#\\DoAn\\DoAn.csproj",
+  "projectFilePath": "D:\\code\\C#\\Asp.net-Mvc-Core-QLDA\\DoAn.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\DELL\\.nuget\\packages\\aspnetcorehero.toastnotification\\1.1.0\\aspnetcorehero.toastnotification.1.1.0.nupkg.sha512",
     "C:\\Users\\DELL\\.nuget\\packages\\bouncycastle.cryptography\\2.2.1\\bouncycastle.cryptography.2.2.1.nupkg.sha512",

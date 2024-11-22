@@ -1,6 +1,5 @@
 using AspNetCoreHero.ToastNotification;
 using AspNetCoreHero.ToastNotification.Extensions;
-using DoAn.MigrationSeeder;
 using DoAn.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Builder;
@@ -16,7 +15,7 @@ var conn = builder.Configuration.GetConnectionString("conn");
 builder.Services.AddDbContext<CContext>(options => options.UseMySQL(conn));
 builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
 builder.Services.AddNotyf(config => { config.DurationInSeconds = 10; config.IsDismissable = true; config.Position = NotyfPosition.BottomRight; });
-
+builder.Services.AddHttpClient();
 // Add session services
 builder.Services.AddDistributedMemoryCache(); // Use an appropriate distributed cache in production
 builder.Services.AddSession(options =>
@@ -51,7 +50,6 @@ using (var scope = app.Services.CreateScope())
     try
     {
         var context = services.GetRequiredService<CContext>();
-        CContextSeeder.Seed(context);
     }
     catch (Exception ex)
     {
