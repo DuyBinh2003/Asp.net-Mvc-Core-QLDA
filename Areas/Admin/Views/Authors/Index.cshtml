@@ -52,7 +52,9 @@
                                 @Html.DisplayFor(modelItem => item.Description)
                             </td>
                             <td scope="col" class="text-center">
-                                <a class="btn btn-success btn-tone m-r-5" asp-action="Details" asp-route-id="@item.AuthorId">View</a>
+                                <a asp-action="Details" asp-route-id="@item.AuthorId" class="btn btn-success">View</a>
+                                <a asp-action="Edit" asp-route-id="@item.AuthorId" class="btn btn-primary">Edit</a>
+                                <a asp-action="Delete" asp-route-id="@item.AuthorId" class="btn btn-danger">Delete</a>
                             </td>
                         </tr>
                     }

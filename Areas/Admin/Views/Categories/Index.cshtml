@@ -37,8 +37,8 @@
                             <th scope="col" class="text-center">@category.Description</th>
                             <th scope="col" class="text-center">
                                 <a asp-controller="Categories" asp-action="Details" asp-route-id="@category.CategoryId" class="btn btn-success">View</a>
-                                <a asp-controller="Categories" asp-action="Delete" asp-route-id="@category.CategoryId" class="btn btn-danger">Delete</a>
                                 <a asp-controller="Categories" asp-action="Edit" asp-route-id="@category.CategoryId" class="btn btn-primary">Edit</a>
+                                <a asp-controller="Categories" asp-action="Delete" asp-route-id="@category.CategoryId" class="btn btn-danger">Delete</a>
                             </th>
                         </tr>
                     }

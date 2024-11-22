@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
-using System.Linq;
 using AspNetCoreHero.ToastNotification.Notyf;
 using AspNetCoreHero.ToastNotification.Abstractions;
 
@@ -107,6 +106,7 @@ namespace DoAn.Areas.Authentication.Controllers
             _notyf.Error("Username or password invalid");
             return View();
         }
+        
         //Sign out
         public IActionResult Logout()
         {
@@ -119,7 +119,5 @@ namespace DoAn.Areas.Authentication.Controllers
             _notyf.Success("Logout successful");
             return RedirectToAction("Login", "Account", new { area = "Authentication" });
         }
-
-
     }
 }

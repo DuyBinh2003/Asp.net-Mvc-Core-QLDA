@@ -626,7 +626,7 @@ a:focus {
           transform: scale(1.1);
 }
 
-.book_section .btn-box {
+.btn-box {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -636,7 +636,7 @@ a:focus {
   margin-top: 45px;
 }
 
-.book_section .btn-box a {
+.btn-box a {
   display: inline-block;
   padding: 10px 55px;
   background-color: #ffbe33;
@@ -647,7 +647,7 @@ a:focus {
   border: none;
 }
 
-.book_section .btn-box a:hover {
+.btn-box a:hover {
   background-color: #e69c00;
 }
 

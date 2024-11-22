@@ -50,7 +50,12 @@
                                 </tr>
                                 <tr>
                                     <th scope="col" class="text-center">Rate</th>
-                                    <td class="text-center">@Model.Rate</td>
+                                    <td class="text-center">
+                                        @for(int i = 1; i <= Model.Rate; i++)
+                                        {
+                                            <i class="fas fa-star text-warning ml-2"></i>
+                                        }
+                                    </td>
                                 </tr>
                                 <tr>
                                     <th scope="col" class="text-center">Quantity</th>
@@ -126,7 +131,7 @@
                         </table>
                     </div>
                     <div>
-                        <a class="btn btn-secondary" asp-action="">Back to list</a>
+                        <a class="btn btn-secondary mt-4" asp-action="">Back to list</a>
                     </div>
                 </div>
             </div>

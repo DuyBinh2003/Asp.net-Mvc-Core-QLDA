@@ -27,6 +27,7 @@
                         <th scope="col" class="text-center">Name</th>
                         <th scope="col" class="text-center">Author</th>
                         <th scope="col" class="text-center">Description</th>
+                        <th scope="col" class="text-center">Rate</th>
                         <th scope="col" class="text-center">Action</th>
                     </tr>
                 </thead>
@@ -49,6 +50,12 @@
                                     </a>
                                 </th>
                                 <td scope="col" class="text-center">@book.Description</td>
+                                <td class="text-center">
+                                    @for (int i = 1; i <= @book.Rate; i++)
+                                    {
+                                        <i class="fas fa-star text-warning ml-1"></i>
+                                    }
+                                </td>
                                 <td scope="col" class="text-center">
                                     <a class="btn btn-success btn-tone m-r-5" asp-action="Details" asp-route-id="@book.BookId">View</a>
                                     <a class="btn btn-primary btn-tone m-r-5" asp-action="Edit" asp-route-id="@book.BookId">Edit</a>
