@@ -1,0 +1,23 @@
+version: '27.3.1'
+
+services:
+  web:
+    image: doan:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "5000:80"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__conn=Server=db;Port=3300;Database=bookstore;User=root;Password=Binh0366032155
+    depends_on:
+      - db
+
+  db:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: Binh0366032155
+      MYSQL_DATABASE: bookstore
+    ports:
+      - "3300:3300"

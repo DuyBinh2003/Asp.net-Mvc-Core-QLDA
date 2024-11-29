@@ -42,12 +42,6 @@ namespace DoAn.Areas.Authentication.Controllers
                 HttpContext.Session.SetString("Username", user.Username);
                 HttpContext.Session.SetString("UserType", user.UserType.ToString());
 
-                Response.Cookies.Append("UserSession", HttpContext.Session.Id, new CookieOptions
-                {
-                    HttpOnly = true,
-                    Secure = true,
-                    SameSite = SameSiteMode.Strict
-                });
 
                 return Ok(new
                 {

@@ -20,11 +20,12 @@ namespace DoAn.Controllers
 
         public async Task<IActionResult> Index(int pageSizeIncrement = 6)
         {
-            Console.WriteLine("sesion userid" + HttpContext.Session.GetInt32("UserId"));
-            // Check if the UserId session variable is null
-            if (HttpContext.Session.GetInt32("UserId") == null)
+            var sessionId = HttpContext.Session.GetString("SessionId");
+            var userId = HttpContext.Session.GetInt32(sessionId + "_UserId");
+            Console.WriteLine("SessionId" + sessionId);
+            Console.WriteLine("UserId" + userId);
+            if (HttpContext.Session.GetString("SessionId") == null)
             {
-
                 // UserId is null, redirect to the login page in the "Authorization" area
                 return RedirectToAction("Login", "Account", new { area = "Authentication" });
             }

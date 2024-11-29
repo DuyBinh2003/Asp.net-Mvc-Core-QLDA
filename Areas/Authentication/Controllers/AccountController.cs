@@ -5,6 +5,8 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using AspNetCoreHero.ToastNotification.Notyf;
 using AspNetCoreHero.ToastNotification.Abstractions;
+using MySqlX.XDevAPI;
+using System.Xml;
 
 namespace DoAn.Areas.Authentication.Controllers
 {
@@ -65,8 +67,15 @@ namespace DoAn.Areas.Authentication.Controllers
 
 
         // GET: /Authentication/Account/Login
-        public IActionResult Login()
+        public IActionResult Login(string sessionId)
         {
+            if (!string.IsNullOrEmpty(sessionId))
+            {
+                // Gán session ID từ URL vào session
+                HttpContext.Session.Clear(); // Xóa session cũ
+                HttpContext.Session.SetString("SessionId", sessionId);
+            }
+
             return View();
         }
 
@@ -74,39 +83,55 @@ namespace DoAn.Areas.Authentication.Controllers
         [HttpPost]
         public IActionResult Login(string username, string password)
         {
+            // Kiểm tra sessionId từ URL nếu có
+            string sessionId = HttpContext.Session.GetString("SessionId");
+            
             if (ModelState.IsValid)
             {
                 var user = _context.Users.SingleOrDefault(u => u.Username == username && u.Password == password);
 
                 if (user != null)
                 {
-                    // Store user information in session
-                    HttpContext.Session.SetInt32("UserId", user.UserId);
-                    HttpContext.Session.SetString("Username", user.Username);
-                    HttpContext.Session.SetString("UserType", user.UserType.ToString()); // Assuming UserType is an enumeration
+                    // Nếu có sessionId từ URL, sử dụng nó thay vì tạo sessionId mới
+                    if (!string.IsNullOrEmpty(sessionId))
+                    {
+                        HttpContext.Session.SetString("SessionId", sessionId);
+                    }
+                    else
+                    {
+                        // Tạo sessionId mới nếu không có sessionId từ URL
+                        sessionId = Guid.NewGuid().ToString();
+                        HttpContext.Session.SetString("SessionId", sessionId);
+                    }
 
-                    // Check if the user is an admin
-                    var isAdmin = (user.UserType == "admin"); 
+                    // Lưu các thông tin người dùng vào session
+                    HttpContext.Session.SetInt32(sessionId + "_UserId", user.UserId);
+                    HttpContext.Session.SetString(sessionId + "_Username", user.Username);
+                    HttpContext.Session.SetString(sessionId + "_UserType", user.UserType.ToString());
+
+                    // Kiểm tra xem người dùng là admin
+                    var isAdmin = (user.UserType == "admin");
 
                     if (isAdmin)
                     {
-                        // Redirect to Admin area's HomeController/Index
+                        // Chuyển hướng đến trang quản trị
                         _notyf.Success("Login successful as Admin");
                         return RedirectToAction("Index", "Home", new { area = "Admin" });
                     }
 
-                    // Redirect to regular user's HomeController/Index
+                    // Chuyển hướng đến trang chính của người dùng
                     _notyf.Success("Login successful");
                     return RedirectToAction("Index", "Home", new { area = "" });
                 }
 
                 ModelState.AddModelError(string.Empty, "Invalid login attempt.");
-                
             }
+
             _notyf.Error("Username or password invalid");
             return View();
         }
-        
+
+
         //Sign out
         public IActionResult Logout()
         {

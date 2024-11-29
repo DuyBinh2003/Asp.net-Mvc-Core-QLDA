@@ -18,7 +18,8 @@ namespace DoAn.Controllers
         }
         public async Task<IActionResult> Index()
         {
-            var userId = HttpContext.Session.GetInt32("UserId");
+            var sessionId = HttpContext.Session.GetString("SessionId");
+            var userId = HttpContext.Session.GetInt32(sessionId + "_UserId");
             if (userId == null || _context.Carts == null)
             {
                 return NotFound();

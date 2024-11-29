@@ -35,7 +35,17 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
         options.ExpireTimeSpan = TimeSpan.FromMinutes(30); // Thời gian hết hạn cookie
         options.SlidingExpiration = true; // Kéo dài phiên làm việc khi người dùng vẫn đang hoạt động
     });
+/*
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowSpecificOrigin", builder =>
+        builder.WithOrigins("http://localhost:7147/") // Chỉ cho phép domain này
+               .AllowAnyHeader()
+               .AllowAnyMethod());
+});
 
+builder.Services.AddControllers();
+*/
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -59,7 +69,6 @@ app.Use(async (context, next) =>
     context.Response.Headers["X-Frame-Options"] = "ALLOWALL"; // Cho phép nhúng iframe từ mọi nguồn
     await next();
 });
-
 // Add session middleware
 app.UseSession();
 
